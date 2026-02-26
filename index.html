@@ -1,14 +1,181 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tardo v3.0.1 - Trading Automatizado</title>
+    <title>Tardo Bot | Trading Automatizado Profesional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                },
+                colors: {
+                    emerald: {
+                        450: '#10b981',
+                        950: '#022c22',
+                    },
+                    neutral: {
+                        850: '#1f1f1f',
+                        950: '#0a0a0a',
+                    }
+                },
+                animation: {
+                    'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    'blob': 'blob 10s infinite',
+                    'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    'fade-in': 'fadeIn 1s ease-out forwards',
+                    'scanline': 'scanline 8s linear infinite',
+                },
+                keyframes: {
+                    blob: {
+                        '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                        '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                        '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                        '100%': { transform: 'translate(0px, 0px) scale(1)' }
+                    },
+                    fadeInUp: {
+                        '0%': { opacity: '0', transform: 'translateY(20px)' },
+                        '100%': { opacity: '1', transform: 'translateY(0)' }
+                    },
+                    fadeIn: {
+                        '0%': { opacity: '0' },
+                        '100%': { opacity: '1' }
+                    },
+                    scanline: {
+                        '0%': { top: '-100%' },
+                        '100%': { top: '100%' }
+                    }
+                }
+            }
+        }
+    }
+    </script>
+    <style>
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
+    .delay-500 { animation-delay: 500ms; }
+    .typewriter-cursor::after {
+        content: '|';
+        animation: cursor-blink 1s step-start infinite;
+    }
+    @keyframes cursor-blink {
+        50% { opacity: 0; }
+    }
+    .bg-grid-pattern {
+        background-image: linear-gradient(to right, #ffffff05 1px, transparent 1px),
+        linear-gradient(to bottom, #ffffff05 1px, transparent 1px);
+        background-size: 32px 32px;
+        mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .scrolly-word {
+        opacity: 0.1;
+        filter: blur(2px);
+        transform: translateY(12px) scale(0.98);
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        display: inline-block;
+        will-change: opacity, transform, filter;
+        margin-right: 0.25em;
+    }
+    .scrolly-word.active {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0) scale(1);
+        color: white;
+        text-shadow: 0 0 15px rgba(255,255,255,0.25);
+    }
+    </style>
 </head>
-<body>
-    <h1>🤖 Hola Mundo - Tardo Bot</h1>
-    <p>Sitio en construcción...</p>
-    <p>Bot de trading automatizado con estrategia dual testeada con IA.</p>
-    <p>Operamos solo con Binance, la plataforma de trading más confiable.</p>
+<body class="bg-[#030303] text-neutral-300 font-sans antialiased selection:bg-white/20 selection:text-white overflow-x-hidden">
+
+    <!-- Background Gradients -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-[-10%] left-[20%] w-[800px] h-[600px] bg-neutral-800/20 rounded-full blur-[120px] mix-blend-screen opacity-20 animate-blob"></div>
+        <div class="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] bg-emerald-900/10 rounded-full blur-[100px] mix-blend-screen opacity-20 animate-pulse-slow"></div>
+        <div class="absolute inset-0 bg-grid-pattern z-0 opacity-60"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 border-b border-white/5 bg-[#030303]/80 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                <span class="text-sm font-semibold tracking-tight text-white uppercase">Tardo<span class="text-neutral-500">Bot</span></span>
+            </div>
+            <div class="hidden md:flex items-center gap-6 text-xs font-medium text-neutral-500">
+                <a href="#story" class="hover:text-white transition-colors">La Historia</a>
+                <a href="#features" class="hover:text-white transition-colors">Tecnología</a>
+                <a href="#pricing" class="hover:text-white transition-colors">Precios</a>
+            </div>
+            <a href="#cta" class="text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/5 text-white px-4 py-1.5 rounded transition-all">
+                Solicitar Licencia
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative z-10 pt-32 pb-24">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            
+            <!-- Result Pill -->
+            <div class="opacity-0 animate-fade-in-up inline-flex items-center gap-3 px-4 py-1.5 mb-8 rounded-full bg-white/5 border border-white/5 backdrop-blur-sm">
+                <span class="text-[10px] font-mono text-emerald-400">v3.0</span>
+                <iconify-icon icon="solar:arrow-right-linear" class="text-neutral-500 text-[10px]"></iconify-icon>
+                <span class="text-[10px] font-mono text-white font-semibold">Sistema Dual Adaptativo</span>
+                <span class="w-px h-3 bg-white/10 mx-1"></span>
+                <span class="text-[10px] uppercase tracking-widest text-neutral-400 font-medium">En Producción</span>
+            </div>
+
+            <h1 class="opacity-0 animate-fade-in-up delay-100 text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-white mb-6 leading-[1.1]">
+                Trading sin Emociones.<br>
+                <span class="text-neutral-500">Estrategia Matemática.</span>
+            </h1>
+
+            <div class="opacity-0 animate-fade-in-up delay-200 flex flex-col items-center justify-center gap-4 mb-10">
+                <p class="text-base md:text-lg text-neutral-400 max-w-2xl mx-auto leading-relaxed font-light">
+                    Bot de trading automatizado con <span class="text-white font-medium">estrategia dual testeada</span> en tiempo real. 
+                    Sistema de gestión de riesgo adaptativa diseñado para <span class="text-white">Binance Futures</span> con dashboard en vivo.
+                </p>
+                
+                <!-- Social Proof Badges -->
+                <div class="flex flex-wrap justify-center gap-3 mt-2">
+                    <div class="flex items-center gap-2 px-3 py-1 rounded border border-emerald-500/20 bg-emerald-500/5">
+                        <iconify-icon icon="solar:shield-check-linear" class="text-emerald-500 text-xs"></iconify-icon>
+                        <span class="text-[10px] font-medium text-emerald-500/90 uppercase tracking-wide">Sistema en Producción</span>
+                    </div>
+                    <div class="flex items-center gap-2 px-3 py-1 rounded border border-blue-500/20 bg-blue-500/5">
+                        <iconify-icon icon="solar:graph-up-linear" class="text-blue-500 text-xs"></iconify-icon>
+                        <span class="text-[10px] font-medium text-blue-500/90 uppercase tracking-wide">Binance Futures</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="opacity-0 animate-fade-in-up delay-300 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#cta" class="h-10 px-6 flex items-center justify-center rounded bg-white text-black font-medium text-sm hover:bg-neutral-200 transition-colors w-full sm:w-auto">
+                    Solicitar Licencia
+                </a>
+                <div class="flex items-center gap-3 text-xs text-neutral-500">
+                    <span class="flex items-center gap-1"><iconify-icon icon="solar:clock-circle-linear" class="text-emerald-500"></iconify-icon> 24/7 Operativo</span>
+                    <span class="w-px h-3 bg-white/10"></span>
+                    <span class="flex items-center gap-1"><iconify-icon icon="solar:shield-warning-linear" class="text-emerald-500"></iconify-icon> Stop Loss Automático</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section (scroll down for more...) -->
+
+    <script>
+        // Scrollytelling script placeholder
+    </script>
+
 </body>
 </html>
