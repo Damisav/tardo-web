@@ -7,92 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                fontFamily: {
-                    sans: ['Inter', 'sans-serif'],
-                },
-                colors: {
-                    emerald: {
-                        450: '#10b981',
-                        950: '#022c22',
-                    },
-                    neutral: {
-                        850: '#1f1f1f',
-                        950: '#0a0a0a',
-                    }
-                },
-                animation: {
-                    'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    'blob': 'blob 10s infinite',
-                    'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                    'fade-in': 'fadeIn 1s ease-out forwards',
-                    'scanline': 'scanline 8s linear infinite',
-                },
-                keyframes: {
-                    blob: {
-                        '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                        '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                        '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                        '100%': { transform: 'translate(0px, 0px) scale(1)' }
-                    },
-                    fadeInUp: {
-                        '0%': { opacity: '0', transform: 'translateY(20px)' },
-                        '100%': { opacity: '1', transform: 'translateY(0)' }
-                    },
-                    fadeIn: {
-                        '0%': { opacity: '0' },
-                        '100%': { opacity: '1' }
-                    },
-                    scanline: {
-                        '0%': { top: '-100%' },
-                        '100%': { top: '100%' }
-                    }
-                }
-            }
-        }
-    }
-    </script>
-    <style>
-    .delay-100 { animation-delay: 100ms; }
-    .delay-200 { animation-delay: 200ms; }
-    .delay-300 { animation-delay: 300ms; }
-    .delay-500 { animation-delay: 500ms; }
-    .typewriter-cursor::after {
-        content: '|';
-        animation: cursor-blink 1s step-start infinite;
-    }
-    @keyframes cursor-blink {
-        50% { opacity: 0; }
-    }
-    .bg-grid-pattern {
-        background-image: linear-gradient(to right, #ffffff05 1px, transparent 1px),
-        linear-gradient(to bottom, #ffffff05 1px, transparent 1px);
-        background-size: 32px 32px;
-        mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
-    }
-    .scrollbar-hide::-webkit-scrollbar {
-        display: none;
-    }
-    .scrolly-word {
-        opacity: 0.1;
-        filter: blur(2px);
-        transform: translateY(12px) scale(0.98);
-        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        display: inline-block;
-        will-change: opacity, transform, filter;
-        margin-right: 0.25em;
-    }
-    .scrolly-word.active {
-        opacity: 1;
-        filter: blur(0);
-        transform: translateY(0) scale(1);
-        color: white;
-        text-shadow: 0 0 15px rgba(255,255,255,0.25);
-    }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-[#030303] text-neutral-300 font-sans antialiased selection:bg-white/20 selection:text-white overflow-x-hidden">
 
@@ -173,9 +88,7 @@
 
     <!-- CTA Section (scroll down for more...) -->
 
-    <script>
-        // Scrollytelling script placeholder
-    </script>
+    <script src="js/main.js"></script>
 
 </body>
 </html>

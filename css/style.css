@@ -1,0 +1,49 @@
+/* Tardo Bot - Custom Styles */
+
+/* Animation Delays */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-500 { animation-delay: 500ms; }
+
+/* Typewriter Cursor */
+.typewriter-cursor::after {
+    content: '|';
+    animation: cursor-blink 1s step-start infinite;
+}
+
+@keyframes cursor-blink {
+    50% { opacity: 0; }
+}
+
+/* Grid Pattern Background */
+.bg-grid-pattern {
+    background-image: linear-gradient(to right, #ffffff05 1px, transparent 1px),
+                      linear-gradient(to bottom, #ffffff05 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
+}
+
+/* Hide Scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* Scrollytelling Words */
+.scrolly-word {
+    opacity: 0.1;
+    filter: blur(2px);
+    transform: translateY(12px) scale(0.98);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-block;
+    will-change: opacity, transform, filter;
+    margin-right: 0.25em;
+}
+
+.scrolly-word.active {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+    color: white;
+    text-shadow: 0 0 15px rgba(255,255,255,0.25);
+}
