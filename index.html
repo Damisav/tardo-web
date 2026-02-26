@@ -30,7 +30,7 @@
                 <a href="#features" class="hover:text-white transition-colors">Tecnología</a>
                 <a href="#pricing" class="hover:text-white transition-colors">Precios</a>
             </div>
-            <a href="#cta" class="text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/5 text-white px-4 py-1.5 rounded transition-all">
+            <a href="#pricing" class="text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/5 text-white px-4 py-1.5 rounded transition-all">
                 Solicitar Licencia
             </a>
         </div>
@@ -74,7 +74,7 @@
             </div>
 
             <div class="opacity-0 animate-fade-in-up delay-300 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#cta" class="h-10 px-6 flex items-center justify-center rounded bg-white text-black font-medium text-sm hover:bg-neutral-200 transition-colors w-full sm:w-auto">
+                <a href="#pricing" class="h-10 px-6 flex items-center justify-center rounded bg-white text-black font-medium text-sm hover:bg-neutral-200 transition-colors w-full sm:w-auto">
                     Solicitar Licencia
                 </a>
                 <div class="flex items-center gap-3 text-xs text-neutral-500">
@@ -344,20 +344,241 @@
         </div>
     </section>
 
-    <!-- CTA / Pricing -->
-    <section id="cta" class="py-24 relative overflow-hidden bg-emerald-950/20 border-t border-emerald-500/10">
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 relative overflow-hidden bg-[#030303] border-t border-white/5">
         <div class="absolute inset-0 bg-grid-pattern opacity-30"></div>
-        <div class="max-w-2xl mx-auto px-6 relative z-10 text-center">
+        
+        <!-- Header -->
+        <div class="relative z-10 text-center mb-16 space-y-4 px-6 opacity-0 animate-fade-in delay-100">
+            <h2 class="text-emerald-500 font-medium tracking-wide text-xs uppercase">Precios Transparentes</h2>
+            <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-white">Elige tu plan</h1>
+            <p class="text-gray-400 text-sm md:text-base max-w-xl mx-auto">Escala tus operaciones de trading con infraestructura de alto rendimiento adaptada a tu estrategia.</p>
+        </div>
+
+        <!-- Pricing Grid -->
+        <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1200px] mx-auto w-full px-6">
             
-            <iconify-icon icon="solar:wallet-money-linear" class="text-emerald-500 mb-6 text-4xl"></iconify-icon>
-            
-            <h2 class="text-3xl font-medium text-white mb-6 tracking-tight">
-                Próximamente
-            </h2>
-            
-            <p class="text-neutral-400 text-base max-w-lg mx-auto">
-                Sistema en fase final de desarrollo. Pronto estará disponible para licenciamiento.
-            </p>
+            <!-- PLAN 1: Básico Mensual -->
+            <div class="group relative bg-[#0a0a0a] border border-white/5 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.06)] hover:border-white/10 opacity-0 animate-fade-in delay-200">
+                <div class="mb-8">
+                    <h3 class="text-base font-medium text-white mb-2 tracking-tight">Básico Mensual</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-4xl font-semibold tracking-tight">$15.99</span>
+                        <span class="text-xs text-gray-500 font-medium">USD /mes</span>
+                    </div>
+                </div>
+                <ul class="space-y-4 mb-10 flex-1 text-sm text-gray-400">
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>1 herramienta activa</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>Panel de control web</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>Actualizaciones incluidas</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>Soporte por email 48h</span>
+                    </li>
+                </ul>
+                <button class="w-full py-2.5 px-4 rounded-xl bg-white/5 text-white text-sm font-medium hover:bg-white/10 transition-colors border border-white/5">
+                    Comenzar
+                </button>
+            </div>
+
+            <!-- PLAN 3: Trader Mensual -->
+            <div class="group relative bg-[#0a0a0a] border border-white/5 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.06)] hover:border-white/10 opacity-0 animate-fade-in delay-300">
+                <div class="absolute top-0 right-6 -translate-y-1/2">
+                    <span class="bg-emerald-500 text-[#030303] text-[10px] font-semibold px-2.5 py-1 rounded-full tracking-wider uppercase">POPULAR</span>
+                </div>
+                <div class="mb-8">
+                    <h3 class="text-base font-medium text-white mb-2 tracking-tight">Trader Mensual</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-4xl font-semibold tracking-tight">$39.99</span>
+                        <span class="text-xs text-gray-500 font-medium">USD /mes</span>
+                    </div>
+                </div>
+                <ul class="space-y-4 mb-10 flex-1 text-sm text-gray-400">
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span class="text-gray-200">3 herramientas simultáneas</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>Multi-símbolo</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>Panel unificado</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>Soporte 24h</span>
+                    </li>
+                </ul>
+                <button class="w-full py-2.5 px-4 rounded-xl bg-emerald-500 text-[#030303] text-sm font-semibold hover:bg-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-300">
+                    Comenzar
+                </button>
+            </div>
+
+            <!-- PLAN 5: Pro Mensual -->
+            <div class="group relative bg-[#0a0a0a] border border-white/5 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.06)] hover:border-white/10 opacity-0 animate-fade-in">
+                <div class="mb-8">
+                    <h3 class="text-base font-medium text-white mb-2 tracking-tight">Pro Mensual</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-4xl font-semibold tracking-tight">$99.99</span>
+                        <span class="text-xs text-gray-500 font-medium">USD /mes</span>
+                    </div>
+                </div>
+                <ul class="space-y-4 mb-10 flex-1 text-sm text-gray-400">
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span class="text-gray-200">10 herramientas simultáneas</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>Gestión avanzada</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>API personalizada</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>Soporte VIP</span>
+                    </li>
+                </ul>
+                <button class="w-full py-2.5 px-4 rounded-xl bg-white/5 text-white text-sm font-medium hover:bg-white/10 transition-colors border border-white/5">
+                    Comenzar
+                </button>
+            </div>
+
+            <!-- PLAN 2: Básico Anual -->
+            <div class="group relative bg-gradient-to-b from-[#0a0a0a] to-[#050505] border border-emerald-500/30 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.1)] hover:border-emerald-500/50 opacity-0 animate-fade-in delay-500">
+                <div class="absolute top-0 right-6 -translate-y-1/2">
+                    <span class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-semibold px-2.5 py-1 rounded-full tracking-wider uppercase backdrop-blur-md">AHORRA 17%</span>
+                </div>
+                <div class="mb-8">
+                    <h3 class="text-base font-medium text-emerald-400 mb-2 tracking-tight">Básico Anual</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-4xl font-semibold tracking-tight text-white">$159</span>
+                        <span class="text-xs text-gray-500 font-medium">USD /año</span>
+                    </div>
+                </div>
+                <ul class="space-y-4 mb-10 flex-1 text-sm text-gray-400">
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>1 herramienta activa</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>Panel de control web</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>Actualizaciones incluidas</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>Soporte prioritario</span>
+                    </li>
+                </ul>
+                <button class="w-full py-2.5 px-4 rounded-xl bg-white/5 text-white text-sm font-medium hover:bg-white/10 transition-colors border border-white/5">
+                    Comenzar
+                </button>
+            </div>
+
+            <!-- PLAN 4: Trader Anual -->
+            <div class="group relative bg-gradient-to-b from-[#0a0a0a] to-[#050505] border border-emerald-500/30 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.1)] hover:border-emerald-500/50 opacity-0 animate-fade-in">
+                <div class="absolute top-0 right-6 -translate-y-1/2">
+                    <span class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-semibold px-2.5 py-1 rounded-full tracking-wider uppercase backdrop-blur-md">AHORRA 17%</span>
+                </div>
+                <div class="mb-8">
+                    <h3 class="text-base font-medium text-emerald-400 mb-2 tracking-tight">Trader Anual</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-4xl font-semibold tracking-tight text-white">$399</span>
+                        <span class="text-xs text-gray-500 font-medium">USD /año</span>
+                    </div>
+                </div>
+                <ul class="space-y-4 mb-10 flex-1 text-sm text-gray-400">
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span class="text-gray-200">3 herramientas simultáneas</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>Multi-símbolo</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>Panel unificado</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>Soporte dedicado</span>
+                    </li>
+                </ul>
+                <button class="w-full py-2.5 px-4 rounded-xl bg-white/5 text-white text-sm font-medium hover:bg-white/10 transition-colors border border-white/5">
+                    Comenzar
+                </button>
+            </div>
+
+            <!-- PLAN 6: Pro Anual -->
+            <div class="group relative bg-gradient-to-b from-[#0a0a0a] to-[#050505] border border-emerald-500/40 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.15)] hover:border-emerald-500/60 opacity-0 animate-fade-in">
+                <div class="absolute top-0 right-6 -translate-y-1/2">
+                    <span class="bg-emerald-500 text-[#030303] text-[10px] font-semibold px-2.5 py-1 rounded-full tracking-wider uppercase shadow-[0_0_15px_rgba(16,185,129,0.4)]">MEJOR VALOR</span>
+                </div>
+                <div class="mb-8">
+                    <h3 class="text-base font-medium text-emerald-400 mb-2 tracking-tight">Pro Anual</h3>
+                    <div class="flex items-baseline gap-1">
+                        <span class="text-4xl font-semibold tracking-tight text-white">$999</span>
+                        <span class="text-xs text-gray-500 font-medium">USD /año</span>
+                    </div>
+                </div>
+                <ul class="space-y-4 mb-10 flex-1 text-sm text-gray-400">
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span class="text-gray-200">10 herramientas simultáneas</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>Gestión avanzada</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>API personalizada</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+                        <span>Soporte VIP prioritario</span>
+                    </li>
+                </ul>
+                <button class="w-full py-2.5 px-4 rounded-xl bg-emerald-500 text-[#030303] text-sm font-semibold hover:bg-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-300">
+                    Comenzar
+                </button>
+            </div>
+        </div>
+
+        <!-- Premium Support Toggle -->
+        <div class="relative z-10 mt-16 max-w-lg mx-auto w-full px-6 opacity-0 animate-fade-in">
+            <label class="group relative flex items-center justify-between p-5 rounded-2xl border border-white/5 bg-[#0a0a0a] hover:border-white/10 hover:bg-white/[0.02] transition-all duration-300 cursor-pointer">
+                <div class="flex items-center gap-5">
+                    <div class="relative w-11 h-6 bg-emerald-500 rounded-full flex items-center p-1 transition-colors shadow-inner shrink-0">
+                        <div class="w-4 h-4 bg-white rounded-full shadow-sm transform translate-x-5 transition-transform"></div>
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium text-white flex items-center gap-2 tracking-tight">
+                            Agregar Soporte Premium 
+                            <span class="text-emerald-500 font-medium text-xs bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">+$5 USD</span>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1 leading-relaxed">Instalación guiada, configuración inicial y asistencia técnica prioritaria</div>
+                    </div>
+                </div>
+            </label>
         </div>
     </section>
 
