@@ -95,13 +95,13 @@ document.addEventListener('DOMContentLoaded', () => {
 const basePrices = {
     monthly: {
         basic: 15.99,
-        trader: 39.99,
-        pro: 99.99
+        premium: 39.99,
+        enterprise: 99.99
     },
     yearly: {
         basic: 159,
-        trader: 399,
-        pro: 999
+        premium: 399,
+        enterprise: 999
     }
 };
 
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const supportCost = 5;
 
         // Update monthly prices
-        ['basic', 'trader', 'pro'].forEach(plan => {
+        ['basic', 'premium', 'enterprise'].forEach(plan => {
             const priceElement = document.getElementById(`price-${plan}-monthly`);
             if (priceElement) {
                 const basePrice = basePrices.monthly[plan];
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update yearly badges (recalculate savings with support included)
         if (supportEnabled) {
-            // Básico Yearly: ((15.99+5)×12 - 159) / ((15.99+5)×12)
+            // Basic Yearly: ((15.99+5)×12 - 159) / ((15.99+5)×12)
             const basicMonthlyWithSupport = (basePrices.monthly.basic + supportCost) * 12; // $251.88
             const basicSavings = ((basicMonthlyWithSupport - basePrices.yearly.basic) / basicMonthlyWithSupport * 100).toFixed(1);
             const basicBadge = document.getElementById('badge-basic-yearly');
@@ -167,20 +167,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 basicBadge.innerHTML = `AHORRA ${basicSavings}% <span class="ml-1 text-[9px] opacity-80">+ Soporte gratis</span>`;
             }
 
-            // Trader Yearly
-            const traderMonthlyWithSupport = (basePrices.monthly.trader + supportCost) * 12; // $539.88
-            const traderSavings = ((traderMonthlyWithSupport - basePrices.yearly.trader) / traderMonthlyWithSupport * 100).toFixed(1);
-            const traderBadge = document.getElementById('badge-trader-yearly');
-            if (traderBadge) {
-                traderBadge.innerHTML = `AHORRA ${traderSavings}% <span class="ml-1 text-[9px] opacity-80">+ Soporte gratis</span>`;
+            // Premium Yearly
+            const premiumMonthlyWithSupport = (basePrices.monthly.premium + supportCost) * 12; // $539.88
+            const premiumSavings = ((premiumMonthlyWithSupport - basePrices.yearly.premium) / premiumMonthlyWithSupport * 100).toFixed(1);
+            const premiumBadge = document.getElementById('badge-premium-yearly');
+            if (premiumBadge) {
+                premiumBadge.innerHTML = `AHORRA ${premiumSavings}% <span class="ml-1 text-[9px] opacity-80">+ Soporte gratis</span>`;
             }
 
-            // Pro Yearly
-            const proMonthlyWithSupport = (basePrices.monthly.pro + supportCost) * 12; // $1259.88
-            const proSavings = ((proMonthlyWithSupport - basePrices.yearly.pro) / proMonthlyWithSupport * 100).toFixed(1);
-            const proBadge = document.getElementById('badge-pro-yearly');
-            if (proBadge) {
-                proBadge.innerHTML = `MEJOR VALOR <span class="ml-1 text-[9px] opacity-80">+ Soporte gratis</span>`;
+            // Enterprise Yearly
+            const enterpriseMonthlyWithSupport = (basePrices.monthly.enterprise + supportCost) * 12; // $1259.88
+            const enterpriseSavings = ((enterpriseMonthlyWithSupport - basePrices.yearly.enterprise) / enterpriseMonthlyWithSupport * 100).toFixed(1);
+            const enterpriseBadge = document.getElementById('badge-enterprise-yearly');
+            if (enterpriseBadge) {
+                enterpriseBadge.innerHTML = `MEJOR VALOR <span class="ml-1 text-[9px] opacity-80">+ Soporte gratis</span>`;
             }
         } else {
             // Reset to original badges (no support)
@@ -189,14 +189,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 basicBadge.textContent = 'AHORRA 17%';
             }
 
-            const traderBadge = document.getElementById('badge-trader-yearly');
-            if (traderBadge) {
-                traderBadge.textContent = 'AHORRA 17%';
+            const premiumBadge = document.getElementById('badge-premium-yearly');
+            if (premiumBadge) {
+                premiumBadge.textContent = 'AHORRA 17%';
             }
 
-            const proBadge = document.getElementById('badge-pro-yearly');
-            if (proBadge) {
-                proBadge.textContent = 'MEJOR VALOR';
+            const enterpriseBadge = document.getElementById('badge-enterprise-yearly');
+            if (enterpriseBadge) {
+                enterpriseBadge.textContent = 'MEJOR VALOR';
             }
         }
     }
