@@ -107,12 +107,21 @@ const basePrices = {
 
 // Tab Switching Logic
 document.addEventListener('DOMContentLoaded', () => {
+    // DOM Elements
     const tabMonthly = document.getElementById('tab-monthly');
     const tabYearly = document.getElementById('tab-yearly');
     const planCards = document.querySelectorAll('[data-plan-type]');
     const supportToggle = document.getElementById('support-toggle');
     const toggleSwitch = document.getElementById('toggle-switch');
+    
+    // State
     let supportEnabled = false;
+
+    // Verify all elements exist
+    if (!tabMonthly || !tabYearly || !supportToggle || !toggleSwitch) {
+        console.error('❌ Missing required DOM elements for pricing system');
+        return;
+    }
 
     // Function: Switch tabs
     function switchTab(tabType) {
@@ -143,91 +152,121 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePricesAndBadges();
     }
 
-    // Function: Update prices and badges
+    // Function: Update all prices and badges
     function updatePricesAndBadges() {
         const supportCost = 5;
 
-        // Update monthly prices
-        ['basic', 'premium', 'enterprise'].forEach(plan => {
+        // ===================================
+        // Update Monthly Prices (all 3 plans)
+        // ===================================
+        const plans = ['basic', 'premium', 'enterprise'];
+        
+        plans.forEach(plan => {
             const priceElement = document.getElementById(`price-${plan}-monthly`);
             if (priceElement) {
                 const basePrice = basePrices.monthly[plan];
                 const finalPrice = supportEnabled ? basePrice + supportCost : basePrice;
                 priceElement.textContent = `$${finalPrice.toFixed(2)}`;
+            } else {
+                console.warn(`⚠️ Element not found: price-${plan}-monthly`);
             }
         });
 
-        // Update yearly badges (recalculate savings with support included)
+        // ===================================
+        // Update Yearly Badges (all 3 plans)
+        // ===================================
         if (supportEnabled) {
-            // Basic Yearly: ((15.99+5)×12 - 159) / ((15.99+5)×12)
-            const basicMonthlyWithSupport = (basePrices.monthly.basic + supportCost) * 12; // $251.88
-            const basicSavings = ((basicMonthlyWithSupport - basePrices.yearly.basic) / basicMonthlyWithSupport * 100).toFixed(1);
+            // BASIC YEARLY
+            const basicMonthlyTotal = (basePrices.monthly.basic + supportCost) * 12; // $251.88
+            const basicYearly = basePrices.yearly.basic; // $159
+            const basicSavings = ((basicMonthlyTotal - basicYearly) / basicMonthlyTotal * 100).toFixed(1);
+            
             const basicBadge = document.getElementById('badge-basic-yearly');
             if (basicBadge) {
                 basicBadge.innerHTML = `AHORRA ${basicSavings}% <span class="ml-1 text-[9px] opacity-80">+ Soporte gratis</span>`;
+            } else {
+                console.warn('⚠️ Element not found: badge-basic-yearly');
             }
 
-            // Premium Yearly
-            const premiumMonthlyWithSupport = (basePrices.monthly.premium + supportCost) * 12; // $539.88
-            const premiumSavings = ((premiumMonthlyWithSupport - basePrices.yearly.premium) / premiumMonthlyWithSupport * 100).toFixed(1);
+            // PREMIUM YEARLY
+            const premiumMonthlyTotal = (basePrices.monthly.premium + supportCost) * 12; // $539.88
+            const premiumYearly = basePrices.yearly.premium; // $399
+            const premiumSavings = ((premiumMonthlyTotal - premiumYearly) / premiumMonthlyTotal * 100).toFixed(1);
+            
             const premiumBadge = document.getElementById('badge-premium-yearly');
             if (premiumBadge) {
                 premiumBadge.innerHTML = `AHORRA ${premiumSavings}% <span class="ml-1 text-[9px] opacity-80">+ Soporte gratis</span>`;
+            } else {
+                console.warn('⚠️ Element not found: badge-premium-yearly');
             }
 
-            // Enterprise Yearly
-            const enterpriseMonthlyWithSupport = (basePrices.monthly.enterprise + supportCost) * 12; // $1259.88
-            const enterpriseSavings = ((enterpriseMonthlyWithSupport - basePrices.yearly.enterprise) / enterpriseMonthlyWithSupport * 100).toFixed(1);
+            // ENTERPRISE YEARLY
+            const enterpriseMonthlyTotal = (basePrices.monthly.enterprise + supportCost) * 12; // $1259.88
+            const enterpriseYearly = basePrices.yearly.enterprise; // $999
+            const enterpriseSavings = ((enterpriseMonthlyTotal - enterpriseYearly) / enterpriseMonthlyTotal * 100).toFixed(1);
+            
             const enterpriseBadge = document.getElementById('badge-enterprise-yearly');
             if (enterpriseBadge) {
                 enterpriseBadge.innerHTML = `MEJOR VALOR <span class="ml-1 text-[9px] opacity-80">+ Soporte gratis</span>`;
+            } else {
+                console.warn('⚠️ Element not found: badge-enterprise-yearly');
             }
         } else {
-            // Reset to original badges (no support)
+            // Reset to original badges (support disabled)
             const basicBadge = document.getElementById('badge-basic-yearly');
-            if (basicBadge) {
-                basicBadge.textContent = 'AHORRA 17%';
-            }
+            if (basicBadge) basicBadge.textContent = 'AHORRA 17%';
 
             const premiumBadge = document.getElementById('badge-premium-yearly');
-            if (premiumBadge) {
-                premiumBadge.textContent = 'AHORRA 17%';
-            }
+            if (premiumBadge) premiumBadge.textContent = 'AHORRA 17%';
 
             const enterpriseBadge = document.getElementById('badge-enterprise-yearly');
-            if (enterpriseBadge) {
-                enterpriseBadge.textContent = 'MEJOR VALOR';
-            }
+            if (enterpriseBadge) enterpriseBadge.textContent = 'MEJOR VALOR';
         }
     }
 
-    // Function: Toggle switch visual state
+    // Function: Update toggle switch visual state
     function updateToggleSwitch() {
+        const innerCircle = toggleSwitch.querySelector('div');
+        
+        if (!innerCircle) {
+            console.error('❌ Toggle switch inner circle not found');
+            return;
+        }
+
         if (supportEnabled) {
             toggleSwitch.classList.add('bg-emerald-500');
             toggleSwitch.classList.remove('bg-gray-700');
-            toggleSwitch.querySelector('div').classList.add('translate-x-5');
-            toggleSwitch.querySelector('div').classList.remove('translate-x-0');
+            innerCircle.classList.add('translate-x-5');
+            innerCircle.classList.remove('translate-x-0');
         } else {
             toggleSwitch.classList.remove('bg-emerald-500');
             toggleSwitch.classList.add('bg-gray-700');
-            toggleSwitch.querySelector('div').classList.remove('translate-x-5');
-            toggleSwitch.querySelector('div').classList.add('translate-x-0');
+            innerCircle.classList.remove('translate-x-5');
+            innerCircle.classList.add('translate-x-0');
         }
     }
 
-    // Event Listeners: Tabs
+    // ===================================
+    // Event Listeners
+    // ===================================
+    
+    // Tabs
     tabMonthly.addEventListener('click', () => switchTab('monthly'));
     tabYearly.addEventListener('click', () => switchTab('yearly'));
 
-    // Event Listener: Support Toggle
+    // Support Toggle
     supportToggle.addEventListener('change', (e) => {
         supportEnabled = e.target.checked;
         updateToggleSwitch();
         updatePricesAndBadges();
     });
 
-    // Initial state: Show monthly plans, support disabled
+    // ===================================
+    // Initialize
+    // ===================================
     switchTab('monthly');
     updateToggleSwitch();
+    updatePricesAndBadges();
+
+    console.log('✅ Pricing system initialized successfully');
 });
