@@ -349,21 +349,50 @@
         <div class="absolute inset-0 bg-grid-pattern opacity-30"></div>
         
         <!-- Header -->
-        <div class="relative z-10 text-center mb-16 space-y-4 px-6 opacity-0 animate-fade-in delay-100">
+        <div class="relative z-10 text-center mb-8 space-y-4 px-6 opacity-0 animate-fade-in delay-100">
             <h2 class="text-emerald-500 font-medium tracking-wide text-xs uppercase">Precios Transparentes</h2>
             <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-white">Elige tu plan</h1>
-            <p class="text-gray-400 text-sm md:text-base max-w-xl mx-auto">Escala tus operaciones de trading con infraestructura de alto rendimiento adaptada a tu estrategia.</p>
+            <p class="text-gray-400 text-sm md:text-base max-w-xl mx-auto mb-8">Escala tus operaciones de trading con infraestructura de alto rendimiento adaptada a tu estrategia.</p>
+        </div>
+
+        <!-- Tabs MENSUALES / ANUALES -->
+        <div class="relative z-10 flex justify-center gap-2 mb-12 px-6">
+            <button id="tab-monthly" class="tab-button active px-8 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 bg-emerald-500 text-[#030303]">
+                MENSUALES
+            </button>
+            <button id="tab-yearly" class="tab-button px-8 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 bg-white/5 text-gray-400 border border-white/5 hover:bg-white/10 hover:text-white">
+                ANUALES
+            </button>
+        </div>
+
+        <!-- Premium Support Toggle (arriba de las cards) -->
+        <div class="relative z-10 mb-12 max-w-lg mx-auto w-full px-6">
+            <label class="group relative flex items-center justify-between p-4 rounded-2xl border border-white/5 bg-[#0a0a0a] hover:border-white/10 hover:bg-white/[0.02] transition-all duration-300 cursor-pointer">
+                <input type="checkbox" id="support-toggle" class="sr-only">
+                <div class="flex items-center gap-4">
+                    <div id="toggle-switch" class="relative w-11 h-6 bg-gray-700 rounded-full flex items-center p-1 transition-colors shadow-inner shrink-0">
+                        <div class="w-4 h-4 bg-white rounded-full shadow-sm transform transition-transform"></div>
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium text-white flex items-center gap-2 tracking-tight">
+                            Agregar Soporte Premium 
+                            <span class="text-emerald-500 font-medium text-xs bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">+$5 USD</span>
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1 leading-relaxed">Instalación guiada, configuración inicial y asistencia técnica prioritaria</div>
+                    </div>
+                </div>
+            </label>
         </div>
 
         <!-- Pricing Grid -->
         <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[1200px] mx-auto w-full px-6">
             
             <!-- PLAN 1: Básico Mensual -->
-            <div class="group relative bg-[#0a0a0a] border border-white/5 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.06)] hover:border-white/10 opacity-0 animate-fade-in delay-200">
+            <div data-plan-type="monthly" data-base-price="15.99" data-plan-name="basic" class="group relative bg-[#0a0a0a] border border-white/5 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.06)] hover:border-white/10 opacity-0 animate-fade-in delay-200">
                 <div class="mb-8">
                     <h3 class="text-base font-medium text-white mb-2 tracking-tight">Básico Mensual</h3>
                     <div class="flex items-baseline gap-1">
-                        <span class="text-4xl font-semibold tracking-tight">$15.99</span>
+                        <span id="price-basic-monthly" class="text-4xl font-semibold tracking-tight">$15.99</span>
                         <span class="text-xs text-gray-500 font-medium">USD /mes</span>
                     </div>
                 </div>
@@ -391,14 +420,14 @@
             </div>
 
             <!-- PLAN 3: Trader Mensual -->
-            <div class="group relative bg-[#0a0a0a] border border-white/5 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.06)] hover:border-white/10 opacity-0 animate-fade-in delay-300">
+            <div data-plan-type="monthly" data-base-price="39.99" data-plan-name="trader" class="group relative bg-[#0a0a0a] border border-white/5 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.06)] hover:border-white/10 opacity-0 animate-fade-in delay-300">
                 <div class="absolute top-0 right-6 -translate-y-1/2">
                     <span class="bg-emerald-500 text-[#030303] text-[10px] font-semibold px-2.5 py-1 rounded-full tracking-wider uppercase">POPULAR</span>
                 </div>
                 <div class="mb-8">
                     <h3 class="text-base font-medium text-white mb-2 tracking-tight">Trader Mensual</h3>
                     <div class="flex items-baseline gap-1">
-                        <span class="text-4xl font-semibold tracking-tight">$39.99</span>
+                        <span id="price-trader-monthly" class="text-4xl font-semibold tracking-tight">$39.99</span>
                         <span class="text-xs text-gray-500 font-medium">USD /mes</span>
                     </div>
                 </div>
@@ -426,11 +455,11 @@
             </div>
 
             <!-- PLAN 5: Pro Mensual -->
-            <div class="group relative bg-[#0a0a0a] border border-white/5 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.06)] hover:border-white/10 opacity-0 animate-fade-in">
+            <div data-plan-type="monthly" data-base-price="99.99" data-plan-name="pro" class="group relative bg-[#0a0a0a] border border-white/5 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.06)] hover:border-white/10 opacity-0 animate-fade-in">
                 <div class="mb-8">
                     <h3 class="text-base font-medium text-white mb-2 tracking-tight">Pro Mensual</h3>
                     <div class="flex items-baseline gap-1">
-                        <span class="text-4xl font-semibold tracking-tight">$99.99</span>
+                        <span id="price-pro-monthly" class="text-4xl font-semibold tracking-tight">$99.99</span>
                         <span class="text-xs text-gray-500 font-medium">USD /mes</span>
                     </div>
                 </div>
@@ -458,9 +487,9 @@
             </div>
 
             <!-- PLAN 2: Básico Anual -->
-            <div class="group relative bg-gradient-to-b from-[#0a0a0a] to-[#050505] border border-emerald-500/30 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.1)] hover:border-emerald-500/50 opacity-0 animate-fade-in delay-500">
+            <div data-plan-type="yearly" data-base-price="159" data-plan-name="basic" class="hidden group relative bg-gradient-to-b from-[#0a0a0a] to-[#050505] border border-emerald-500/30 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.1)] hover:border-emerald-500/50 opacity-0 animate-fade-in delay-500">
                 <div class="absolute top-0 right-6 -translate-y-1/2">
-                    <span class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-semibold px-2.5 py-1 rounded-full tracking-wider uppercase backdrop-blur-md">AHORRA 17%</span>
+                    <span id="badge-basic-yearly" class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-semibold px-2.5 py-1 rounded-full tracking-wider uppercase backdrop-blur-md">AHORRA 17%</span>
                 </div>
                 <div class="mb-8">
                     <h3 class="text-base font-medium text-emerald-400 mb-2 tracking-tight">Básico Anual</h3>
@@ -493,9 +522,9 @@
             </div>
 
             <!-- PLAN 4: Trader Anual -->
-            <div class="group relative bg-gradient-to-b from-[#0a0a0a] to-[#050505] border border-emerald-500/30 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.1)] hover:border-emerald-500/50 opacity-0 animate-fade-in">
+            <div data-plan-type="yearly" data-base-price="399" data-plan-name="trader" class="hidden group relative bg-gradient-to-b from-[#0a0a0a] to-[#050505] border border-emerald-500/30 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.1)] hover:border-emerald-500/50 opacity-0 animate-fade-in">
                 <div class="absolute top-0 right-6 -translate-y-1/2">
-                    <span class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-semibold px-2.5 py-1 rounded-full tracking-wider uppercase backdrop-blur-md">AHORRA 17%</span>
+                    <span id="badge-trader-yearly" class="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-semibold px-2.5 py-1 rounded-full tracking-wider uppercase backdrop-blur-md">AHORRA 17%</span>
                 </div>
                 <div class="mb-8">
                     <h3 class="text-base font-medium text-emerald-400 mb-2 tracking-tight">Trader Anual</h3>
@@ -528,9 +557,9 @@
             </div>
 
             <!-- PLAN 6: Pro Anual -->
-            <div class="group relative bg-gradient-to-b from-[#0a0a0a] to-[#050505] border border-emerald-500/40 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.15)] hover:border-emerald-500/60 opacity-0 animate-fade-in">
+            <div data-plan-type="yearly" data-base-price="999" data-plan-name="pro" class="hidden group relative bg-gradient-to-b from-[#0a0a0a] to-[#050505] border border-emerald-500/40 rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(16,185,129,0.15)] hover:border-emerald-500/60 opacity-0 animate-fade-in">
                 <div class="absolute top-0 right-6 -translate-y-1/2">
-                    <span class="bg-emerald-500 text-[#030303] text-[10px] font-semibold px-2.5 py-1 rounded-full tracking-wider uppercase shadow-[0_0_15px_rgba(16,185,129,0.4)]">MEJOR VALOR</span>
+                    <span id="badge-pro-yearly" class="bg-emerald-500 text-[#030303] text-[10px] font-semibold px-2.5 py-1 rounded-full tracking-wider uppercase shadow-[0_0_15px_rgba(16,185,129,0.4)]">MEJOR VALOR</span>
                 </div>
                 <div class="mb-8">
                     <h3 class="text-base font-medium text-emerald-400 mb-2 tracking-tight">Pro Anual</h3>
@@ -561,24 +590,6 @@
                     Comenzar
                 </button>
             </div>
-        </div>
-
-        <!-- Premium Support Toggle -->
-        <div class="relative z-10 mt-16 max-w-lg mx-auto w-full px-6 opacity-0 animate-fade-in">
-            <label class="group relative flex items-center justify-between p-5 rounded-2xl border border-white/5 bg-[#0a0a0a] hover:border-white/10 hover:bg-white/[0.02] transition-all duration-300 cursor-pointer">
-                <div class="flex items-center gap-5">
-                    <div class="relative w-11 h-6 bg-emerald-500 rounded-full flex items-center p-1 transition-colors shadow-inner shrink-0">
-                        <div class="w-4 h-4 bg-white rounded-full shadow-sm transform translate-x-5 transition-transform"></div>
-                    </div>
-                    <div>
-                        <div class="text-sm font-medium text-white flex items-center gap-2 tracking-tight">
-                            Agregar Soporte Premium 
-                            <span class="text-emerald-500 font-medium text-xs bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">+$5 USD</span>
-                        </div>
-                        <div class="text-xs text-gray-500 mt-1 leading-relaxed">Instalación guiada, configuración inicial y asistencia técnica prioritaria</div>
-                    </div>
-                </div>
-            </label>
         </div>
     </section>
 

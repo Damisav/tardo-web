@@ -86,3 +86,148 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', updateScroll);
     updateScroll(); // Run on init
 });
+
+// ============================================
+// Interactive Pricing System
+// ============================================
+
+// Base Prices (without support)
+const basePrices = {
+    monthly: {
+        basic: 15.99,
+        trader: 39.99,
+        pro: 99.99
+    },
+    yearly: {
+        basic: 159,
+        trader: 399,
+        pro: 999
+    }
+};
+
+// Tab Switching Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const tabMonthly = document.getElementById('tab-monthly');
+    const tabYearly = document.getElementById('tab-yearly');
+    const planCards = document.querySelectorAll('[data-plan-type]');
+    const supportToggle = document.getElementById('support-toggle');
+    const toggleSwitch = document.getElementById('toggle-switch');
+    let supportEnabled = false;
+
+    // Function: Switch tabs
+    function switchTab(tabType) {
+        planCards.forEach(card => {
+            if (card.dataset.planType === tabType) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+
+        // Update tab button styles
+        if (tabType === 'monthly') {
+            tabMonthly.classList.add('active', 'bg-emerald-500', 'text-[#030303]');
+            tabMonthly.classList.remove('bg-white/5', 'text-gray-400', 'border', 'border-white/5');
+            
+            tabYearly.classList.remove('active', 'bg-emerald-500', 'text-[#030303]');
+            tabYearly.classList.add('bg-white/5', 'text-gray-400', 'border', 'border-white/5');
+        } else {
+            tabYearly.classList.add('active', 'bg-emerald-500', 'text-[#030303]');
+            tabYearly.classList.remove('bg-white/5', 'text-gray-400', 'border', 'border-white/5');
+            
+            tabMonthly.classList.remove('active', 'bg-emerald-500', 'text-[#030303]');
+            tabMonthly.classList.add('bg-white/5', 'text-gray-400', 'border', 'border-white/5');
+        }
+
+        // Update prices and badges based on current support state
+        updatePricesAndBadges();
+    }
+
+    // Function: Update prices and badges
+    function updatePricesAndBadges() {
+        const supportCost = 5;
+
+        // Update monthly prices
+        ['basic', 'trader', 'pro'].forEach(plan => {
+            const priceElement = document.getElementById(`price-${plan}-monthly`);
+            if (priceElement) {
+                const basePrice = basePrices.monthly[plan];
+                const finalPrice = supportEnabled ? basePrice + supportCost : basePrice;
+                priceElement.textContent = `$${finalPrice.toFixed(2)}`;
+            }
+        });
+
+        // Update yearly badges (recalculate savings with support included)
+        if (supportEnabled) {
+            // Básico Yearly: ((15.99+5)×12 - 159) / ((15.99+5)×12)
+            const basicMonthlyWithSupport = (basePrices.monthly.basic + supportCost) * 12; // $251.88
+            const basicSavings = ((basicMonthlyWithSupport - basePrices.yearly.basic) / basicMonthlyWithSupport * 100).toFixed(1);
+            const basicBadge = document.getElementById('badge-basic-yearly');
+            if (basicBadge) {
+                basicBadge.innerHTML = `AHORRA ${basicSavings}% <span class="ml-1 text-[9px] opacity-80">+ Soporte gratis</span>`;
+            }
+
+            // Trader Yearly
+            const traderMonthlyWithSupport = (basePrices.monthly.trader + supportCost) * 12; // $539.88
+            const traderSavings = ((traderMonthlyWithSupport - basePrices.yearly.trader) / traderMonthlyWithSupport * 100).toFixed(1);
+            const traderBadge = document.getElementById('badge-trader-yearly');
+            if (traderBadge) {
+                traderBadge.innerHTML = `AHORRA ${traderSavings}% <span class="ml-1 text-[9px] opacity-80">+ Soporte gratis</span>`;
+            }
+
+            // Pro Yearly
+            const proMonthlyWithSupport = (basePrices.monthly.pro + supportCost) * 12; // $1259.88
+            const proSavings = ((proMonthlyWithSupport - basePrices.yearly.pro) / proMonthlyWithSupport * 100).toFixed(1);
+            const proBadge = document.getElementById('badge-pro-yearly');
+            if (proBadge) {
+                proBadge.innerHTML = `MEJOR VALOR <span class="ml-1 text-[9px] opacity-80">+ Soporte gratis</span>`;
+            }
+        } else {
+            // Reset to original badges (no support)
+            const basicBadge = document.getElementById('badge-basic-yearly');
+            if (basicBadge) {
+                basicBadge.textContent = 'AHORRA 17%';
+            }
+
+            const traderBadge = document.getElementById('badge-trader-yearly');
+            if (traderBadge) {
+                traderBadge.textContent = 'AHORRA 17%';
+            }
+
+            const proBadge = document.getElementById('badge-pro-yearly');
+            if (proBadge) {
+                proBadge.textContent = 'MEJOR VALOR';
+            }
+        }
+    }
+
+    // Function: Toggle switch visual state
+    function updateToggleSwitch() {
+        if (supportEnabled) {
+            toggleSwitch.classList.add('bg-emerald-500');
+            toggleSwitch.classList.remove('bg-gray-700');
+            toggleSwitch.querySelector('div').classList.add('translate-x-5');
+            toggleSwitch.querySelector('div').classList.remove('translate-x-0');
+        } else {
+            toggleSwitch.classList.remove('bg-emerald-500');
+            toggleSwitch.classList.add('bg-gray-700');
+            toggleSwitch.querySelector('div').classList.remove('translate-x-5');
+            toggleSwitch.querySelector('div').classList.add('translate-x-0');
+        }
+    }
+
+    // Event Listeners: Tabs
+    tabMonthly.addEventListener('click', () => switchTab('monthly'));
+    tabYearly.addEventListener('click', () => switchTab('yearly'));
+
+    // Event Listener: Support Toggle
+    supportToggle.addEventListener('change', (e) => {
+        supportEnabled = e.target.checked;
+        updateToggleSwitch();
+        updatePricesAndBadges();
+    });
+
+    // Initial state: Show monthly plans, support disabled
+    switchTab('monthly');
+    updateToggleSwitch();
+});
