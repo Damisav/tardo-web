@@ -26,9 +26,9 @@
                 <span class="text-sm font-semibold tracking-tight text-white uppercase">Tardo<span class="text-neutral-500">AR</span></span>
             </div>
             <div class="hidden md:flex items-center gap-6 text-xs font-medium text-neutral-500">
-                <a href="#story" class="hover:text-white transition-colors">La Historia</a>
-                <a href="#features" class="hover:text-white transition-colors">Tecnología</a>
+                <a href="#story" class="hover:text-white transition-colors">Mi Historia</a>
                 <a href="#pricing" class="hover:text-white transition-colors">Precios</a>
+                <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
             </div>
             <a href="#pricing" class="text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/5 text-white px-4 py-1.5 rounded transition-all">
                 Solicitar Licencia
@@ -60,28 +60,39 @@
                     Sistema de gestión de riesgo adaptativo diseñado para <span class="text-white">Binance Futures</span> con panel de control en vivo.
                 </p>
                 
-                <!-- Social Proof Badges -->
-                <div class="flex flex-wrap justify-center gap-3 mt-2">
-                    <div class="flex items-center gap-2 px-3 py-1 rounded border border-emerald-500/20 bg-emerald-500/5">
-                        <iconify-icon icon="solar:shield-check-linear" class="text-emerald-500 text-xs"></iconify-icon>
-                        <span class="text-[10px] font-medium text-emerald-500/90 uppercase tracking-wide">Sistema en Producción</span>
+                <!-- Features Bullets -->
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-3 mt-6 max-w-3xl">
+                    <div class="flex items-center gap-2.5">
+                        <iconify-icon icon="solar:clock-circle-linear" class="text-emerald-500 text-lg"></iconify-icon>
+                        <span class="text-xs text-neutral-300 font-medium">24/7 Operativo</span>
                     </div>
-                    <div class="flex items-center gap-2 px-3 py-1 rounded border border-blue-500/20 bg-blue-500/5">
-                        <iconify-icon icon="solar:graph-up-linear" class="text-blue-500 text-xs"></iconify-icon>
-                        <span class="text-[10px] font-medium text-blue-500/90 uppercase tracking-wide">Binance Futures</span>
+                    <div class="flex items-center gap-2.5">
+                        <iconify-icon icon="solar:chart-2-linear" class="text-emerald-500 text-lg"></iconify-icon>
+                        <span class="text-xs text-neutral-300 font-medium">Estrategia de Reversión Balanceada</span>
+                    </div>
+                    <div class="flex items-center gap-2.5">
+                        <iconify-icon icon="solar:monitor-smartphone-linear" class="text-blue-500 text-lg"></iconify-icon>
+                        <span class="text-xs text-neutral-300 font-medium">Panel de Control en Tiempo Real</span>
+                    </div>
+                    <div class="flex items-center gap-2.5">
+                        <iconify-icon icon="solar:history-linear" class="text-white text-lg"></iconify-icon>
+                        <span class="text-xs text-neutral-300 font-medium">Historial Completo</span>
+                    </div>
+                    <div class="flex items-center gap-2.5">
+                        <iconify-icon icon="solar:restart-linear" class="text-red-500 text-lg"></iconify-icon>
+                        <span class="text-xs text-neutral-300 font-medium">Recuperación Automática por corte</span>
+                    </div>
+                    <div class="flex items-center gap-2.5">
+                        <iconify-icon icon="solar:settings-linear" class="text-yellow-500 text-lg"></iconify-icon>
+                        <span class="text-xs text-neutral-300 font-medium">Configuración Adaptable</span>
                     </div>
                 </div>
             </div>
 
-            <div class="opacity-0 animate-fade-in-up delay-300 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#pricing" class="h-10 px-6 flex items-center justify-center rounded bg-white text-black font-medium text-sm hover:bg-neutral-200 transition-colors w-full sm:w-auto">
-                    Solicitar Licencia
+            <div class="opacity-0 animate-fade-in-up delay-300 flex items-center justify-center">
+                <a href="#pricing" class="h-12 px-8 flex items-center justify-center rounded-lg bg-emerald-500 text-white font-semibold text-base hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-500/25">
+                    Ver Planes y Precios
                 </a>
-                <div class="flex items-center gap-3 text-xs text-neutral-500">
-                    <span class="flex items-center gap-1"><iconify-icon icon="solar:clock-circle-linear" class="text-emerald-500"></iconify-icon> 24/7 Operativo</span>
-                    <span class="w-px h-3 bg-white/10"></span>
-                    <span class="flex items-center gap-1"><iconify-icon icon="solar:shield-warning-linear" class="text-emerald-500"></iconify-icon> Stop Loss Automático</span>
-                </div>
             </div>
         </div>
     </section>
@@ -224,171 +235,6 @@
                         💡 <span class="text-white">Próximamente:</span> Capturas de PnL verificadas con fechas
                     </p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- The Bridge: Technical Features -->
-    <section id="features" class="py-24 max-w-6xl mx-auto px-6">
-        <div class="mb-16">
-            <h3 class="text-sm font-semibold text-emerald-500 uppercase tracking-wider mb-2">Superioridad Técnica</h3>
-            <h2 class="text-3xl font-medium text-white tracking-tight max-w-2xl">
-                No es una herramienta "de las de siempre".<br>
-                Es ingeniería matemática aplicada.
-            </h2>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-6">
-            
-            <!-- Feature 1 -->
-            <div class="group p-6 rounded-xl bg-neutral-900/50 border border-white/5 hover:border-emerald-500/30 transition-all duration-300">
-                <div class="w-10 h-10 rounded bg-neutral-800 flex items-center justify-center mb-4 text-white group-hover:bg-emerald-500 group-hover:text-black transition-colors">
-                    <iconify-icon icon="solar:chart-2-linear" width="20"></iconify-icon>
-                </div>
-                <h4 class="text-white font-medium mb-2">Estrategia Dual Balanceada</h4>
-                <p class="text-sm text-neutral-400 leading-relaxed">
-                    Abre simultáneamente LONG y SHORT. Escala solo el lado perdedor usando GAP progresivo (0.8%-2.3%). No necesita predecir dirección, solo gestiona riesgo matemáticamente.
-                </p>
-            </div>
-
-            <!-- Feature 2 -->
-            <div class="group p-6 rounded-xl bg-neutral-900/50 border border-white/5 hover:border-purple-500/30 transition-all duration-300">
-                <div class="w-10 h-10 rounded bg-neutral-800 flex items-center justify-center mb-4 text-white group-hover:bg-purple-500 group-hover:text-black transition-colors">
-                    <iconify-icon icon="solar:shield-warning-linear" width="20"></iconify-icon>
-                </div>
-                <h4 class="text-white font-medium mb-2">Stop Loss Dinámico</h4>
-                <p class="text-sm text-neutral-400 leading-relaxed">
-                    SL adaptativo basado en % del capital total (default 20%). Take Profit progresivo escalado por escalones (1.0x-3.5x). Cierre forzado si duración excede 24h sin TP.
-                </p>
-            </div>
-
-            <!-- Feature 3 -->
-            <div class="group p-6 rounded-xl bg-neutral-900/50 border border-white/5 hover:border-blue-500/30 transition-all duration-300">
-                <div class="w-10 h-10 rounded bg-neutral-800 flex items-center justify-center mb-4 text-white group-hover:bg-blue-500 group-hover:text-black transition-colors">
-                    <iconify-icon icon="solar:monitor-smartphone-linear" width="20"></iconify-icon>
-                </div>
-                <h4 class="text-white font-medium mb-2">Panel de Control en Tiempo Real</h4>
-                <p class="text-sm text-neutral-400 leading-relaxed">
-                    Panel web completo con posiciones abiertas, PnL histórico (hoy/semana/mes), balance USDT disponible, gráfico de precios y control remoto de la herramienta desde cualquier dispositivo.
-                </p>
-            </div>
-
-            <!-- Feature 4 -->
-            <div class="group p-6 rounded-xl bg-neutral-900/50 border border-white/5 hover:border-yellow-500/30 transition-all duration-300">
-                <div class="w-10 h-10 rounded bg-neutral-800 flex items-center justify-center mb-4 text-white group-hover:bg-yellow-500 group-hover:text-black transition-colors">
-                    <iconify-icon icon="solar:settings-linear" width="20"></iconify-icon>
-                </div>
-                <h4 class="text-white font-medium mb-2">Configuración Adaptable</h4>
-                <p class="text-sm text-neutral-400 leading-relaxed">
-                    Ajusta leverage, margen inicial, multiplicador, GAP, TP/SL desde el panel de control. Cambios guardados en JSON y aplicables en el próximo ciclo sin reiniciar el sistema.
-                </p>
-            </div>
-
-            <!-- Feature 5 -->
-            <div class="group p-6 rounded-xl bg-neutral-900/50 border border-white/5 hover:border-red-500/30 transition-all duration-300">
-                <div class="w-10 h-10 rounded bg-neutral-800 flex items-center justify-center mb-4 text-white group-hover:bg-red-500 group-hover:text-black transition-colors">
-                    <iconify-icon icon="solar:restart-linear" width="20"></iconify-icon>
-                </div>
-                <h4 class="text-white font-medium mb-2">Recuperación Automática</h4>
-                <p class="text-sm text-neutral-400 leading-relaxed">
-                    Si la herramienta se detiene (corte de luz, reinicio), detecta posiciones abiertas en Binance y recupera el estado exacto desde archivo JSON. Nunca pierde el contexto del ciclo activo.
-                </p>
-            </div>
-
-             <!-- Feature 6 -->
-             <div class="group p-6 rounded-xl bg-neutral-900/50 border border-white/5 hover:border-white/30 transition-all duration-300">
-                <div class="w-10 h-10 rounded bg-neutral-800 flex items-center justify-center mb-4 text-white group-hover:bg-white group-hover:text-black transition-colors">
-                    <iconify-icon icon="solar:history-linear" width="20"></iconify-icon>
-                </div>
-                <h4 class="text-white font-medium mb-2">Historial Completo</h4>
-                <p class="text-sm text-neutral-400 leading-relaxed">
-                    Logs CSV con cada ciclo: timestamp inicio/cierre, precio entrada/salida, escalones, margen usado, PnL bruto/neto, comisiones y razón de cierre. Auditoría total de operaciones.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Comparison / Differentiation -->
-    <section class="py-20 border-t border-white/5 bg-[#030303]">
-        <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-2xl font-medium text-white text-center mb-12">Diferenciación Real</h2>
-            
-            <div class="grid md:grid-cols-2 gap-px bg-white/5 rounded-lg overflow-hidden border border-white/5">
-                
-                <!-- The "Others" -->
-                <div class="bg-[#0a0a0a] p-8">
-                    <h3 class="text-red-400 font-medium text-sm mb-6 flex items-center gap-2">
-                        <iconify-icon icon="solar:close-circle-linear"></iconify-icon> Herramientas Convencionales
-                    </h3>
-                    <ul class="space-y-4 text-sm text-neutral-500">
-                        <li class="flex items-start gap-3">
-                            <span class="text-red-900 mt-0.5">✕</span> Grid/Martingala pura que quema cuentas en tendencias.
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-red-900 mt-0.5">✕</span> Sin panel de control: operas ciego sin saber el estado real.
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-red-900 mt-0.5">✕</span> Caja negra: no entiendes qué hace ni por qué.
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-red-900 mt-0.5">✕</span> Si se cae, pierdes el control y el contexto del ciclo.
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Tardo -->
-                <div class="bg-[#0c0c0c] p-8 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-10">
-                        <iconify-icon icon="solar:check-circle-linear" width="100" class="text-emerald-500"></iconify-icon>
-                    </div>
-                    <h3 class="text-emerald-400 font-medium text-sm mb-6 flex items-center gap-2">
-                        <iconify-icon icon="solar:check-circle-linear"></iconify-icon> Tardo
-                    </h3>
-                    <ul class="space-y-4 text-sm text-neutral-300">
-                        <li class="flex items-start gap-3">
-                            <span class="text-emerald-500 mt-0.5">✓</span> Dual balanceado: cubre ambos lados del movimiento.
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-emerald-500 mt-0.5">✓</span> Panel de control completo con control, gráficos y PnL histórico.
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-emerald-500 mt-0.5">✓</span> Código abierto: ves exactamente cómo funciona.
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-emerald-500 mt-0.5">✓</span> Recuperación automática post-caída desde JSON/Binance.
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Filters: Who is this for? -->
-    <section class="py-20 max-w-5xl mx-auto px-6">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12">
-            <div>
-                <h2 class="text-2xl font-medium text-white mb-2">¿Es Tardo para ti?</h2>
-                <p class="text-neutral-500 text-sm">Este sistema no es para todos. Sé honesto contigo mismo.</p>
-            </div>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="space-y-4">
-                <h3 class="text-white text-sm font-semibold border-b border-white/10 pb-2">NO es para ti si:</h3>
-                <ul class="space-y-3 text-neutral-500 text-sm">
-                    <li class="flex gap-3"><span class="text-neutral-700">01</span> Buscas hacerte rico en una semana sin riesgo.</li>
-                    <li class="flex gap-3"><span class="text-neutral-700">02</span> No tienes capital inicial (mínimo $100-200 USDT recomendado).</li>
-                    <li class="flex gap-3"><span class="text-neutral-700">03</span> No sabes qué es Binance Futures ni leverage.</li>
-                </ul>
-            </div>
-            <div class="space-y-4">
-                <h3 class="text-white text-sm font-semibold border-b border-white/10 pb-2">SÍ es para ti si:</h3>
-                <ul class="space-y-3 text-neutral-300 text-sm">
-                    <li class="flex gap-3"><span class="text-emerald-500">01</span> Tienes cuenta en Binance Futures (o puedes crearla).</li>
-                    <li class="flex gap-3"><span class="text-emerald-500">02</span> Valoras consistencia matemática sobre "corazonadas".</li>
-                    <li class="flex gap-3"><span class="text-emerald-500">03</span> Entiendes que todo sistema implica riesgo gestionable.</li>
-                </ul>
             </div>
         </div>
     </section>
@@ -654,6 +500,217 @@
                 <button class="w-full py-2.5 px-4 rounded-xl bg-emerald-500 text-[#030303] text-sm font-semibold hover:bg-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-300">
                     Comenzar
                 </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-24 bg-[#050505] border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl font-medium text-white mb-3">Preguntas Frecuentes</h2>
+                <p class="text-neutral-500 text-sm">Todo lo que necesitas saber sobre Tardo</p>
+            </div>
+
+            <div class="space-y-4">
+                
+                <!-- FAQ 1: ¿Cómo funciona? -->
+                <details class="group bg-[#0a0a0a] border border-white/5 rounded-xl overflow-hidden hover:border-emerald-500/30 transition-all">
+                    <summary class="cursor-pointer px-6 py-4 text-white font-medium flex items-center justify-between list-none">
+                        <span>¿Cómo funciona Tardo en detalle?</span>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" class="text-neutral-500 group-open:rotate-180 transition-transform"></iconify-icon>
+                    </summary>
+                    <div class="px-6 pb-6 text-sm text-neutral-400 space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4 mt-4">
+                            <div class="p-4 bg-neutral-900/50 rounded-lg border border-white/5">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <iconify-icon icon="solar:chart-2-linear" class="text-emerald-500"></iconify-icon>
+                                    <h4 class="text-white font-medium text-sm">Estrategia Dual Balanceada</h4>
+                                </div>
+                                <p class="text-xs leading-relaxed">Abre simultáneamente LONG y SHORT. Escala solo el lado perdedor usando GAP progresivo (0.8%-2.3%). No necesita predecir dirección, solo gestiona riesgo matemáticamente.</p>
+                            </div>
+                            <div class="p-4 bg-neutral-900/50 rounded-lg border border-white/5">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <iconify-icon icon="solar:shield-warning-linear" class="text-purple-500"></iconify-icon>
+                                    <h4 class="text-white font-medium text-sm">Stop Loss Dinámico</h4>
+                                </div>
+                                <p class="text-xs leading-relaxed">SL adaptativo basado en % del capital total (default 20%). Take Profit progresivo escalado por escalones (1.0x-3.5x). Cierre forzado si duración excede 24h sin TP.</p>
+                            </div>
+                            <div class="p-4 bg-neutral-900/50 rounded-lg border border-white/5">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <iconify-icon icon="solar:monitor-smartphone-linear" class="text-blue-500"></iconify-icon>
+                                    <h4 class="text-white font-medium text-sm">Panel de Control</h4>
+                                </div>
+                                <p class="text-xs leading-relaxed">Panel web completo con posiciones abiertas, PnL histórico (hoy/semana/mes), balance USDT disponible, gráfico de precios y control remoto desde cualquier dispositivo.</p>
+                            </div>
+                            <div class="p-4 bg-neutral-900/50 rounded-lg border border-white/5">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <iconify-icon icon="solar:settings-linear" class="text-yellow-500"></iconify-icon>
+                                    <h4 class="text-white font-medium text-sm">Configuración Adaptable</h4>
+                                </div>
+                                <p class="text-xs leading-relaxed">Ajusta leverage, margen inicial, multiplicador, GAP, TP/SL desde el panel de control. Cambios guardados en JSON y aplicables en el próximo ciclo sin reiniciar.</p>
+                            </div>
+                            <div class="p-4 bg-neutral-900/50 rounded-lg border border-white/5">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <iconify-icon icon="solar:restart-linear" class="text-red-500"></iconify-icon>
+                                    <h4 class="text-white font-medium text-sm">Recuperación Automática</h4>
+                                </div>
+                                <p class="text-xs leading-relaxed">Si la herramienta se detiene (corte de luz, reinicio), detecta posiciones abiertas en Binance y recupera el estado exacto desde archivo JSON. Nunca pierde el contexto del ciclo activo.</p>
+                            </div>
+                            <div class="p-4 bg-neutral-900/50 rounded-lg border border-white/5">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <iconify-icon icon="solar:history-linear" class="text-white"></iconify-icon>
+                                    <h4 class="text-white font-medium text-sm">Historial Completo</h4>
+                                </div>
+                                <p class="text-xs leading-relaxed">Logs CSV con cada ciclo: timestamp inicio/cierre, precio entrada/salida, escalones, margen usado, PnL bruto/neto, comisiones y razón de cierre. Auditoría total de operaciones.</p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- FAQ 2: ¿Es diferente a otros? -->
+                <details class="group bg-[#0a0a0a] border border-white/5 rounded-xl overflow-hidden hover:border-emerald-500/30 transition-all">
+                    <summary class="cursor-pointer px-6 py-4 text-white font-medium flex items-center justify-between list-none">
+                        <span>¿En qué se diferencia de otras herramientas?</span>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" class="text-neutral-500 group-open:rotate-180 transition-transform"></iconify-icon>
+                    </summary>
+                    <div class="px-6 pb-6">
+                        <div class="grid md:grid-cols-2 gap-4 mt-4">
+                            <div class="p-4 bg-red-900/10 rounded-lg border border-red-900/20">
+                                <h4 class="text-red-400 font-medium text-sm mb-3 flex items-center gap-2">
+                                    <iconify-icon icon="solar:close-circle-linear"></iconify-icon> Herramientas Convencionales
+                                </h4>
+                                <ul class="space-y-2 text-xs text-neutral-500">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-red-900 mt-0.5">✕</span> Grid/Martingala pura que quema cuentas en tendencias.
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-red-900 mt-0.5">✕</span> Sin panel de control: operas ciego sin saber el estado real.
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-red-900 mt-0.5">✕</span> Caja negra: no entiendes qué hace ni por qué.
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-red-900 mt-0.5">✕</span> Si se cae, pierdes el control y el contexto del ciclo.
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="p-4 bg-emerald-900/10 rounded-lg border border-emerald-900/20">
+                                <h4 class="text-emerald-400 font-medium text-sm mb-3 flex items-center gap-2">
+                                    <iconify-icon icon="solar:check-circle-linear"></iconify-icon> Tardo
+                                </h4>
+                                <ul class="space-y-2 text-xs text-neutral-300">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-emerald-500 mt-0.5">✓</span> Dual balanceado: cubre ambos lados del movimiento.
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-emerald-500 mt-0.5">✓</span> Panel de control completo con control, gráficos y PnL histórico.
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-emerald-500 mt-0.5">✓</span> Código abierto: ves exactamente cómo funciona.
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-emerald-500 mt-0.5">✓</span> Recuperación automática post-caída desde JSON/Binance.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- FAQ 3: ¿Es para mí? -->
+                <details class="group bg-[#0a0a0a] border border-white/5 rounded-xl overflow-hidden hover:border-emerald-500/30 transition-all">
+                    <summary class="cursor-pointer px-6 py-4 text-white font-medium flex items-center justify-between list-none">
+                        <span>¿Es Tardo para mí?</span>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" class="text-neutral-500 group-open:rotate-180 transition-transform"></iconify-icon>
+                    </summary>
+                    <div class="px-6 pb-6 text-sm">
+                        <p class="text-neutral-500 mb-4 mt-2">Este sistema no es para todos. Sé honesto contigo mismo.</p>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-white text-sm font-semibold border-b border-white/10 pb-2 mb-3">NO es para ti si:</h4>
+                                <ul class="space-y-2 text-neutral-500 text-xs">
+                                    <li class="flex gap-2"><span class="text-neutral-700 font-mono">01</span> Buscas hacerte rico en una semana sin riesgo.</li>
+                                    <li class="flex gap-2"><span class="text-neutral-700 font-mono">02</span> No tienes capital inicial (mínimo $100-200 USDT recomendado).</li>
+                                    <li class="flex gap-2"><span class="text-neutral-700 font-mono">03</span> No sabes qué es Binance Futures ni leverage.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-white text-sm font-semibold border-b border-white/10 pb-2 mb-3">SÍ es para ti si:</h4>
+                                <ul class="space-y-2 text-neutral-300 text-xs">
+                                    <li class="flex gap-2"><span class="text-emerald-500 font-mono">01</span> Tienes cuenta en Binance Futures (o puedes crearla).</li>
+                                    <li class="flex gap-2"><span class="text-emerald-500 font-mono">02</span> Valoras consistencia matemática sobre "corazonadas".</li>
+                                    <li class="flex gap-2"><span class="text-emerald-500 font-mono">03</span> Entiendes que todo sistema implica riesgo gestionable.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- FAQ 4: ¿Qué necesito? -->
+                <details class="group bg-[#0a0a0a] border border-white/5 rounded-xl overflow-hidden hover:border-emerald-500/30 transition-all">
+                    <summary class="cursor-pointer px-6 py-4 text-white font-medium flex items-center justify-between list-none">
+                        <span>¿Qué necesito para empezar?</span>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" class="text-neutral-500 group-open:rotate-180 transition-transform"></iconify-icon>
+                    </summary>
+                    <div class="px-6 pb-6">
+                        <ul class="space-y-3 text-sm text-neutral-400 mt-4">
+                            <li class="flex items-start gap-3">
+                                <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg mt-0.5"></iconify-icon>
+                                <div>
+                                    <span class="text-white font-medium">Cuenta en Binance Futures</span>
+                                    <p class="text-xs text-neutral-500 mt-1">Con modo HEDGE activado y API Keys creadas (lectura + trading).</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg mt-0.5"></iconify-icon>
+                                <div>
+                                    <span class="text-white font-medium">Capital inicial en USDT</span>
+                                    <p class="text-xs text-neutral-500 mt-1">Mínimo recomendado: $100-200 USDT para gestión de riesgo adecuada.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg mt-0.5"></iconify-icon>
+                                <div>
+                                    <span class="text-white font-medium">Servidor/PC siempre encendido</span>
+                                    <p class="text-xs text-neutral-500 mt-1">Raspberry Pi, VPS o PC con conexión estable para operación 24/7.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <iconify-icon icon="solar:check-circle-linear" class="text-emerald-500 text-lg mt-0.5"></iconify-icon>
+                                <div>
+                                    <span class="text-white font-medium">Python 3.8+ instalado</span>
+                                    <p class="text-xs text-neutral-500 mt-1">El bot está desarrollado en Python con dependencias incluidas en requirements.txt.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- FAQ 5: ¿Qué soporte incluye? -->
+                <details class="group bg-[#0a0a0a] border border-white/5 rounded-xl overflow-hidden hover:border-emerald-500/30 transition-all">
+                    <summary class="cursor-pointer px-6 py-4 text-white font-medium flex items-center justify-between list-none">
+                        <span>¿Qué soporte se incluye en cada plan?</span>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" class="text-neutral-500 group-open:rotate-180 transition-transform"></iconify-icon>
+                    </summary>
+                    <div class="px-6 pb-6">
+                        <div class="space-y-3 mt-4">
+                            <div class="p-3 bg-neutral-900/30 rounded-lg border border-white/5">
+                                <h4 class="text-white text-sm font-medium mb-2">Basic - Soporte por Email</h4>
+                                <p class="text-xs text-neutral-400">Respuestas en 24-48hs. Incluye documentación completa y acceso a actualizaciones.</p>
+                            </div>
+                            <div class="p-3 bg-blue-900/10 rounded-lg border border-blue-900/20">
+                                <h4 class="text-blue-400 text-sm font-medium mb-2">Premium - Soporte Prioritario</h4>
+                                <p class="text-xs text-neutral-400">Respuestas en menos de 12hs + configuración inicial asistida + ajustes de estrategia personalizados.</p>
+                            </div>
+                            <div class="p-3 bg-emerald-900/10 rounded-lg border border-emerald-900/20">
+                                <h4 class="text-emerald-400 text-sm font-medium mb-2">Enterprise - Soporte VIP</h4>
+                                <p class="text-xs text-neutral-400">Respuestas inmediatas + instalación completa + sesiones 1-a-1 para optimización + monitoreo proactivo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
             </div>
         </div>
     </section>
