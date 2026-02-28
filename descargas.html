@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descargas | Tardo - Sistema de Trading Automatizado</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#030303] text-neutral-300 font-sans antialiased selection:bg-white/20 selection:text-white overflow-x-hidden">
+
+    <!-- Background Gradients -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-[-10%] left-[20%] w-[800px] h-[600px] bg-neutral-800/20 rounded-full blur-[120px] mix-blend-screen opacity-20 animate-blob"></div>
+        <div class="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] bg-emerald-900/10 rounded-full blur-[100px] mix-blend-screen opacity-20 animate-pulse-slow"></div>
+        <div class="absolute inset-0 bg-grid-pattern z-0 opacity-60"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 border-b border-white/5 bg-[#030303]/80 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                <span class="text-sm font-semibold tracking-tight text-white uppercase">Tardo<span class="text-neutral-500">AR</span></span>
+            </a>
+            <div class="hidden md:flex items-center gap-6 text-xs font-medium text-neutral-500">
+                <a href="index.html#story" class="hover:text-white transition-colors">Mi Historia</a>
+                <a href="descargas.html" class="text-white transition-colors">Descargas</a>
+                <a href="index.html#pricing" class="hover:text-white transition-colors">Precios</a>
+                <a href="index.html#faq" class="hover:text-white transition-colors">Preguntas Frecuentes</a>
+            </div>
+            <a href="index.html#pricing" class="text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/5 text-white px-4 py-1.5 rounded transition-all">
+                Solicitar Licencia
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative z-10 pt-32 pb-16">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            
+            <!-- Version Badge -->
+            <div class="inline-flex items-center gap-3 px-4 py-1.5 mb-6 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                <iconify-icon icon="solar:download-linear" class="text-emerald-500"></iconify-icon>
+                <span class="text-xs font-mono text-emerald-400 font-semibold">Última versión: v3.0.1</span>
+                <span class="text-[10px] text-neutral-500">24/02/2026</span>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-white mb-4 leading-tight">
+                Descarga Tardo
+            </h1>
+
+            <p class="text-base text-neutral-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+                Sistema de trading automatizado con estrategia dual de reversión adaptativa. 
+                <span class="text-white font-medium">Instalador oficial para Windows</span>
+            </p>
+
+            <!-- Download Button -->
+            <a href="https://drive.google.com/file/d/1J_ZFpJPeeIthxslWPVyf6q4H9wbmU676/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-3 h-14 px-10 rounded-lg bg-emerald-500 text-white font-semibold text-base hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-500/25 mb-8">
+                <iconify-icon icon="solar:download-bold" class="text-2xl"></iconify-icon>
+                Descargar Tardo Setup.exe
+                <span class="text-xs bg-white/20 px-2 py-1 rounded">~85 MB</span>
+            </a>
+
+            <!-- License Notice -->
+            <div class="max-w-xl mx-auto p-4 rounded-lg bg-yellow-500/5 border border-yellow-500/20">
+                <div class="flex items-start gap-3">
+                    <iconify-icon icon="solar:shield-warning-bold" class="text-yellow-500 text-xl mt-0.5 flex-shrink-0"></iconify-icon>
+                    <div class="text-left text-sm">
+                        <p class="text-yellow-200 font-medium mb-1">Licencia requerida para operar</p>
+                        <p class="text-neutral-400 text-xs leading-relaxed">
+                            El software se descarga gratis, pero necesitas una <a href="index.html#pricing" class="text-yellow-400 hover:text-yellow-300 underline">licencia activa</a> 
+                            para conectar con Binance y operar. La licencia incluye soporte técnico y actualizaciones.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- System Requirements -->
+    <section class="py-12 border-y border-white/5 bg-[#050505]">
+        <div class="max-w-4xl mx-auto px-6">
+            <h3 class="text-sm font-semibold text-emerald-500 uppercase tracking-wider mb-6 text-center">Requisitos del Sistema</h3>
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="p-4 rounded-lg bg-neutral-900/50 border border-white/5">
+                    <div class="flex items-center gap-2 mb-2">
+                        <iconify-icon icon="solar:monitor-linear" class="text-blue-500"></iconify-icon>
+                        <h4 class="text-white font-medium text-sm">Sistema Operativo</h4>
+                    </div>
+                    <p class="text-xs text-neutral-400">Windows 10/11 (64-bit)</p>
+                </div>
+                <div class="p-4 rounded-lg bg-neutral-900/50 border border-white/5">
+                    <div class="flex items-center gap-2 mb-2">
+                        <iconify-icon icon="solar:global-linear" class="text-emerald-500"></iconify-icon>
+                        <h4 class="text-white font-medium text-sm">Conexión</h4>
+                    </div>
+                    <p class="text-xs text-neutral-400">Internet estable 24/7 recomendado</p>
+                </div>
+                <div class="p-4 rounded-lg bg-neutral-900/50 border border-white/5">
+                    <div class="flex items-center gap-2 mb-2">
+                        <iconify-icon icon="simple-icons:binance" class="text-yellow-500"></iconify-icon>
+                        <h4 class="text-white font-medium text-sm">Cuenta Binance</h4>
+                    </div>
+                    <p class="text-xs text-neutral-400">Futures con API Keys creadas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Changelog Section -->
+    <section class="py-20 bg-[#030303]">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="mb-12 text-center">
+                <h2 class="text-3xl font-medium text-white mb-3">Historial de Versiones</h2>
+                <p class="text-neutral-500 text-sm">Novedades y mejoras implementadas</p>
+            </div>
+
+            <div class="space-y-4">
+                
+                <!-- v3.0.1 -->
+                <details class="group bg-[#0a0a0a] border border-white/5 rounded-xl overflow-hidden" open>
+                    <summary class="cursor-pointer px-6 py-4 flex items-center justify-between list-none">
+                        <div class="flex items-center gap-3">
+                            <span class="text-emerald-400 font-mono text-sm font-semibold">v3.0.1</span>
+                            <span class="text-neutral-600">•</span>
+                            <span class="text-neutral-500 text-xs">24 de Febrero, 2026</span>
+                        </div>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" class="text-neutral-500 group-open:rotate-180 transition-transform"></iconify-icon>
+                    </summary>
+                    <div class="px-6 pb-6 border-t border-white/5">
+                        <ul class="space-y-3 mt-4 text-sm text-neutral-400">
+                            <li class="flex items-start gap-3">
+                                <iconify-icon icon="solar:chart-linear" class="text-emerald-500 mt-1 flex-shrink-0"></iconify-icon>
+                                <div>
+                                    <span class="text-white font-medium">Selector de período para gráficos</span>
+                                    <p class="text-xs text-neutral-500 mt-1">Visualiza la evolución del capital en 30, 60, 120 o 365 días con un simple click bajo el título del gráfico.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <iconify-icon icon="solar:screen-share-linear" class="text-blue-500 mt-1 flex-shrink-0"></iconify-icon>
+                                <div>
+                                    <span class="text-white font-medium">Auto-zoom dinámico</span>
+                                    <p class="text-xs text-neutral-500 mt-1">El gráfico se ajusta automáticamente para usar todo el ancho disponible según el período seleccionado.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <iconify-icon icon="solar:smartphone-2-linear" class="text-purple-500 mt-1 flex-shrink-0"></iconify-icon>
+                                <div>
+                                    <span class="text-white font-medium">Diseño 100% responsive</span>
+                                    <p class="text-xs text-neutral-500 mt-1">Layout mobile optimizado con tarjetas apiladas y botones adaptables en pantallas pequeñas.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <iconify-icon icon="solar:shield-check-linear" class="text-emerald-500 mt-1 flex-shrink-0"></iconify-icon>
+                                <div>
+                                    <span class="text-white font-medium">Corrección de duplicado de ciclos</span>
+                                    <p class="text-xs text-neutral-500 mt-1">Solucionado bug crítico que duplicaba registros en CSV al detener manualmente el bot desde el dashboard.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- v2.5.1 -->
+                <details class="group bg-[#0a0a0a] border border-white/5 rounded-xl overflow-hidden">
+                    <summary class="cursor-pointer px-6 py-4 flex items-center justify-between list-none">
+                        <div class="flex items-center gap-3">
+                            <span class="text-blue-400 font-mono text-sm font-semibold">v2.5.1</span>
+                            <span class="text-neutral-600">•</span>
+                            <span class="text-neutral-500 text-xs">22 de Febrero, 2026</span>
+                        </div>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" class="text-neutral-500 group-open:rotate-180 transition-transform"></iconify-icon>
+                    </summary>
+                    <div class="px-6 pb-6 border-t border-white/5">
+                        <ul class="space-y-3 mt-4 text-sm text-neutral-400">
+                            <li class="flex items-start gap-3">
+                                <iconify-icon icon="solar:shield-warning-linear" class="text-yellow-500 mt-1 flex-shrink-0"></iconify-icon>
+                                <div>
+                                    <span class="text-white font-medium">Validación de leverage máximo</span>
+                                    <p class="text-xs text-neutral-500 mt-1">El bot consulta automáticamente el leverage máximo permitido para cada par antes de iniciar operaciones (BTC=150x, DOGE=75x, etc.).</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <iconify-icon icon="solar:danger-linear" class="text-red-500 mt-1 flex-shrink-0"></iconify-icon>
+                                <div>
+                                    <span class="text-white font-medium">Mensajes de error mejorados</span>
+                                    <p class="text-xs text-neutral-500 mt-1">Sistema expandido de detección de errores de configuración inicial con mensajes claros y concisos.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <iconify-icon icon="solar:settings-linear" class="text-emerald-500 mt-1 flex-shrink-0"></iconify-icon>
+                                <div>
+                                    <span class="text-white font-medium">Manejo inteligente de errores</span>
+                                    <p class="text-xs text-neutral-500 mt-1">El bot maneja automáticamente errores temporales de conexión sin bombardear al usuario con alertas innecesarias.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- v2.0.1 -->
+                <details class="group bg-[#0a0a0a] border border-white/5 rounded-xl overflow-hidden">
+                    <summary class="cursor-pointer px-6 py-4 flex items-center justify-between list-none">
+                        <div class="flex items-center gap-3">
+                            <span class="text-purple-400 font-mono text-sm font-semibold">v2.0.1</span>
+                            <span class="text-neutral-600">•</span>
+                            <span class="text-neutral-500 text-xs">17 de Febrero, 2026</span>
+                        </div>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" class="text-neutral-500 group-open:rotate-180 transition-transform"></iconify-icon>
+                    </summary>
+                    <div class="px-6 pb-6 border-t border-white/5">
+                        <ul class="space-y-3 mt-4 text-sm text-neutral-400">
+                            <li class="flex items-start gap-3">
+                                <iconify-icon icon="solar:widget-4-linear" class="text-emerald-500 mt-1 flex-shrink-0"></iconify-icon>
+                                <div>
+                                    <span class="text-white font-medium">Sistema de multibots</span>
+                                    <p class="text-xs text-neutral-500 mt-1">Corre hasta 1, 3 o 10 bots simultáneos según tu plan de licencia. Cada bot con archivos únicos e interfaz independiente.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <iconify-icon icon="solar:window-frame-linear" class="text-blue-500 mt-1 flex-shrink-0"></iconify-icon>
+                                <div>
+                                    <span class="text-white font-medium">UI individual por bot</span>
+                                    <p class="text-xs text-neutral-500 mt-1">Dashboard dedicado para cada bot con su propia URL y terminal. Posibilidad de probar distintas estrategias en paralelo.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <iconify-icon icon="solar:add-circle-linear" class="text-purple-500 mt-1 flex-shrink-0"></iconify-icon>
+                                <div>
+                                    <span class="text-white font-medium">Gestión completa de bots</span>
+                                    <p class="text-xs text-neutral-500 mt-1">Crea, edita y elimina bots desde la interfaz. La eliminación limpia completamente archivos de datos y cierra terminales.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- v1.0.1 -->
+                <details class="group bg-[#0a0a0a] border border-white/5 rounded-xl overflow-hidden">
+                    <summary class="cursor-pointer px-6 py-4 flex items-center justify-between list-none">
+                        <div class="flex items-center gap-3">
+                            <span class="text-yellow-400 font-mono text-sm font-semibold">v1.0.1</span>
+                            <span class="text-neutral-600">•</span>
+                            <span class="text-neutral-500 text-xs">06 de Febrero, 2026</span>
+                        </div>
+                        <iconify-icon icon="solar:alt-arrow-down-linear" class="text-neutral-500 group-open:rotate-180 transition-transform"></iconify-icon>
+                    </summary>
+                    <div class="px-6 pb-6 border-t border-white/5">
+                        <ul class="space-y-3 mt-4 text-sm text-neutral-400">
+                            <li class="flex items-start gap-3">
+                                <iconify-icon icon="solar:key-linear" class="text-emerald-500 mt-1 flex-shrink-0"></iconify-icon>
+                                <div>
+                                    <span class="text-white font-medium">Sistema de licencias</span>
+                                    <p class="text-xs text-neutral-500 mt-1">Validación de licencia al iniciar. Pantalla de carga con logo y barra de progreso.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <iconify-icon icon="solar:shield-check-linear" class="text-blue-500 mt-1 flex-shrink-0"></iconify-icon>
+                                <div>
+                                    <span class="text-white font-medium">Validación de API keys</span>
+                                    <p class="text-xs text-neutral-500 mt-1">Confirmación automática de que las credenciales de Binance son correctas antes de operar.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <iconify-icon icon="solar:global-linear" class="text-purple-500 mt-1 flex-shrink-0"></iconify-icon>
+                                <div>
+                                    <span class="text-white font-medium">Acceso remoto facilitado</span>
+                                    <p class="text-xs text-neutral-500 mt-1">Sistema de IP fija con mDNS para acceder al dashboard desde cualquier dispositivo en tu red local.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+
+            </div>
+
+            <!-- CTA -->
+            <div class="mt-12 text-center p-8 rounded-xl bg-gradient-to-br from-emerald-900/10 to-blue-900/10 border border-emerald-500/20">
+                <h3 class="text-xl font-semibold text-white mb-2">¿Listo para empezar?</h3>
+                <p class="text-neutral-400 text-sm mb-6">Descarga el software y obtén tu licencia para comenzar a operar</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="https://drive.google.com/file/d/1J_ZFpJPeeIthxslWPVyf6q4H9wbmU676/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 h-10 px-6 rounded bg-emerald-500 text-white font-medium text-sm hover:bg-emerald-600 transition-colors">
+                        <iconify-icon icon="solar:download-linear"></iconify-icon>
+                        Descargar Ahora
+                    </a>
+                    <a href="index.html#pricing" class="inline-flex items-center gap-2 h-10 px-6 rounded bg-white/5 border border-white/10 text-white font-medium text-sm hover:bg-white/10 transition-colors">
+                        Ver Planes de Licencia
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-[#030303] border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-[10px] text-neutral-600">
+            <div class="flex items-center gap-2">
+                <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>
+                <span>© 2026 TardoAR. Todos los derechos reservados.</span>
+            </div>
+            <div class="flex items-center gap-4 mt-4 md:mt-0">
+                <span>Sistema de Trading Automatizado</span>
+                <span>•</span>
+                <span>Binance Futures</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
