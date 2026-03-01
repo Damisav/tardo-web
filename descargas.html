@@ -31,10 +31,40 @@
                 <a href="index.html#pricing" class="hover:text-white transition-colors">Precios</a>
                 <a href="index.html#faq" class="hover:text-white transition-colors">Preguntas Frecuentes</a>
             </div>
-            <a href="index.html#pricing" class="text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/5 text-white px-4 py-1.5 rounded transition-all">
+            <a href="index.html#pricing" class="hidden md:block text-xs font-medium bg-white/5 hover:bg-white/10 border border-white/5 text-white px-4 py-1.5 rounded transition-all">
                 Solicitar Licencia
             </a>
+            <button id="mobile-menu-btn" class="md:hidden text-white p-2">
+                <iconify-icon icon="solar:hamburger-menu-linear" class="text-xl"></iconify-icon>
+            </button>
         </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/5 bg-[#030303]/95 backdrop-blur-md">
+            <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-4">
+                <a href="index.html#story" class="text-sm text-neutral-400 hover:text-white transition-colors">Mi Historia</a>
+                <a href="descargas.html" class="text-sm text-white transition-colors">Descargas</a>
+                <a href="index.html#pricing" class="text-sm text-neutral-400 hover:text-white transition-colors">Precios</a>
+                <a href="index.html#faq" class="text-sm text-neutral-400 hover:text-white transition-colors">Preguntas Frecuentes</a>
+                <a href="index.html#pricing" class="text-sm font-medium bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded text-center transition-all">
+                    Solicitar Licencia
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        // Close menu when clicking links
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+    </script>
     </nav>
 
     <!-- Hero Section -->
