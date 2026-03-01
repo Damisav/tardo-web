@@ -38,46 +38,65 @@
                 <iconify-icon icon="solar:hamburger-menu-linear" class="text-xl"></iconify-icon>
             </button>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden border-t border-white/5 bg-[#030303]/95 backdrop-blur-md">
-            <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-4">
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="hidden fixed inset-0 bg-black/90 z-40 md:hidden transition-opacity duration-300"></div>
+
+    <!-- Mobile Menu Sidebar -->
+    <div id="mobile-menu" class="fixed top-0 right-0 h-screen w-64 bg-[#030303] border-l border-white/10 z-50 md:hidden transform translate-x-full transition-transform duration-300">
+        <div class="flex flex-col h-full">
+            <!-- Header -->
+            <div class="flex items-center justify-between p-6 border-b border-white/10">
+                <span class="text-sm font-semibold text-white">Menú</span>
+                <button id="mobile-menu-close" class="text-neutral-500 hover:text-white p-1">
+                    <iconify-icon icon="solar:close-circle-linear" class="text-2xl"></iconify-icon>
+                </button>
+            </div>
+            <!-- Links -->
+            <div class="flex-1 px-6 py-8 flex flex-col gap-6">
                 <a href="index.html#story" class="text-sm text-neutral-400 hover:text-white transition-colors">Mi Historia</a>
                 <a href="descargas.html" class="text-sm text-white transition-colors">Descargas</a>
                 <a href="index.html#pricing" class="text-sm text-neutral-400 hover:text-white transition-colors">Precios</a>
                 <a href="index.html#faq" class="text-sm text-neutral-400 hover:text-white transition-colors">Preguntas Frecuentes</a>
-                <a href="index.html#pricing" class="text-sm font-medium bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded text-center transition-all">
+            </div>
+            <!-- CTA -->
+            <div class="p-6 border-t border-white/10">
+                <a href="index.html#pricing" class="block text-sm font-medium bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-3 rounded text-center transition-all">
                     Solicitar Licencia
                 </a>
             </div>
         </div>
-    </nav>
-
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu-overlay" class="hidden fixed inset-0 bg-black/70 z-40 md:hidden transition-opacity"></div>
+    </div>
 
     <script>
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
         
-        mobileMenuBtn.addEventListener('click', function() {
-            mobileMenu.classList.toggle('hidden');
-            mobileMenuOverlay.classList.toggle('hidden');
-        });
+        function openMenu() {
+            mobileMenuOverlay.classList.remove('hidden');
+            setTimeout(() => {
+                mobileMenu.classList.remove('translate-x-full');
+            }, 10);
+        }
         
-        // Close menu when clicking overlay
-        mobileMenuOverlay.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            mobileMenuOverlay.classList.add('hidden');
-        });
+        function closeMenu() {
+            mobileMenu.classList.add('translate-x-full');
+            setTimeout(() => {
+                mobileMenuOverlay.classList.add('hidden');
+            }, 300);
+        }
+        
+        mobileMenuBtn.addEventListener('click', openMenu);
+        mobileMenuClose.addEventListener('click', closeMenu);
+        mobileMenuOverlay.addEventListener('click', closeMenu);
         
         // Close menu when clicking links
         document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileMenuOverlay.classList.add('hidden');
-            });
+            link.addEventListener('click', closeMenu);
         });
     </script>
     </nav>
