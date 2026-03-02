@@ -192,12 +192,43 @@
         </div>
     </section>
 
+    <!-- Dashboard Showcase Section -->
+    <section class="py-16 bg-[#030303] border-b border-white/5 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-8">
+                <h2 class="text-sm font-semibold text-emerald-500 uppercase tracking-wider mb-3">
+                    Sistema en Producción
+                </h2>
+                <p class="text-neutral-400 text-sm max-w-2xl mx-auto">
+                    Panel de control de TARDO en tiempo real operando
+                </p>
+            </div>
+            
+            <!-- Dashboard Image Container -->
+            <div class="group relative cursor-zoom-in rounded-xl overflow-hidden border border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 shadow-[0_0_30px_rgba(16,185,129,0.1)] hover:shadow-[0_0_50px_rgba(16,185,129,0.2)]">
+                <img src="images/dashboard/dashboard_bot.webp" 
+                     alt="Dashboard completo del sistema TARDO en operación"
+                     class="w-full h-auto max-h-[500px] object-cover object-top js-dashboard-img">
+                <!-- Zoom icon overlay -->
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                    <div class="bg-emerald-500/90 p-3 rounded-full">
+                        <iconify-icon icon="solar:magnifer-zoom-in-linear" class="text-white" width="24" height="24"></iconify-icon>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-center text-xs text-neutral-600 mt-4 uppercase tracking-widest">
+                Click para ver en detalle
+            </p>
+        </div>
+    </section>
+
     <!-- Mi Historia -->
     <section id="story" class="py-24 border-y border-white/5 bg-[#050505] relative overflow-hidden">
         <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
             
             <!-- Left: Historia Personal -->
-            <div class="relative z-10 pt-4">
+            <div class="relative z-10">
                 <h2 class="text-sm font-semibold text-emerald-500 uppercase tracking-wider mb-6">Mi Historia</h2>
                 <div class="space-y-5 text-base md:text-lg leading-relaxed text-gray-300 font-light">
                     <p class="scrolly-text">
@@ -257,76 +288,111 @@
                 </div>
             </div>
 
-            <!-- Right: Terminal con Resultados Reales (Sticky) -->
-            <div class="relative md:sticky md:top-32">
-                <!-- Decorative Glow -->
-                <div class="absolute inset-0 bg-emerald-500/5 blur-3xl rounded-full"></div>
-                
-                <!-- Terminal Card -->
-                <div class="relative bg-[#0A0A0A] border border-white/10 rounded-xl overflow-hidden shadow-2xl">
-                    <div class="h-8 bg-[#111] border-b border-white/5 flex items-center px-4 justify-between">
-                        <div class="text-[10px] text-neutral-500 font-mono">TARDO_MONITOR // EN VIVO</div>
-                        <div class="flex gap-1.5">
-                            <div class="w-2 h-2 rounded-full bg-red-500/20"></div>
-                            <div class="w-2 h-2 rounded-full bg-yellow-500/20"></div>
-                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+            <!-- Right: Galería de Resultados Reales -->
+            <div class="relative">
+                <div class="mb-6">
+                    <h2 class="text-sm font-semibold text-emerald-500 uppercase tracking-wider mb-2">Resultados Reales</h2>
+                    <p class="text-xs text-neutral-500">Capturas verificadas de cuentas de Binance de los ultimos meses. Click para ampliar.</p>
+                </div>
+
+                <!-- Masonry Grid -->
+                <div class="columns-3 sm:columns-4 md:columns-2 gap-3 space-y-3">
+                    
+                    <!-- Image Item 1 -->
+                    <div class="group relative overflow-hidden rounded-lg break-inside-avoid cursor-zoom-in bg-[#0A0A0A] border border-white/10 transition-all hover:border-emerald-500/30 h-[220px]">
+                        <img src="images/results/PNL_1.webp" alt="Resultado Real de Trading - PnL Positivo" class="w-full h-full object-cover transform transition-transform duration-500 ease-out group-hover:scale-105 js-gallery-img">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none">
+                            <div class="bg-emerald-500/90 backdrop-blur-sm p-2.5 rounded-full flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                                <iconify-icon icon="solar:magnifer-zoom-in-linear" class="text-white" width="20" height="20"></iconify-icon>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-4 font-mono text-[10px] h-[360px] overflow-y-auto text-neutral-400 space-y-2 relative">
-                        <!-- Scanlines -->
-                        <div class="absolute inset-0 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10"></div>
-                        <div class="absolute w-full h-1 bg-white/5 animate-scanline top-0 left-0 pointer-events-none"></div>
 
-                        <div class="text-neutral-600">Iniciando Sistema v3.0.1...</div>
-                        <div class="flex gap-2">
-                            <span class="text-blue-400">[BINANCE]</span>
-                            <span>Conectando API Futures... <span class="text-emerald-500">OK</span> (Latencia: 18ms)</span>
+                    <!-- Image Item 2 -->
+                    <div class="group relative overflow-hidden rounded-lg break-inside-avoid cursor-zoom-in bg-[#0A0A0A] border border-white/10 transition-all hover:border-emerald-500/30 h-[220px]">
+                        <img src="images/results/PNL_2.webp" alt="Estadísticas de Trading Reales" class="w-full h-full object-cover transform transition-transform duration-500 ease-out group-hover:scale-105 js-gallery-img">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none">
+                            <div class="bg-emerald-500/90 backdrop-blur-sm p-2.5 rounded-full flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                                <iconify-icon icon="solar:magnifer-zoom-in-linear" class="text-white" width="20" height="20"></iconify-icon>
+                            </div>
                         </div>
-                        <div class="flex gap-2">
-                            <span class="text-purple-400">[DUAL]</span>
-                            <span>Abriendo ciclo: 1 LONG + 1 SHORT DOGEUSDT...</span>
+                    </div>
+
+                    <!-- Image Item 3 -->
+                    <div class="group relative overflow-hidden rounded-lg break-inside-avoid cursor-zoom-in bg-[#0A0A0A] border border-white/10 transition-all hover:border-emerald-500/30 h-[220px]">
+                        <img src="images/results/PNL_3.webp" alt="Gráfico de Rendimiento Real" class="w-full h-full object-cover transform transition-transform duration-500 ease-out group-hover:scale-105 js-gallery-img">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none">
+                            <div class="bg-emerald-500/90 backdrop-blur-sm p-2.5 rounded-full flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                                <iconify-icon icon="solar:magnifer-zoom-in-linear" class="text-white" width="20" height="20"></iconify-icon>
+                            </div>
                         </div>
-                        <div class="flex gap-2">
-                            <span class="text-yellow-600">[PRECIO]</span>
-                            <span>Entrada: $0.08245 | Leverage: 8x</span>
+                    </div>
+
+                    <!-- Image Item 4 -->
+                    <div class="group relative overflow-hidden rounded-lg break-inside-avoid cursor-zoom-in bg-[#0A0A0A] border border-white/10 transition-all hover:border-emerald-500/30 h-[220px]">
+                        <img src="images/results/PNL_4.webp" alt="Reporte de Ganancias Real" class="w-full h-full object-cover transform transition-transform duration-500 ease-out group-hover:scale-105 js-gallery-img">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none">
+                            <div class="bg-emerald-500/90 backdrop-blur-sm p-2.5 rounded-full flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                                <iconify-icon icon="solar:magnifer-zoom-in-linear" class="text-white" width="20" height="20"></iconify-icon>
+                            </div>
                         </div>
-                        <div class="flex gap-2">
-                            <span class="text-emerald-500">[MARGEN]</span>
-                            <span>Inicial: 1.4 USDT por lado (2.8 USDT total)</span>
+                    </div>
+
+                    <!-- Image Item 5 -->
+                    <div class="group relative overflow-hidden rounded-lg break-inside-avoid cursor-zoom-in bg-[#0A0A0A] border border-white/10 transition-all hover:border-emerald-500/30 h-[220px]">
+                        <img src="images/results/PNL_5.webp" alt="Vista de Analytics Reales" class="w-full h-full object-cover transform transition-transform duration-500 ease-out group-hover:scale-105 js-gallery-img">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none">
+                            <div class="bg-emerald-500/90 backdrop-blur-sm p-2.5 rounded-full flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                                <iconify-icon icon="solar:magnifer-zoom-in-linear" class="text-white" width="20" height="20"></iconify-icon>
+                            </div>
                         </div>
-                        <div class="text-neutral-600 my-2">--- Precio oscila 0.9% ---</div>
-                        <div class="flex gap-2">
-                            <span class="text-yellow-600">[ESCALÓN]</span>
-                            <span>Precio: $0.08180 | Escalando LONG → GAP 0.8%</span>
+                    </div>
+
+                    <!-- Image Item 6 -->
+                    <div class="group relative overflow-hidden rounded-lg break-inside-avoid cursor-zoom-in bg-[#0A0A0A] border border-white/10 transition-all hover:border-emerald-500/30 h-[220px]">
+                        <img src="images/results/PNL_6.webp" alt="Resultados de Trading Verificados" class="w-full h-full object-cover transform transition-transform duration-500 ease-out group-hover:scale-105 js-gallery-img">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none">
+                            <div class="bg-emerald-500/90 backdrop-blur-sm p-2.5 rounded-full flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                                <iconify-icon icon="solar:magnifer-zoom-in-linear" class="text-white" width="20" height="20"></iconify-icon>
+                            </div>
                         </div>
-                        <div class="flex gap-2">
-                            <span class="text-purple-400">[MARGEN]</span>
-                            <span>Nuevo margen LONG: 2.8 USDT (x2.0 multiplicador)</span>
+                    </div>
+
+                    <!-- Image Item 7 -->
+                    <div class="group relative overflow-hidden rounded-lg break-inside-avoid cursor-zoom-in bg-[#0A0A0A] border border-white/10 transition-all hover:border-emerald-500/30 h-[220px]">
+                        <img src="images/results/PNL_8.webp" alt="Operaciones Exitosas Reales" class="w-full h-full object-cover transform transition-transform duration-500 ease-out group-hover:scale-105 js-gallery-img">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none">
+                            <div class="bg-emerald-500/90 backdrop-blur-sm p-2.5 rounded-full flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                                <iconify-icon icon="solar:magnifer-zoom-in-linear" class="text-white" width="20" height="20"></iconify-icon>
+                            </div>
                         </div>
-                         <div class="flex gap-2">
-                            <span class="text-emerald-500">[TP]</span>
-                            <span>Target dinámico: +4.2% sobre margen usado</span>
+                    </div>
+
+                    <!-- Image Item 8 -->
+                    <div class="group relative overflow-hidden rounded-lg break-inside-avoid cursor-zoom-in bg-[#0A0A0A] border border-white/10 transition-all hover:border-emerald-500/30 h-[220px]">
+                        <img src="images/results/PNL_9.webp" alt="Balance de Cuenta Real" class="w-full h-full object-cover transform transition-transform duration-500 ease-out group-hover:scale-105 js-gallery-img">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none">
+                            <div class="bg-emerald-500/90 backdrop-blur-sm p-2.5 rounded-full flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                                <iconify-icon icon="solar:magnifer-zoom-in-linear" class="text-white" width="20" height="20"></iconify-icon>
+                            </div>
                         </div>
-                        <div class="mt-2 p-2 bg-emerald-900/10 border border-emerald-500/20 rounded text-emerald-400">
-                            &gt; Posiciones: 2 LONG + 1 SHORT<br>
-                            &gt; PnL actual: +$3.12 USDT (+2.8%)<br>
-                            &gt; Estado Emocional: NULL
+                    </div>
+
+                    <!-- Image Item 9 -->
+                    <div class="group relative overflow-hidden rounded-lg break-inside-avoid cursor-zoom-in bg-[#0A0A0A] border border-white/10 transition-all hover:border-emerald-500/30 h-[220px]">
+                        <img src="images/results/PNL_10.webp" alt="Historial Completo de PnL" class="w-full h-full object-cover transform transition-transform duration-500 ease-out group-hover:scale-105 js-gallery-img">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none">
+                            <div class="bg-emerald-500/90 backdrop-blur-sm p-2.5 rounded-full flex items-center justify-center shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                                <iconify-icon icon="solar:magnifer-zoom-in-linear" class="text-white" width="20" height="20"></iconify-icon>
+                            </div>
                         </div>
-                        <div class="typewriter-cursor text-emerald-500">_</div>
                     </div>
                 </div>
-                
+
                 <!-- Caption -->
-                <p class="text-center text-[10px] uppercase tracking-widest text-neutral-600 mt-4">
-                    Sistema operando en tiempo real
+                <p class="text-center text-[10px] uppercase tracking-widest text-neutral-600 mt-6">
+                    Capturas del panel de control en tiempo real
                 </p>
-
-                <!-- Nota: Aquí puedes agregar capturas de PnL reales -->
-                <div class="mt-6 p-4 bg-white/5 border border-white/5 rounded-lg">
-                    <p class="text-xs text-gray-400 text-center">
-                        💡 <span class="text-white">Próximamente:</span> Capturas de PnL verificadas con fechas
-                    </p>
-                </div>
             </div>
         </div>
     </section>
@@ -823,7 +889,118 @@
         </div>
     </footer>
 
+    <!-- Lightbox Overlay -->
+    <div id="lightbox" class="fixed inset-0 z-50 hidden flex-col items-center justify-center bg-black/95 backdrop-blur-xl opacity-0 transition-opacity duration-300">
+        
+        <!-- Controls -->
+        <div class="absolute top-0 w-full p-6 flex justify-end z-10">
+            <button id="close-lightbox" class="group flex items-center justify-center p-3 text-neutral-400 hover:text-white transition-colors bg-white/5 hover:bg-white/10 rounded-full backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-emerald-500/50">
+                <iconify-icon icon="solar:close-circle-linear" width="28" height="28"></iconify-icon>
+            </button>
+        </div>
+        
+        <!-- Image Container -->
+        <div class="relative w-full h-full p-4 sm:p-12 flex items-center justify-center cursor-zoom-out" id="lightbox-container">
+            <!-- Spinner -->
+            <div id="lightbox-loader" class="absolute inset-0 flex items-center justify-center z-0 text-emerald-500">
+                <iconify-icon icon="solar:refresh-circle-linear" width="32" height="32" class="animate-spin"></iconify-icon>
+            </div>
+            
+            <img id="lightbox-img" src="" alt="Zoomed view" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl transform scale-95 opacity-0 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] z-10 border border-white/10">
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
+
+    <!-- Gallery Lightbox Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('.js-gallery-img');
+            const dashboardImg = document.querySelector('.js-dashboard-img');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxContainer = document.getElementById('lightbox-container');
+            const closeBtn = document.getElementById('close-lightbox');
+            const loader = document.getElementById('lightbox-loader');
+            const body = document.body;
+
+            function openLightbox(src) {
+                // Use original src (already high quality WebP)
+                const highResSrc = src;
+                
+                // Show modal background
+                lightbox.classList.remove('hidden');
+                body.classList.add('overflow-hidden');
+                
+                // Reset image state
+                lightboxImg.classList.add('opacity-0', 'scale-95');
+                loader.classList.remove('hidden');
+                
+                // Trigger reflow
+                void lightbox.offsetWidth;
+                
+                // Fade in background
+                lightbox.classList.remove('opacity-0');
+
+                // Load image
+                lightboxImg.onload = () => {
+                    loader.classList.add('hidden');
+                    lightboxImg.classList.remove('opacity-0', 'scale-95');
+                    lightboxImg.classList.add('opacity-100', 'scale-100');
+                };
+                
+                lightboxImg.src = highResSrc;
+            }
+
+            function closeLightbox() {
+                // Fade out
+                lightbox.classList.add('opacity-0');
+                lightboxImg.classList.remove('opacity-100', 'scale-100');
+                lightboxImg.classList.add('opacity-0', 'scale-95');
+                
+                // Wait for transition
+                setTimeout(() => {
+                    lightbox.classList.add('hidden');
+                    lightboxImg.src = '';
+                    body.classList.remove('overflow-hidden');
+                }, 300);
+            }
+
+            // Attach click listeners to grid items
+            images.forEach(img => {
+                const wrapper = img.parentElement;
+                wrapper.addEventListener('click', () => {
+                    openLightbox(img.src);
+                });
+            });
+
+            // Attach click listener to dashboard image
+            if (dashboardImg) {
+                const dashboardWrapper = dashboardImg.parentElement;
+                dashboardWrapper.addEventListener('click', () => {
+                    openLightbox(dashboardImg.src);
+                });
+            }
+
+            // Close actions
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeLightbox();
+            });
+
+            lightboxContainer.addEventListener('click', (e) => {
+                if (e.target === lightboxContainer || e.target === lightboxImg) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+                    closeLightbox();
+                }
+            });
+        });
+    </script>
 
     <!-- Build: 20260226-1 -->
 </body>
