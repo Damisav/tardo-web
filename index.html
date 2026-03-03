@@ -193,30 +193,6 @@
         </div>
     </section>
 
-    <!-- Dashboard Showcase Section -->
-    <section class="pt-12 pb-16 bg-[#030303] border-b border-white/5 relative overflow-hidden">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-3">
-                <h2 class="text-sm font-semibold text-emerald-500 uppercase tracking-wider mb-3">
-                    Control Total en Tiempo Real
-                </h2>
-            </div>
-            
-            <!-- Dashboard Image Container -->
-            <div class="group relative cursor-zoom-in rounded-xl overflow-hidden border border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 shadow-[0_0_30px_rgba(16,185,129,0.1)] hover:shadow-[0_0_50px_rgba(16,185,129,0.2)]">
-                <img src="images/dashboard/dashboard_bot.webp" 
-                     alt="Dashboard completo del sistema TARDO en operación"
-                     class="w-full h-auto max-h-[500px] object-cover object-top js-dashboard-img">
-                <!-- Zoom icon overlay -->
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                    <div class="bg-emerald-500/90 p-3 rounded-full">
-                        <iconify-icon icon="solar:magnifer-zoom-in-linear" class="text-white" width="24" height="24"></iconify-icon>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Mi Historia -->
     <section id="story" class="py-24 border-y border-white/5 bg-[#050505] relative overflow-hidden">
         <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
@@ -282,15 +258,36 @@
                 </div>
             </div>
 
-            <!-- Right: Galería de Resultados Reales -->
-            <div class="relative">
-                <div class="mb-6">
-                    <h2 class="text-sm font-semibold text-emerald-500 uppercase tracking-wider mb-2">Resultados Reales</h2>
-                    <p class="text-xs text-neutral-500">Capturas verificadas de cuentas de Binance de los ultimos meses. Click para ampliar.</p>
+            <!-- Right: Dashboard + Galería de Resultados Reales -->
+            <div class="relative space-y-8 lg:space-y-12">
+                
+                <!-- Dashboard Section -->
+                <div>
+                    <h2 class="text-sm font-semibold text-emerald-500 uppercase tracking-wider mb-6">Control Total en Tiempo Real</h2>
+                    
+                    <!-- Dashboard Image Container -->
+                    <div class="group relative cursor-zoom-in rounded-xl overflow-hidden border border-emerald-500/20 hover:border-emerald-500/40 transition-all duration-300 shadow-[0_0_30px_rgba(16,185,129,0.1)] hover:shadow-[0_0_50px_rgba(16,185,129,0.2)]">
+                        <img src="images/dashboard/dashboard_bot.webp" 
+                             alt="Dashboard completo del sistema TARDO en operación"
+                             class="w-full h-auto object-cover object-top js-dashboard-img">
+                        <!-- Zoom icon overlay -->
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                            <div class="bg-emerald-500/90 p-3 rounded-full">
+                                <iconify-icon icon="solar:magnifer-zoom-in-linear" class="text-white" width="24" height="24"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Masonry Grid -->
-                <div class="columns-3 sm:columns-4 md:columns-2 gap-3 space-y-3">
+                <!-- Gallery Section -->
+                <div>
+                    <div class="mb-6">
+                        <h2 class="text-sm font-semibold text-emerald-500 uppercase tracking-wider mb-2">Resultados Reales</h2>
+                        <p class="text-xs text-neutral-500">Capturas verificadas de cuentas de Binance de los ultimos meses. Click para ampliar.</p>
+                    </div>
+
+                    <!-- Masonry Grid -->
+                    <div class="w-full columns-3 gap-3 space-y-3">
                     
                     <!-- Image Item 1 -->
                     <div class="group relative overflow-hidden rounded-lg break-inside-avoid cursor-zoom-in bg-[#0A0A0A] border border-white/10 transition-all hover:border-emerald-500/30 h-[220px]">
@@ -393,8 +390,8 @@
         <!-- Header -->
         <div class="relative z-10 text-center mb-8 space-y-4 px-6 opacity-0 animate-fade-in delay-100">
             <h2 class="text-emerald-500 font-medium tracking-wide text-xs uppercase">Precios Transparentes</h2>
-            <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-white">Elige tu plan</h1>
-            <p class="text-gray-400 text-sm md:text-base max-w-xl mx-auto mb-8">Escala tus operaciones de trading con infraestructura de alto rendimiento adaptada a tu estrategia.</p>
+            <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-white">Elige el tipo de licencia</h1>
+            <p class="text-gray-400 text-sm md:text-base max-w-xl mx-auto mb-8">Escala tus operaciones de trading con infraestructura de alto rendimiento, adaptá tu estrategia a cada criptomoneda.</p>
         </div>
 
         <!-- Tabs MENSUALES / ANUALES -->
@@ -417,10 +414,10 @@
                     </div>
                     <div>
                         <div class="text-sm font-medium text-white flex items-center gap-2 tracking-tight">
-                            Agregar Soporte Premium 
+                            Soporte Premium mensual
                             <span class="text-emerald-500 font-medium text-xs bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20">+$5 USD</span>
                         </div>
-                        <div class="text-xs text-gray-500 mt-1 leading-relaxed">Instalación guiada, configuración inicial y asistencia técnica prioritaria</div>
+                        <div class="text-xs text-gray-500 mt-1 leading-relaxed">Instalación guiada, configuracion de la herramienta y asistencia técnica prioritaria por Telegram</div>
                     </div>
                 </div>
             </label>
