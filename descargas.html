@@ -130,30 +130,98 @@
     <!-- System Requirements -->
     <section class="py-12 border-y border-white/5 bg-[#050505]">
         <div class="max-w-4xl mx-auto px-6">
-            <h3 class="text-sm font-semibold text-emerald-500 uppercase tracking-wider mb-6 text-center">Requisitos del Sistema</h3>
-            <div class="grid md:grid-cols-3 gap-4">
-                <div class="p-4 rounded-lg bg-neutral-900/50 border border-white/5">
-                    <div class="flex items-center gap-2 mb-2">
-                        <iconify-icon icon="solar:monitor-linear" class="text-blue-500"></iconify-icon>
-                        <h4 class="text-white font-medium text-sm">Sistema Operativo</h4>
+            <h3 class="text-sm font-semibold text-emerald-500 uppercase tracking-wider mb-8 text-center">Requisitos del Sistema</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                
+                <!-- BASIC -->
+                <div class="p-5 rounded-xl bg-neutral-900/50 border border-white/5 hover:border-emerald-500/20 transition-all">
+                    <div class="flex items-center gap-2 mb-4 pb-3 border-b border-white/5">
+                        <iconify-icon icon="solar:document-linear" class="text-emerald-500 text-lg"></iconify-icon>
+                        <h4 class="text-white font-semibold text-sm">BASIC (1 bot)</h4>
                     </div>
-                    <p class="text-xs text-neutral-400">Windows 10/11 (64-bit)</p>
-                </div>
-                <div class="p-4 rounded-lg bg-neutral-900/50 border border-white/5">
-                    <div class="flex items-center gap-2 mb-2">
-                        <iconify-icon icon="solar:global-linear" class="text-emerald-500"></iconify-icon>
-                        <h4 class="text-white font-medium text-sm">Conexión</h4>
+                    <div class="space-y-3 text-xs text-neutral-400">
+                        <div>
+                            <p class="text-white font-medium mb-1">Sistema:</p>
+                            <p>Windows 10/11 (64-bit)</p>
+                        </div>
+                        <div>
+                            <p class="text-white font-medium mb-1">Hardware:</p>
+                            <p><span class="text-emerald-400">2 núcleos CPU</span> | <span class="text-emerald-400">4 GB RAM</span></p>
+                            <p class="mt-1">500 MB espacio libre</p>
+                        </div>
+                        <div>
+                            <p class="text-white font-medium mb-1">Conexión:</p>
+                            <p><span class="text-emerald-400">Estable 24/7</span></p>
+                        </div>
+                        <div class="pt-2 border-t border-white/5">
+                            <p class="text-neutral-500 text-[11px]">Consumo: ~400 MB RAM | 1-3% CPU | 5 MB/hora red</p>
+                        </div>
                     </div>
-                    <p class="text-xs text-neutral-400">Internet estable 24/7 recomendado</p>
                 </div>
-                <div class="p-4 rounded-lg bg-neutral-900/50 border border-white/5">
-                    <div class="flex items-center gap-2 mb-2">
-                        <iconify-icon icon="simple-icons:binance" class="text-yellow-500"></iconify-icon>
-                        <h4 class="text-white font-medium text-sm">Cuenta Binance</h4>
+
+                <!-- PREMIUM -->
+                <div class="p-5 rounded-xl bg-neutral-900/50 border border-emerald-500/20 hover:border-emerald-500/30 transition-all">
+                    <div class="flex items-center gap-2 mb-4 pb-3 border-b border-white/5">
+                        <iconify-icon icon="solar:stars-linear" class="text-emerald-500 text-lg"></iconify-icon>
+                        <h4 class="text-white font-semibold text-sm">PREMIUM (3 bots)</h4>
                     </div>
-                    <p class="text-xs text-neutral-400">Futures con API Keys creadas</p>
+                    <div class="space-y-3 text-xs text-neutral-400">
+                        <div>
+                            <p class="text-white font-medium mb-1">Sistema:</p>
+                            <p>Windows 10/11 (64-bit)</p>
+                        </div>
+                        <div>
+                            <p class="text-white font-medium mb-1">Hardware:</p>
+                            <p><span class="text-emerald-400">4 núcleos CPU</span> | <span class="text-emerald-400">8 GB RAM</span></p>
+                            <p class="mt-1">500 MB espacio libre</p>
+                        </div>
+                        <div>
+                            <p class="text-white font-medium mb-1">Conexión:</p>
+                            <p><span class="text-emerald-400">Estable 24/7</span></p>
+                        </div>
+                        <div>
+                            <p class="text-white font-medium mb-1">Adicional:</p>
+                            <p><span class="text-emerald-400">3 API Keys</span> distintas de Binance</p>
+                        </div>
+                        <div class="pt-2 border-t border-white/5">
+                            <p class="text-neutral-500 text-[11px]">Consumo: ~1 GB RAM | 3-7% CPU | 15 MB/hora red</p>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- ENTERPRISE -->
+                <div class="p-5 rounded-xl bg-neutral-900/50 border border-white/5 hover:border-emerald-500/20 transition-all">
+                    <div class="flex items-center gap-2 mb-4 pb-3 border-b border-white/5">
+                        <iconify-icon icon="solar:server-linear" class="text-emerald-500 text-lg"></iconify-icon>
+                        <h4 class="text-white font-semibold text-sm">ENTERPRISE (10 bots)</h4>
+                    </div>
+                    <div class="space-y-3 text-xs text-neutral-400">
+                        <div>
+                            <p class="text-white font-medium mb-1">Sistema:</p>
+                            <p>Windows 10/11 Pro (64-bit)</p>
+                        </div>
+                        <div>
+                            <p class="text-white font-medium mb-1">Hardware:</p>
+                            <p><span class="text-emerald-400">6-8 núcleos CPU</span> | <span class="text-emerald-400">16 GB RAM</span></p>
+                            <p class="mt-1">500 MB espacio libre</p>
+                        </div>
+                        <div>
+                            <p class="text-white font-medium mb-1">Conexión:</p>
+                            <p><span class="text-emerald-400">Dedicada estable 24/7</span></p>
+                        </div>
+                        <div>
+                            <p class="text-white font-medium mb-1">Adicional:</p>
+                            <p><span class="text-emerald-400">10 API Keys</span> distintas de Binance</p>
+                            <p class="mt-1"><span class="text-emerald-400">PC dedicado + UPS</span> recomendado</p>
+                        </div>
+                        <div class="pt-2 border-t border-white/5">
+                            <p class="text-neutral-500 text-[11px]">Consumo: ~3 GB RAM | 10-20% CPU | 50 MB/hora</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+            <p class="text-center text-xs text-neutral-600 mt-6">Recomendación Enterprise: Backup de conexión (4G/5G) y ventilación adecuada para operación continua.</p>
         </div>
     </section>
 
