@@ -140,12 +140,40 @@ document.addEventListener('DOMContentLoaded', () => {
             
             tabYearly.classList.remove('active', 'bg-emerald-500', 'text-[#030303]');
             tabYearly.classList.add('bg-white/5', 'text-gray-400', 'border', 'border-white/5');
+
+            // Restore toggle to interactive
+            supportToggle.disabled = false;
+            supportToggle.parentElement.classList.remove('opacity-75', 'cursor-not-allowed');
+            supportToggle.parentElement.classList.add('cursor-pointer');
+
+            // Remove "incluido" badge if exists
+            const includedBadge = document.getElementById('support-included-badge');
+            if (includedBadge) includedBadge.remove();
+
         } else {
             tabYearly.classList.add('active', 'bg-emerald-500', 'text-[#030303]');
             tabYearly.classList.remove('bg-white/5', 'text-gray-400', 'border', 'border-white/5');
             
             tabMonthly.classList.remove('active', 'bg-emerald-500', 'text-[#030303]');
             tabMonthly.classList.add('bg-white/5', 'text-gray-400', 'border', 'border-white/5');
+
+            // Auto-activate support toggle and lock it
+            supportEnabled = true;
+            supportToggle.checked = true;
+            supportToggle.disabled = true;
+            supportToggle.parentElement.classList.add('opacity-75', 'cursor-not-allowed');
+            supportToggle.parentElement.classList.remove('cursor-pointer');
+            updateToggleSwitch();
+
+            // Add "incluido" badge if not already present
+            if (!document.getElementById('support-included-badge')) {
+                const badge = document.createElement('span');
+                badge.id = 'support-included-badge';
+                badge.className = 'text-emerald-400 font-medium text-xs bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20 ml-1';
+                badge.textContent = 'Incluido';
+                const priceSpan = supportToggle.parentElement.querySelector('.text-emerald-500');
+                if (priceSpan) priceSpan.insertAdjacentElement('afterend', badge);
+            }
         }
 
         // Update prices and badges based on current support state
@@ -269,4 +297,187 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePricesAndBadges();
 
     console.log('✅ Pricing system initialized successfully');
+});
+
+// ============================================
+// Testimonials Carousel
+// ============================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('carousel-track');
+    const cards = document.querySelectorAll('.carousel-card');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const dotsContainer = document.getElementById('pagination-dots');
+    const carouselWrapper = document.getElementById('carousel-wrapper');
+
+    let currentIndex = 0;
+    let cardsPerView = getCardsPerView();
+    let autoplayInterval;
+
+    function getCardsPerView() {
+        if (window.innerWidth >= 1024) return 3; // lg
+        if (window.innerWidth >= 768) return 2;  // md
+        return 1;                                // sm
+    }
+
+    function initCarousel() {
+        cardsPerView = getCardsPerView();
+        
+        // Adjust index if window resize cuts off cards
+        const maxIndex = Math.max(0, cards.length - cardsPerView);
+        if (currentIndex > maxIndex) currentIndex = maxIndex;
+
+        createDots();
+        updateCarousel();
+        startAutoplay();
+    }
+
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        const maxIndex = Math.max(0, cards.length - cardsPerView);
+        
+        for (let i = 0; i <= maxIndex; i++) {
+            const dot = document.createElement('button');
+            dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+            dot.className = `h-1.5 rounded-full transition-all duration-300 ease-out ${
+                i === currentIndex ? 'w-6 bg-white' : 'w-1.5 bg-white/20 hover:bg-white/40'
+            }`;
+            dot.addEventListener('click', () => {
+                currentIndex = i;
+                updateCarousel();
+                resetAutoplay();
+            });
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function updateCarousel() {
+        const maxIndex = Math.max(0, cards.length - cardsPerView);
+        
+        // Calculate transform percentage
+        const slidePercentage = 100 / cardsPerView;
+        const translateValue = currentIndex * -slidePercentage;
+        track.style.transform = `translateX(${translateValue}%)`;
+
+        // Update dots styling
+        Array.from(dotsContainer.children).forEach((dot, index) => {
+            dot.className = `h-1.5 rounded-full transition-all duration-300 ease-out ${
+                index === currentIndex ? 'w-6 bg-white' : 'w-1.5 bg-white/20 hover:bg-white/40'
+            }`;
+        });
+
+        // Update button states
+        if (prevBtn && nextBtn) {
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === maxIndex;
+        }
+    }
+
+    // Arrow Listeners
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+                resetAutoplay();
+            }
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            const maxIndex = Math.max(0, cards.length - cardsPerView);
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+                updateCarousel();
+                resetAutoplay();
+            }
+        });
+    }
+
+    // Autoplay Functionality
+    function startAutoplay() {
+        stopAutoplay();
+        autoplayInterval = setInterval(() => {
+            const maxIndex = Math.max(0, cards.length - cardsPerView);
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+            } else {
+                currentIndex = 0; // Loop to start
+            }
+            updateCarousel();
+        }, 5000);
+    }
+
+    function stopAutoplay() {
+        if (autoplayInterval) clearInterval(autoplayInterval);
+    }
+
+    function resetAutoplay() {
+        stopAutoplay();
+        startAutoplay();
+    }
+
+    // Pause on hover
+    carouselWrapper.addEventListener('mouseenter', stopAutoplay);
+    carouselWrapper.addEventListener('mouseleave', startAutoplay);
+
+    // Responsive Handling
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const newCardsPerView = getCardsPerView();
+            if (newCardsPerView !== cardsPerView) {
+                initCarousel();
+            }
+        }, 100);
+    });
+
+    // Swipe / Drag Gestures
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    track.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoplay();
+    }, {passive: true});
+
+    track.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+        startAutoplay();
+    }, {passive: true});
+
+    track.addEventListener('mousedown', e => {
+        touchStartX = e.screenX;
+        stopAutoplay();
+    });
+
+    track.addEventListener('mouseup', e => {
+        touchEndX = e.screenX;
+        handleSwipe();
+        startAutoplay();
+    });
+
+    function handleSwipe() {
+        const swipeThreshold = 40;
+        const maxIndex = Math.max(0, cards.length - cardsPerView);
+        
+        if (touchEndX < touchStartX - swipeThreshold) {
+            // Swiped left -> Next
+            if (currentIndex < maxIndex) currentIndex++;
+            updateCarousel();
+        }
+        if (touchEndX > touchStartX + swipeThreshold) {
+            // Swiped right -> Prev
+            if (currentIndex > 0) currentIndex--;
+            updateCarousel();
+        }
+    }
+
+    // Initialize
+    initCarousel();
+    console.log('✅ Testimonials carousel initialized successfully');
 });

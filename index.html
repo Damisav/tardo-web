@@ -150,7 +150,7 @@
                         <iconify-icon icon="simple-icons:binance" class="text-yellow-500 text-2xl mt-0.5 flex-shrink-0"></iconify-icon>
                         <div class="text-left">
                             <h4 class="text-white font-semibold text-sm mb-1">Tardo utiliza Binance</h4>
-                            <p class="text-xs text-neutral-400 leading-relaxed">La plataforma más grande y segura para el trading. Crea tu cuenta <a href="https://drive.google.com/file/d/1Ab8bkEWQ7892vWxvEzgY9Nejgs6PeYc3/view?usp=sharing" target="_blank" class="text-yellow-400 hover:text-yellow-300 underline transition-colors">acá</a>.</p>
+                            <p class="text-xs text-neutral-400 leading-relaxed">La plataforma más grande y segura para el trading. Crea tu cuenta <a href="https://drive.google.com/file/d/1Ab8bkEWQ7892vWxvEzgY9Nejgs6PeYc3/view?usp=sharing" target="_blank" class="text-yellow-400 hover:text-yellow-300 transition-colors">acá</a>.</p>
                         </div>
                     </div>
                 </div>
@@ -183,10 +183,229 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- CTA Container con degradado -->
-            <div class="mt-24 pt-12 pb-12 border-t border-b border-white/10 bg-gradient-to-b from-emerald-500/5 via-emerald-500/[0.02] to-transparent opacity-0 animate-fade-in-up delay-300">
-                <a href="#pricing" class="inline-block px-14 py-4 rounded-xl text-lg font-semibold transition-all duration-300 bg-emerald-500 text-[#030303] hover:bg-emerald-600 hover:scale-105 shadow-[0_0_40px_rgba(16,185,129,0.3)]">
+    <!-- Testimonios Section -->
+    <section class="py-20 bg-[#030303] relative overflow-hidden">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            
+            <!-- Header -->
+            <div class="text-center max-w-2xl mx-auto mb-8">
+                <h2 class="text-xl md:text-3xl tracking-tight font-semibold text-white">
+                    Esto dicen las personas que ya están usando TARDO
+                </h2>
+            </div>
+
+            <!-- Carousel Area -->
+            <div class="relative group" id="carousel-wrapper">
+                
+                <!-- Navigation Arrows (Desktop Only) -->
+                <button id="prev-btn" aria-label="Previous slide" class="hidden lg:flex absolute top-1/2 -translate-y-1/2 -left-12 z-10 w-10 h-10 items-center justify-center rounded-full bg-neutral-800/80 border border-white/10 shadow-sm text-neutral-400 hover:text-white hover:bg-neutral-700 hover:border-emerald-500/50 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-[#030303] disabled:opacity-50 disabled:cursor-not-allowed">
+                    <iconify-icon icon="solar:arrow-left-linear" class="text-xl"></iconify-icon>
+                </button>
+                
+                <button id="next-btn" aria-label="Next slide" class="hidden lg:flex absolute top-1/2 -translate-y-1/2 -right-12 z-10 w-10 h-10 items-center justify-center rounded-full bg-neutral-800/80 border border-white/10 shadow-sm text-neutral-400 hover:text-white hover:bg-neutral-700 hover:border-emerald-500/50 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-[#030303] disabled:opacity-50 disabled:cursor-not-allowed">
+                    <iconify-icon icon="solar:arrow-right-linear" class="text-xl"></iconify-icon>
+                </button>
+
+                <!-- Track Container -->
+                <div class="overflow-hidden px-1 -mx-1 py-4">
+                    <div class="flex transition-transform duration-500 ease-in-out cursor-grab active:cursor-grabbing" id="carousel-track">
+                        
+                        <!-- Card 1 -->
+                        <div class="carousel-card w-full flex-shrink-0 md:w-1/2 lg:w-1/3 px-3">
+                            <div class="h-full bg-neutral-900/50 rounded-2xl border border-white/10 p-8 shadow-sm flex flex-col transition-shadow hover:shadow-md hover:border-white/20">
+                                <div class="flex gap-1 mb-6">
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                </div>
+                                <p class="text-sm text-neutral-300 leading-relaxed flex-grow">
+                                    Estoy con TARDO hace aproximadamente 2 meses, y la plataforma resultó ser más simple de lo que esperaba. A pesar de la volatilidad del mercado cripto, mi bot sigue generando ganancias moderadas y estables. Una vez que configuras todo, funciona prácticamente solo, sin necesidad de estar pendiente todo el tiempo.
+                                </p>
+                                <div class="mt-8">
+                                    <h4 class="text-sm font-medium text-white">Carlos</h4>
+                                    <p class="text-xs text-neutral-400 mt-0.5">🇦🇷 Argentina • 26 de enero de 2026</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="carousel-card w-full flex-shrink-0 md:w-1/2 lg:w-1/3 px-3">
+                            <div class="h-full bg-neutral-900/50 rounded-2xl border border-white/10 p-8 shadow-sm flex flex-col transition-shadow hover:shadow-md hover:border-white/20">
+                                <div class="flex gap-1 mb-6">
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                </div>
+                                <p class="text-sm text-neutral-300 leading-relaxed flex-grow">
+                                    La mejor plataforma en términos de simplicidad. Uso TARDO desde agosto y es simple, sin indicadores complicados. Operar con estrategias más avanzadas podría dar más retornos, pero también requiere mucho tiempo. Acá simplemente configurás tu bot, si es a largo plazo lo revisas una vez por semana y listo. El soporte es muy reactivo y eficiente.
+                                </p>
+                                <div class="mt-8">
+                                    <h4 class="text-sm font-medium text-white">Martín</h4>
+                                    <p class="text-xs text-neutral-400 mt-0.5">🇦🇷 Argentina • 15 de agosto de 2025</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="carousel-card w-full flex-shrink-0 md:w-1/2 lg:w-1/3 px-3">
+                            <div class="h-full bg-neutral-900/50 rounded-2xl border border-white/10 p-8 shadow-sm flex flex-col transition-shadow hover:shadow-md hover:border-white/20">
+                                <div class="flex gap-1 mb-6">
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                </div>
+                                <p class="text-sm text-neutral-300 leading-relaxed flex-grow">
+                                    Me gusta mucho la aplicación. Tiene una interfaz limpia y fácil de usar, la plataforma es intuitiva. Descubrí que genera un buen % de forma pasiva, lo cual me permite cubrir la licencia sin problemas. El equipo de soporte también es excelente: siempre atentos y muy receptivos. ¡Sigan así!
+                                </p>
+                                <div class="mt-8">
+                                    <h4 class="text-sm font-medium text-white">Ana</h4>
+                                    <p class="text-xs text-neutral-400 mt-0.5">🇨🇱 Chile • 12 de octubre de 2025</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div class="carousel-card w-full flex-shrink-0 md:w-1/2 lg:w-1/3 px-3">
+                            <div class="h-full bg-neutral-900/50 rounded-2xl border border-white/10 p-8 shadow-sm flex flex-col transition-shadow hover:shadow-md hover:border-white/20">
+                                <div class="flex gap-1 mb-6">
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                </div>
+                                <p class="text-sm text-neutral-300 leading-relaxed flex-grow">
+                                    ¡Excelente! TARDO es muy rentable, especialmente para operar con futuros. Además, es fácil de conectar con Binance, las guías son bien detalladas. La interfaz es muy intuitiva y puedes acceder al panel de control desde el movil.
+                                </p>
+                                <div class="mt-8">
+                                    <h4 class="text-sm font-medium text-white">Diego</h4>
+                                    <p class="text-xs text-neutral-400 mt-0.5">🇲🇽 México • 28 de octubre de 2025</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 5 -->
+                        <div class="carousel-card w-full flex-shrink-0 md:w-1/2 lg:w-1/3 px-3">
+                            <div class="h-full bg-neutral-900/50 rounded-2xl border border-white/10 p-8 shadow-sm flex flex-col transition-shadow hover:shadow-md hover:border-white/20">
+                                <div class="flex gap-1 mb-6">
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-half-linear" class="text-yellow-500 text-base"></iconify-icon>
+                                </div>
+                                <p class="text-sm text-neutral-300 leading-relaxed flex-grow">
+                                    Me encanta rastrear el rendimiento de TARDO en el panel de estadísticas: es claro, detallado y fácil de interpretar. Puedo ver todo lo que necesito de un vistazo e ir ajustando la estrategia según el tipo de mercado.
+                                </p>
+                                <div class="mt-8">
+                                    <h4 class="text-sm font-medium text-white">Laura</h4>
+                                    <p class="text-xs text-neutral-400 mt-0.5">🇪🇸 España • 5 de noviembre de 2025</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 6 -->
+                        <div class="carousel-card w-full flex-shrink-0 md:w-1/2 lg:w-1/3 px-3">
+                            <div class="h-full bg-neutral-900/50 rounded-2xl border border-white/10 p-8 shadow-sm flex flex-col transition-shadow hover:shadow-md hover:border-white/20">
+                                <div class="flex gap-1 mb-6">
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                </div>
+                                <p class="text-sm text-neutral-300 leading-relaxed flex-grow">
+                                    Hablé con Damián y su equipo de soporte y me ayudaron muchísimo. Me explicaron todo de forma clara, sin complicarme demasiado. Empecé con poco capital para sentirme seguro, y si todo sigue así, probablemente añada más fondos a mi cuenta de Binance más adelante.
+                                </p>
+                                <div class="mt-8">
+                                    <h4 class="text-sm font-medium text-white">Ezequiel</h4>
+                                    <p class="text-xs text-neutral-400 mt-0.5">🇦🇷 Argentina • 10 de febrero de 2026</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 7 -->
+                        <div class="carousel-card w-full flex-shrink-0 md:w-1/2 lg:w-1/3 px-3">
+                            <div class="h-full bg-neutral-900/50 rounded-2xl border border-white/10 p-8 shadow-sm flex flex-col transition-shadow hover:shadow-md hover:border-white/20">
+                                <div class="flex gap-1 mb-6">
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                </div>
+                                <p class="text-sm text-neutral-300 leading-relaxed flex-grow">
+                                    Me quedé con el plan básico. Por ahora, prefiero ir seguro. Se mantiene estable y no pierde dinero, así que no tengo quejas. Poner todo en marcha fue sorprendentemente rápido y sencillo.
+                                </p>
+                                <div class="mt-8">
+                                    <h4 class="text-sm font-medium text-white">Patricia</h4>
+                                    <p class="text-xs text-neutral-400 mt-0.5">🇺🇾 Uruguay • 18 de diciembre de 2025</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 8 -->
+                        <div class="carousel-card w-full flex-shrink-0 md:w-1/2 lg:w-1/3 px-3">
+                            <div class="h-full bg-neutral-900/50 rounded-2xl border border-white/10 p-8 shadow-sm flex flex-col transition-shadow hover:shadow-md hover:border-white/20">
+                                <div class="flex gap-1 mb-6">
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-outline" class="text-yellow-500 text-base"></iconify-icon>
+                                </div>
+                                <p class="text-sm text-neutral-300 leading-relaxed flex-grow">
+                                    Llevo usando TARDO algunas semanas después de que un amigo me lo recomendara. Sigo siendo un poco escéptico con los "bots de trading", pero hasta ahora los resultados son positivos y la plataforma parece confiable y transparente. Definitivamente vale la pena probarlo con un capital pequeño.
+                                </p>
+                                <div class="mt-8">
+                                    <h4 class="text-sm font-medium text-white">Miguel</h4>
+                                    <p class="text-xs text-neutral-400 mt-0.5">🇵🇪 Perú • 22 de enero de 2026</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 9 -->
+                        <div class="carousel-card w-full flex-shrink-0 md:w-1/2 lg:w-1/3 px-3">
+                            <div class="h-full bg-neutral-900/50 rounded-2xl border border-white/10 p-8 shadow-sm flex flex-col transition-shadow hover:shadow-md hover:border-white/20">
+                                <div class="flex gap-1 mb-6">
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                    <iconify-icon icon="solar:star-bold" class="text-yellow-500 text-base"></iconify-icon>
+                                </div>
+                                <p class="text-sm text-neutral-300 leading-relaxed flex-grow">
+                                    Tuve una muy buena sesión de incorporación con Damián y su equipo. Sin duda son expertos. En 30 minutos me ayudaron a entender qué licencia necesito y cómo configurar TARDO para que se alinee con mi estrategia y mi capital. ¡Muchas gracias!
+                                </p>
+                                <div class="mt-8">
+                                    <h4 class="text-sm font-medium text-white">Sofía</h4>
+                                    <p class="text-xs text-neutral-400 mt-0.5">🇦🇷 Argentina • 3 de febrero de 2026</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Pagination Dots -->
+                <div class="flex justify-center items-center gap-2 mt-10" id="pagination-dots">
+                    <!-- Dots injected via JS -->
+                </div>
+
+            </div>
+            
+            <!-- CTA Button -->
+            <div class="mt-12 text-center">
+                <a href="#pricing" class="inline-block px-8 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 bg-transparent text-emerald-500 border border-emerald-500/50 hover:bg-emerald-500/10 hover:border-emerald-500">
                     Ver Planes y Precios
                 </a>
             </div>
@@ -387,7 +606,7 @@
         <!-- Header -->
         <div class="relative z-10 text-center mb-8 space-y-4 px-6 opacity-0 animate-fade-in delay-100">
             <h2 class="text-emerald-500 font-medium tracking-wide text-xs uppercase">Precios Transparentes</h2>
-            <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-white">Elige el tipo de licencia</h1>
+            <h1 class="text-2xl md:text-4xl font-semibold tracking-tight text-white">Elige el tipo de licencia</h1>
             <p class="text-gray-400 text-sm md:text-base max-w-xl mx-auto mb-8">Escala tus operaciones de trading con infraestructura de alto rendimiento, adaptá tu estrategia a cada criptomoneda.</p>
         </div>
 
