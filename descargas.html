@@ -18,94 +18,8 @@
         <div class="absolute inset-0 bg-grid-pattern z-0 opacity-60"></div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 border-b border-white/5 bg-[#030303]/80 backdrop-blur-md">
-        <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-            <a href="index.html" class="flex items-center gap-2">
-                <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-                <span class="text-sm font-semibold tracking-tight text-white uppercase">Tardo<span class="text-neutral-500">AR</span></span>
-            </a>
-            <div class="hidden md:flex items-center gap-6 text-xs font-medium text-neutral-500">
-                <a href="index.html#story" class="hover:text-white transition-colors">La historia</a>
-                <a href="descargas.html" class="text-white transition-colors">Descargas</a>
-                <a href="index.html#pricing" class="hover:text-white transition-colors">Planes y licencias</a>
-                <a href="index.html#faq" class="hover:text-white transition-colors">¿Qué es TARDO?</a>
-            </div>
-            <a href="index.html#pricing" class="hidden md:flex items-center gap-2 text-xs font-medium bg-emerald-500/5 hover:bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/30 text-white px-4 py-2 rounded-lg transition-all">
-                <iconify-icon icon="solar:bill-check-linear" class="text-base"></iconify-icon>
-                <span>Solicitar Licencia</span>
-            </a>
-            <button id="mobile-menu-btn" class="md:hidden text-white p-2">
-                <iconify-icon icon="solar:hamburger-menu-linear" class="text-2xl"></iconify-icon>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu-overlay" class="hidden fixed inset-0 bg-black/90 z-40 md:hidden transition-opacity duration-300"></div>
-
-    <!-- Mobile Menu Sidebar -->
-    <div id="mobile-menu" class="fixed top-0 right-0 h-screen w-64 bg-[#030303] border-l border-white/10 z-50 md:hidden transform translate-x-full transition-transform duration-300">
-        <div class="flex flex-col h-full">
-            <!-- Header -->
-            <div class="flex items-center justify-between p-6 border-b border-white/10">
-                <span class="text-sm font-semibold text-white">Menú</span>
-                <button id="mobile-menu-close" class="text-neutral-500 hover:text-white p-1">
-                    <iconify-icon icon="solar:close-circle-linear" class="text-2xl"></iconify-icon>
-                </button>
-            </div>
-            <!-- Links -->
-            <div class="px-6 py-8 flex flex-col gap-6">
-                <a href="index.html#story" class="text-sm text-neutral-400 hover:text-white transition-colors">La historia</a>
-                <a href="descargas.html" class="text-sm text-white transition-colors">Descargas</a>
-                <a href="index.html#pricing" class="text-sm text-neutral-400 hover:text-white transition-colors">Planes y licencias</a>
-                <a href="index.html#faq" class="text-sm text-neutral-400 hover:text-white transition-colors">¿Qué es TARDO?</a>
-            </div>
-            <!-- Download CTA -->
-            <div class="px-6 py-6 border-t border-white/10">
-                <a href="#" class="flex items-center gap-3 p-4 rounded-lg bg-emerald-500/5 border border-emerald-500/20 hover:bg-emerald-500/10 hover:border-emerald-500/30 transition-all">
-                    <iconify-icon icon="solar:download-linear" class="text-emerald-500 text-2xl flex-shrink-0"></iconify-icon>
-                    <div class="text-left">
-                        <h4 class="text-white font-semibold text-sm mb-1">Descargar TARDO</h4>
-                        <p class="text-xs text-neutral-400 leading-relaxed">Última versión: v3.0.1</p>
-                    </div>
-                </a>
-            </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenuClose = document.getElementById('mobile-menu-close');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-        
-        function openMenu() {
-            mobileMenuOverlay.classList.remove('hidden');
-            setTimeout(() => {
-                mobileMenu.classList.remove('translate-x-full');
-            }, 10);
-        }
-        
-        function closeMenu() {
-            mobileMenu.classList.add('translate-x-full');
-            setTimeout(() => {
-                mobileMenuOverlay.classList.add('hidden');
-            }, 300);
-        }
-        
-        mobileMenuBtn.addEventListener('click', openMenu);
-        mobileMenuClose.addEventListener('click', closeMenu);
-        mobileMenuOverlay.addEventListener('click', closeMenu);
-        
-        // Close menu when clicking links
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', closeMenu);
-        });
-    </script>
-    </nav>
+    <!-- Navbar Component -->
+    <div id="navbar-placeholder"></div>
 
     <!-- Hero Section -->
     <section class="relative z-10 pt-32 pb-16">
@@ -401,20 +315,11 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-8 bg-[#030303] border-t border-white/5">
-        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-[10px] text-neutral-600">
-            <div class="flex items-center gap-2">
-                <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div>
-                <span>© 2026 TardoAR. Todos los derechos reservados.</span>
-            </div>
-            <div class="flex items-center gap-4 mt-4 md:mt-0">
-                <span>Sistema de Trading Automatizado</span>
-                <span>•</span>
-                <span>Binance Futures</span>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer Component -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Component Loader -->
+    <script src="/js/components.js"></script>
 
 </body>
 </html>

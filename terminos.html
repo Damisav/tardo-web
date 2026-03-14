@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Términos de Servicio | TardoAR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#030303] text-neutral-300 font-sans antialiased">
+
+    <!-- Background -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute inset-0 bg-grid-pattern z-0 opacity-60"></div>
+    </div>
+
+    <!-- Navbar Component -->
+    <div id="navbar-placeholder"></div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        
+        function openMenu() {
+            mobileMenuOverlay.classList.remove('hidden');
+            setTimeout(() => {
+                mobileMenu.classList.remove('translate-x-full');
+            }, 10);
+        }
+        
+        function closeMenu() {
+            mobileMenu.classList.add('translate-x-full');
+            setTimeout(() => {
+                mobileMenuOverlay.classList.add('hidden');
+            }, 300);
+        }
+        
+        mobileMenuBtn.addEventListener('click', openMenu);
+        mobileMenuClose.addEventListener('click', closeMenu);
+        mobileMenuOverlay.addEventListener('click', closeMenu);
+        
+        // Close menu when clicking links
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    </script>
+
+    <!-- Main Content -->
+    <main class="relative z-10 pt-20 pb-16">
+        <div class="max-w-4xl mx-auto px-6">
+            
+            <!-- Header -->
+            <div class="mb-8">
+                <h1 class="text-2xl font-semibold text-white mb-2">Términos y Condiciones de Uso</h1>
+                <p class="text-sm text-neutral-400">Última actualización: Marzo 2026</p>
+            </div>
+
+            <!-- Content -->
+            <div class="bg-white/5 border border-white/10 rounded-lg p-8 space-y-6 text-sm leading-relaxed">
+                
+                <!-- 1. Aceptación -->
+                <section>
+                    <h2 class="text-base font-semibold text-white mb-3">1. Aceptación de los Términos</h2>
+                    <p class="text-neutral-300">
+                        Al acceder y utilizar los servicios de TardoAR, usted acepta estar sujeto a estos Términos y Condiciones de Uso. 
+                        Si no está de acuerdo con alguna parte de estos términos, no debe utilizar nuestros servicios.
+                    </p>
+                </section>
+
+                <!-- 2. Registro y Cuenta -->
+                <section>
+                    <h2 class="text-base font-semibold text-white mb-3">2. Registro y Creación de Cuenta</h2>
+                    <p class="text-neutral-300 mb-3">
+                        Si desea utilizar nuestros Servicios, visite nuestro sitio web o descargue nuestra aplicación.
+                    </p>
+                    <p class="text-neutral-300 mb-3">
+                        Para utilizar todas las funciones de la plataforma, TardoAR requiere que te registres y crees una cuenta. Para crear una cuenta, 
+                        debes proporcionar tu dirección de correo electrónico, tal como se indica durante el proceso de registro. Tus credenciales de acceso 
+                        serán enviadas automáticamente al correo electrónico proporcionado.
+                    </p>
+                    <p class="text-neutral-300 mb-3">
+                        No está permitido que terceros utilicen su cuenta. Usted es totalmente responsable de la confidencialidad de sus credenciales de acceso 
+                        y del uso de su cuenta. Si, por cualquier motivo, su cuenta es bloqueada o eliminada, ya no podrá utilizar la plataforma, por ejemplo, 
+                        mediante otra cuenta o creando una nueva.
+                    </p>
+                    <p class="text-neutral-300 mb-3">
+                        Usted garantiza que la información proporcionada al crear una cuenta es correcta y completa. Usted es responsable de la exactitud de 
+                        los datos de su cuenta.
+                    </p>
+                    <p class="text-neutral-300 mb-3">
+                        TardoAR tiene derecho, en todo momento, a dejar de habilitar ciertas funcionalidades de la Cuenta, la Plataforma u otros Servicios, 
+                        a no otorgar una Cuenta a ninguna persona y a exigir requisitos adicionales para otorgar una Cuenta.
+                    </p>
+                    <p class="text-neutral-300">
+                        Los usuarios solo pueden tener una cuenta por persona. Crear varias cuentas para eludir las limitaciones promocionales, las restricciones 
+                        de suscripción u otros términos está estrictamente prohibido y puede conllevar la cancelación inmediata de todas las cuentas asociadas.
+                    </p>
+                </section>
+
+                <!-- 3. Uso de Software -->
+                <section>
+                    <h2 class="text-base font-semibold text-white mb-3">3. Licencia y Uso del Software</h2>
+                    <p class="text-neutral-300 mb-3">
+                        TardoAR le otorga una licencia limitada, no exclusiva, intransferible y revocable para usar el software de acuerdo con los términos 
+                        de su plan de suscripción adquirido.
+                    </p>
+                    <p class="text-neutral-300">
+                        El software está protegido por derechos de autor y otras leyes de propiedad intelectual. Usted no puede copiar, modificar, distribuir, 
+                        vender o alquilar ninguna parte del software, ni puede realizar ingeniería inversa o intentar extraer el código fuente del mismo.
+                    </p>
+                </section>
+
+                <!-- 4. Limitación de Responsabilidad -->
+                <section>
+                    <h2 class="text-base font-semibold text-white mb-3">4. Limitación de Responsabilidad y Declaración Legal</h2>
+                    <p class="text-neutral-300 mb-3">
+                        El desarrollador y distribuidor de este software:
+                    </p>
+                    <ul class="space-y-1 text-neutral-300 ml-4 mb-3">
+                        <li>• NO es un asesor financiero.</li>
+                        <li>• NO proporciona recomendaciones de inversión.</li>
+                        <li>• NO garantiza resultados de ningún tipo.</li>
+                        <li>• NO será responsable por pérdidas financieras.</li>
+                        <li>• NO puede ser demandado por pérdidas derivadas del uso del software.</li>
+                    </ul>
+                    <p class="text-neutral-300 mb-3">
+                        Este software es una HERRAMIENTA. Cómo la use es SU responsabilidad.
+                    </p>
+                    <p class="text-neutral-300">
+                        En ningún caso TardoAR, sus desarrolladores, empleados o afiliados serán responsables por daños directos, indirectos, incidentales, 
+                        especiales, consecuentes o ejemplares, incluyendo pero no limitado a pérdida de beneficios, datos, uso, buena voluntad u otras 
+                        pérdidas intangibles resultantes del uso o la incapacidad de usar el servicio.
+                    </p>
+                </section>
+
+                <!-- 5. Modificaciones -->
+                <section>
+                    <h2 class="text-base font-semibold text-white mb-3">5. Modificaciones del Servicio</h2>
+                    <p class="text-neutral-300">
+                        TardoAR se reserva el derecho de modificar o discontinuar, temporal o permanentemente, el servicio (o cualquier parte del mismo) 
+                        con o sin previo aviso. TardoAR no será responsable ante usted ni ante terceros por cualquier modificación, suspensión o 
+                        discontinuación del servicio.
+                    </p>
+                </section>
+
+                <!-- 6. Terminación -->
+                <section>
+                    <h2 class="text-base font-semibold text-white mb-3">6. Terminación de Cuenta</h2>
+                    <p class="text-neutral-300">
+                        TardoAR puede dar por terminada o suspender su cuenta y su acceso al servicio inmediatamente, sin previo aviso ni responsabilidad, 
+                        por cualquier motivo, incluyendo sin limitación si usted incumple los Términos y Condiciones. Todas las disposiciones de los 
+                        Términos que por su naturaleza deban sobrevivir a la terminación sobrevivirán a la terminación, incluyendo sin limitación las 
+                        disposiciones de propiedad, exenciones de garantía, indemnización y limitaciones de responsabilidad.
+                    </p>
+                </section>
+
+                <!-- 7. Ley Aplicable -->
+                <section>
+                    <h2 class="text-base font-semibold text-white mb-3">7. Ley Aplicable</h2>
+                    <p class="text-neutral-300">
+                        Estos Términos se regirán e interpretarán de acuerdo con las leyes de Argentina, sin dar efecto a ningún principio de conflictos 
+                        de leyes. Nuestra falta de aplicación de cualquier derecho o disposición de estos Términos no se considerará una renuncia a esos derechos.
+                    </p>
+                </section>
+
+                <!-- 8. Contacto -->
+                <section>
+                    <h2 class="text-base font-semibold text-white mb-3">8. Contacto</h2>
+                    <p class="text-neutral-300">
+                        Si tiene alguna pregunta sobre estos Términos y Condiciones, puede contactarnos a través de nuestro sitio web.
+                    </p>
+                </section>
+
+                <!-- Footer Legal -->
+                <div class="pt-6 mt-6 border-t border-white/10">
+                    <p class="text-xs text-neutral-500 text-center">
+                        Al crear una cuenta y utilizar TardoAR, usted confirma que ha leído, entendido y aceptado estos Términos y Condiciones 
+                        en su totalidad.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Footer Component -->
+            <div id="footer-placeholder"></div>
+
+        </div>
+    </main>
+
+    <!-- Component Loader -->
+    <script src="/js/components.js"></script>
+
+</body>
+</html>

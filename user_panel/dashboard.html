@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Usuario - TARDO</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/2.2.0/iconify-icon.min.js"></script>
+    
+    <!-- Auth App -->
+    <script src="app.js"></script>
+</head>
+<body class="bg-[#030303] text-neutral-300 font-sans antialiased min-h-screen">
+
+    <!-- Navbar Component -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mt-14">
+        
+        <!-- Welcome Section -->
+        <div class="mb-8">
+            <h2 class="text-3xl font-semibold text-white mb-2">Bienvenido, <span class="user-name text-emerald-400">Usuario</span></h2>
+            <p class="text-neutral-500">Gestiona tus licencias y configuración de TARDO</p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Licencias Activas -->
+            <div class="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center">
+                        <iconify-icon icon="solar:shield-check-bold" class="text-emerald-500 text-2xl"></iconify-icon>
+                    </div>
+                    <span id="active-licenses-count" class="text-3xl font-bold text-white">0</span>
+                </div>
+                <h3 class="text-sm font-medium text-neutral-400">Licencias Activas</h3>
+            </div>
+
+            <!-- Bots Disponibles -->
+            <div class="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center">
+                        <iconify-icon icon="solar:cpu-bolt-bold" class="text-blue-500 text-2xl"></iconify-icon>
+                    </div>
+                    <span id="available-bots-count" class="text-3xl font-bold text-white">0</span>
+                </div>
+                <h3 class="text-sm font-medium text-neutral-400">Bots Disponibles</h3>
+            </div>
+
+            <!-- Próximo Vencimiento -->
+            <div class="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center">
+                        <iconify-icon icon="solar:calendar-bold" class="text-amber-500 text-2xl"></iconify-icon>
+                    </div>
+                    <span id="next-expiry" class="text-lg font-bold text-white text-right">--</span>
+                </div>
+                <h3 class="text-sm font-medium text-neutral-400">Próximo Vencimiento</h3>
+            </div>
+        </div>
+
+        <!-- Licenses Section -->
+        <div class="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-xl font-semibold text-white">Mis Licencias</h3>
+                <a href="/index.html#pricing" class="text-sm text-emerald-400 hover:text-emerald-300 font-medium flex items-center gap-2">
+                    <iconify-icon icon="solar:add-circle-linear" class="text-lg"></iconify-icon>
+                    Adquirir nueva licencia
+                </a>
+            </div>
+
+            <!-- Loading State -->
+            <div id="licenses-loading" class="text-center py-12">
+                <iconify-icon icon="solar:refresh-circle-linear" class="text-4xl text-emerald-500 animate-spin"></iconify-icon>
+                <p class="text-neutral-500 mt-4">Cargando licencias...</p>
+            </div>
+
+            <!-- Licenses List -->
+            <div id="licenses-container" class="hidden space-y-4">
+                <!-- Licencias se cargan aquí dinámicamente -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="licenses-empty" class="hidden text-center py-12">
+                <div class="w-16 h-16 bg-neutral-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <iconify-icon icon="solar:inbox-line-linear" class="text-4xl text-neutral-600"></iconify-icon>
+                </div>
+                <p class="text-neutral-500 mb-4">No tienes licencias activas</p>
+                <a href="/index.html#pricing" class="inline-flex items-center gap-2 px-6 py-2.5 bg-emerald-500 text-[#030303] rounded-lg hover:bg-emerald-400 transition-colors font-medium">
+                    <iconify-icon icon="solar:shopping-cart-linear" class="text-lg"></iconify-icon>
+                    Ver planes disponibles
+                </a>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <a href="profile.html" class="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6 hover:border-emerald-500/30 transition-all group">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center group-hover:bg-emerald-500/20 transition-colors">
+                        <iconify-icon icon="solar:user-linear" class="text-emerald-500 text-2xl"></iconify-icon>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-white mb-1">Mi Perfil</h4>
+                        <p class="text-sm text-neutral-500">Actualiza tus datos personales y de contacto</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="/descargas.html" class="bg-[#0a0a0a] border border-white/10 rounded-2xl p-6 hover:border-emerald-500/30 transition-all group">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
+                        <iconify-icon icon="solar:download-linear" class="text-blue-500 text-2xl"></iconify-icon>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-white mb-1">Descargar TARDO</h4>
+                        <p class="text-sm text-neutral-500">Obtén la última versión del bot de trading</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Scripts -->
+    <script>
+        // Cargar licencias al iniciar la página
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadLicenses();
+        });
+
+        async function loadLicenses() {
+            const loadingEl = document.getElementById('licenses-loading');
+            const containerEl = document.getElementById('licenses-container');
+            const emptyEl = document.getElementById('licenses-empty');
+
+            try {
+                const orders = await TardoAuth.getUserOrders();
+
+                loadingEl.classList.add('hidden');
+
+                if (orders.length === 0) {
+                    emptyEl.classList.remove('hidden');
+                    updateStats(0, 0, null);
+                    return;
+                }
+
+                // Filtrar solo órdenes completadas
+                const activeOrders = orders.filter(o => o.status === 'completed');
+
+                if (activeOrders.length === 0) {
+                    emptyEl.classList.remove('hidden');
+                    updateStats(0, 0, null);
+                    return;
+                }
+
+                // Renderizar licencias
+                containerEl.classList.remove('hidden');
+                containerEl.innerHTML = activeOrders.map(order => renderLicenseCard(order)).join('');
+
+                // Actualizar estadísticas
+                const totalBots = activeOrders.reduce((sum, o) => sum + (o.plan?.max_bots || 0), 0);
+                const expiryDates = activeOrders
+                    .map(o => o.expiry_date)
+                    .filter(d => d)
+                    .sort();
+                const nextExpiry = expiryDates.length > 0 ? expiryDates[0] : null;
+
+                updateStats(activeOrders.length, totalBots, nextExpiry);
+
+            } catch (error) {
+                console.error('Error loading licenses:', error);
+                loadingEl.classList.add('hidden');
+                emptyEl.classList.remove('hidden');
+            }
+        }
+
+        function renderLicenseCard(order) {
+            const statusColors = {
+                'completed': 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+                'pending_payment': 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+                'cancelled': 'bg-red-500/10 text-red-400 border-red-500/20'
+            };
+
+            const statusLabels = {
+                'completed': 'Activa',
+                'pending_payment': 'Pendiente de pago',
+                'cancelled': 'Cancelada'
+            };
+
+            const statusColor = statusColors[order.status] || statusColors['pending_payment'];
+            const statusLabel = statusLabels[order.status] || order.status;
+
+            const planName = order.plan?.name || 'Plan desconocido';
+            const maxBots = order.plan?.max_bots || 0;
+            const expiryDate = order.expiry_date ? TardoAuth.formatDate(order.expiry_date) : 'Sin vencimiento';
+
+            return `
+                <div class="border border-white/10 rounded-xl p-6 hover:border-emerald-500/30 transition-all">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h4 class="text-lg font-semibold text-white mb-1">${planName}</h4>
+                            <p class="text-sm text-neutral-500">ID: ${order.id}</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-medium border ${statusColor}">
+                            ${statusLabel}
+                        </span>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <p class="text-xs text-neutral-500 mb-1">Bots disponibles</p>
+                            <p class="text-lg font-semibold text-white">${maxBots}</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-neutral-500 mb-1">Vencimiento</p>
+                            <p class="text-sm font-medium text-white">${expiryDate}</p>
+                        </div>
+                    </div>
+
+                    ${order.status === 'completed' ? `
+                        <a href="/descargas.html" class="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-lg hover:bg-emerald-500/20 transition-colors font-medium text-sm">
+                            <iconify-icon icon="solar:download-linear" class="text-lg"></iconify-icon>
+                            Descargar TARDO
+                        </a>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function updateStats(licenseCount, botsCount, nextExpiry) {
+            document.getElementById('active-licenses-count').textContent = licenseCount;
+            document.getElementById('available-bots-count').textContent = botsCount;
+            
+            const nextExpiryEl = document.getElementById('next-expiry');
+            if (nextExpiry) {
+                const days = Math.ceil((new Date(nextExpiry) - new Date()) / (1000 * 60 * 60 * 24));
+                nextExpiryEl.textContent = `${days} días`;
+            } else {
+                nextExpiryEl.textContent = '--';
+            }
+        }
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        
+        function openMenu() {
+            mobileMenu.classList.remove('translate-x-full');
+            mobileMenuOverlay.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+        
+        function closeMenu() {
+            mobileMenu.classList.add('translate-x-full');
+            mobileMenuOverlay.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+        
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMenu);
+        if (mobileMenuClose) mobileMenuClose.addEventListener('click', closeMenu);
+        if (mobileMenuOverlay) mobileMenuOverlay.addEventListener('click', closeMenu);
+        
+        // Close menu when clicking links
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    </script>
+
+    <!-- Footer Component -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Component Loader -->
+    <script src="/js/components.js"></script>
+
+</body>
+</html>
