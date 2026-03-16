@@ -1415,15 +1415,13 @@
                 errorDiv.classList.add('hidden');
 
                 try {
-                    const response = await fetch(`${API_URL}/auth/login`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
-                        body: new URLSearchParams({
-                            email: email,
-                            password: password
-                        })
+                    // Enviar como query params (FastAPI espera parámetros en URL)
+                    const queryParams = new URLSearchParams();
+                    queryParams.append('email', email);
+                    queryParams.append('password', password);
+                    
+                    const response = await fetch(`${API_URL}/auth/login?${queryParams.toString()}`, {
+                        method: 'POST'
                     });
 
                     const result = await response.json();
@@ -1433,14 +1431,14 @@
                     }
 
                     // Success - Save JWT token
-                    localStorage.setItem('tardo_token', result.access_token);
+                    localStorage.setItem('tardo_token', result.token);
                     localStorage.setItem('tardo_user', JSON.stringify(result.user));
 
                     // Close modal
                     closeLoginModal();
 
                     // Redirect to dashboard
-                    window.location.href = '/panel/dashboard.html';
+                    window.location.href = 'user_panel/dashboard.html';
 
                 } catch (error) {
                     console.error('Error:', error);
