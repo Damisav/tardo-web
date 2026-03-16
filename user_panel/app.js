@@ -3,7 +3,7 @@
 // ========================================
 
 // Backend API URL (cambiar en producción)
-const API_URL = 'http://localhost:8000/api';
+const API_URL = 'https://admin.tardoar.com/api';
 
 // ========================================
 // JWT Token Management
