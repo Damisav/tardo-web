@@ -1,4 +1,4 @@
-// Componentes compartidos - Carga automática de navbar y footer
+// Componentes compartidos - Carga automática de navbar, footer y modales
 document.addEventListener('DOMContentLoaded', () => {
     // Cargar navbar
     const navbarPlaceholder = document.getElementById('navbar-placeholder');
@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 navbarPlaceholder.innerHTML = html;
                 // Inicializar menú móvil después de cargar navbar
                 initMobileMenu();
+                // Verificar estado de autenticación
+                checkAuthState();
             })
             .catch(error => console.error('Error cargando navbar:', error));
     }
@@ -29,6 +31,26 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(error => console.error('Error cargando footer:', error));
     }
+
+    // Cargar modales (login y registro)
+    const body = document.body;
+    fetch('/components/modals.html')
+        .then(response => {
+            if (!response.ok) throw new Error('Error al cargar modales');
+            return response.text();
+        })
+        .then(html => {
+            // Insertar modales al final del body
+            const modalsContainer = document.createElement('div');
+            modalsContainer.innerHTML = html;
+            body.appendChild(modalsContainer);
+            
+            // Inicializar autenticación después de cargar modales
+            if (typeof initAuth === 'function') {
+                initAuth();
+            }
+        })
+        .catch(error => console.error('Error cargando modales:', error));
 });
 
 // Funcionalidad del menú móvil
@@ -69,4 +91,66 @@ function initMobileMenu() {
         mobileMenuOverlay.classList.add('hidden');
         document.body.style.overflow = ''; // Restaurar scroll
     }
+}
+
+// Authentication state management
+window.checkAuthState = function() {
+    const token = localStorage.getItem('tardo_token');
+    const userStr = localStorage.getItem('tardo_user');
+    
+    const navGuest = document.getElementById('nav-guest');
+    const navUser = document.getElementById('nav-user');
+    const mobileNavGuest = document.getElementById('mobile-nav-guest');
+    const mobileNavUser = document.getElementById('mobile-nav-user');
+    
+    if (token && userStr) {
+        try {
+            const user = JSON.parse(userStr);
+            const userName = user.name || user.email || 'Usuario';
+            
+            // Desktop: Ocultar guest, mostrar user
+            if (navGuest) {
+                navGuest.classList.add('hidden');
+                navGuest.classList.remove('flex');
+            }
+            if (navUser) {
+                navUser.classList.remove('hidden');
+                navUser.classList.add('flex');
+            }
+            
+            const navUserNameText = document.getElementById('nav-user-name-text');
+            if (navUserNameText) navUserNameText.textContent = userName;
+            
+            // Mobile: Ocultar guest, mostrar user
+            if (mobileNavGuest) mobileNavGuest.classList.add('hidden');
+            if (mobileNavUser) {
+                mobileNavUser.classList.remove('hidden');
+                mobileNavUser.classList.add('flex');
+            }
+            const mobileUserName = document.getElementById('mobile-user-name');
+            if (mobileUserName) mobileUserName.textContent = userName;
+            
+        } catch (e) {
+            console.error('Error parsing user data:', e);
+            logout();
+        }
+    } else {
+        // Guest state: Mostrar guest, ocultar user
+        if (navGuest) {
+            navGuest.classList.remove('hidden');
+            navGuest.classList.add('flex');
+        }
+        if (navUser) {
+            navUser.classList.add('hidden');
+            navUser.classList.remove('flex');
+        }
+        if (mobileNavGuest) mobileNavGuest.classList.remove('hidden');
+        if (mobileNavUser) mobileNavUser.classList.add('hidden');
+    }
+}
+
+window.logout = function() {
+    localStorage.removeItem('tardo_token');
+    localStorage.removeItem('tardo_user');
+    window.location.href = '/';
 }

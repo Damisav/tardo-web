@@ -10,36 +10,36 @@
             <a href="/#pricing" class="hover:text-white transition-colors">Planes y licencias</a>
             <a href="/#faq" class="hover:text-white transition-colors">¿Qué es TARDO?</a>
         </div>
-        <!-- Desktop: Botones sin autenticar -->
-        <div id="nav-guest" class="hidden items-center gap-2">
-            <button onclick="openLoginModal()" class="flex items-center gap-2 text-xs font-medium text-white hover:text-emerald-400 px-3 py-2 rounded-lg transition-all">
-                <iconify-icon icon="solar:login-3-linear" class="text-base"></iconify-icon>
-                <span>Acceso</span>
-            </button>
-            <button onclick="openRegisterModal()" class="flex items-center gap-2 text-xs font-medium text-white hover:text-emerald-400 px-3 py-2 rounded-lg transition-all">
-                <iconify-icon icon="solar:user-plus-linear" class="text-base"></iconify-icon>
-                <span>Inscribirse</span>
-            </button>
-            <a href="/descargas.html" class="flex items-center gap-2 text-xs font-medium bg-emerald-500/5 hover:bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/30 text-white px-4 py-2 rounded-lg transition-all">
-                <iconify-icon icon="solar:download-linear" class="text-base"></iconify-icon>
-                <span>Descargar TARDO</span>
-            </a>
+        <!-- Desktop: Auth buttons wrapper -->
+        <div class="hidden md:flex items-center gap-2">
+            <!-- Botones sin autenticar -->
+            <div id="nav-guest" class="flex items-center gap-2">
+                <button onclick="openLoginModal()" class="flex items-center gap-2 text-xs font-medium text-white hover:text-emerald-400 px-3 py-2 rounded-lg transition-all">
+                    <iconify-icon icon="solar:login-3-linear" class="text-base"></iconify-icon>
+                    <span>Acceso</span>
+                </button>
+                <button onclick="openRegisterModal()" class="flex items-center gap-2 text-xs font-medium text-white hover:text-emerald-400 px-3 py-2 rounded-lg transition-all">
+                    <iconify-icon icon="solar:user-plus-linear" class="text-base"></iconify-icon>
+                    <span>Inscribirse</span>
+                </button>
+            </div>
+            <!-- Usuario autenticado -->
+            <div id="nav-user" class="hidden items-center gap-2">
+                <a href="/user_panel/dashboard.html" id="nav-user-name" class="flex items-center gap-2 text-xs font-medium text-white hover:text-emerald-400 px-3 py-2 rounded-lg transition-all">
+                    <iconify-icon icon="solar:user-circle-bold" class="text-base"></iconify-icon>
+                    <span id="nav-user-name-text">Usuario</span>
+                </a>
+                <button onclick="logout()" class="flex items-center gap-2 text-xs font-medium text-neutral-400 hover:text-white px-3 py-2 rounded-lg transition-all">
+                    <iconify-icon icon="solar:logout-2-linear" class="text-base"></iconify-icon>
+                    <span>Salir</span>
+                </button>
+            </div>
         </div>
-        <!-- Desktop: Usuario autenticado -->
-        <div id="nav-user" class="hidden items-center gap-2">
-            <a href="/descargas.html" class="flex items-center gap-2 text-xs font-medium bg-emerald-500/5 hover:bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/30 text-white px-4 py-2 rounded-lg transition-all">
-                <iconify-icon icon="solar:download-linear" class="text-base"></iconify-icon>
-                <span>Descargar</span>
-            </a>
-            <a href="/user_panel/dashboard.html" id="nav-user-name" class="flex items-center gap-2 text-xs font-medium text-white hover:text-emerald-400 px-3 py-2 rounded-lg transition-all">
-                <iconify-icon icon="solar:user-circle-bold" class="text-base"></iconify-icon>
-                <span id="nav-user-name-text">Usuario</span>
-            </a>
-            <button onclick="logout()" class="flex items-center gap-2 text-xs font-medium text-neutral-400 hover:text-white px-3 py-2 rounded-lg transition-all">
-                <iconify-icon icon="solar:logout-2-linear" class="text-base"></iconify-icon>
-                <span>Salir</span>
-            </button>
-        </div>
+        <!-- Desktop: Botón Descargar (siempre visible) -->
+        <a href="/descargas.html" class="hidden md:flex items-center gap-2 text-xs font-medium bg-emerald-500/5 hover:bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/30 text-white px-4 py-2 rounded-lg transition-all">
+            <iconify-icon icon="solar:download-linear" class="text-base"></iconify-icon>
+            <span>Descargar TARDO</span>
+        </a>
         <button id="mobile-menu-btn" class="md:hidden text-white p-2">
             <iconify-icon icon="solar:hamburger-menu-linear" class="text-2xl"></iconify-icon>
         </button>
@@ -102,98 +102,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenuClose = document.getElementById('mobile-menu-close');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-    
-    function openMenu() {
-        mobileMenuOverlay.classList.remove('hidden');
-        setTimeout(() => {
-            mobileMenu.classList.remove('translate-x-full');
-        }, 10);
-    }
-    
-    function closeMenu() {
-        mobileMenu.classList.add('translate-x-full');
-        setTimeout(() => {
-            mobileMenuOverlay.classList.add('hidden');
-        }, 300);
-    }
-    
-    mobileMenuBtn.addEventListener('click', openMenu);
-    mobileMenuClose.addEventListener('click', closeMenu);
-    mobileMenuOverlay.addEventListener('click', closeMenu);
-    
-    // Close menu when clicking links
-    document.querySelectorAll('#mobile-menu a').forEach(link => {
-        link.addEventListener('click', closeMenu);
-    });
-    
-    // Authentication state management
-    function checkAuthState() {
-        const token = localStorage.getItem('tardo_token');
-        const userStr = localStorage.getItem('tardo_user');
-        
-        const navGuest = document.getElementById('nav-guest');
-        const navUser = document.getElementById('nav-user');
-        const mobileNavGuest = document.getElementById('mobile-nav-guest');
-        const mobileNavUser = document.getElementById('mobile-nav-user');
-        
-        if (token && userStr) {
-            try {
-                const user = JSON.parse(userStr);
-                const userName = user.name || user.email || 'Usuario';
-                
-                // Desktop: Ocultar guest, mostrar user
-                if (navGuest) {
-                    navGuest.classList.add('hidden');
-                    navGuest.classList.remove('md:flex');
-                }
-                if (navUser) {
-                    navUser.classList.remove('hidden');
-                    navUser.classList.add('md:flex');
-                }
-                const navUserNameText = document.getElementById('nav-user-name-text');
-                if (navUserNameText) navUserNameText.textContent = userName;
-                
-                // Mobile: Ocultar guest, mostrar user
-                if (mobileNavGuest) mobileNavGuest.classList.add('hidden');
-                if (mobileNavUser) {
-                    mobileNavUser.classList.remove('hidden');
-                    mobileNavUser.classList.add('flex');
-                }
-                const mobileUserName = document.getElementById('mobile-user-name');
-                if (mobileUserName) mobileUserName.textContent = userName;
-                
-            } catch (e) {
-                console.error('Error parsing user data:', e);
-                logout();
-            }
-        } else {
-            // Guest state: Mostrar guest, ocultar user
-            if (navGuest) {
-                navGuest.classList.remove('hidden');
-                navGuest.classList.add('md:flex');
-            }
-            if (navUser) {
-                navUser.classList.add('hidden');
-                navUser.classList.remove('md:flex');
-            }
-            if (mobileNavGuest) mobileNavGuest.classList.remove('hidden');
-            if (mobileNavUser) mobileNavUser.classList.add('hidden');
-        }
-    }
-    
-    function logout() {
-        localStorage.removeItem('tardo_token');
-        localStorage.removeItem('tardo_user');
-        window.location.href = '/';
-    }
-    
-    // Check auth state on load
-    checkAuthState();
-</script>

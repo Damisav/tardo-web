@@ -1,0 +1,183 @@
+<!-- Modal de Login -->
+<div id="login-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="bg-[#0a0a0a] border border-white/10 rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+        <!-- Header -->
+        <div class="sticky top-0 bg-[#0a0a0a] border-b border-white/10 px-6 py-4 flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-white">Iniciar Sesión</h3>
+            <button onclick="closeLoginModal()" class="text-neutral-500 hover:text-white transition-colors">
+                <iconify-icon icon="solar:close-circle-linear" class="text-2xl"></iconify-icon>
+            </button>
+        </div>
+
+        <!-- Form -->
+        <form id="login-form" class="p-6 space-y-4">
+            <!-- Error Message -->
+            <div id="login-error" class="hidden bg-red-500/10 border border-red-500/20 rounded-lg p-3 text-xs text-red-400">
+                <div class="flex items-center gap-2">
+                    <iconify-icon icon="solar:danger-circle-linear" class="text-lg"></iconify-icon>
+                    <span id="login-error-text">Error al iniciar sesión</span>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label class="block text-xs font-medium text-neutral-400 mb-1.5">Email *</label>
+                <input type="email" id="login-email" name="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors" placeholder="tu@email.com">
+            </div>
+
+            <!-- Password -->
+            <div>
+                <label class="block text-xs font-medium text-neutral-400 mb-1.5">Contraseña *</label>
+                <div class="relative">
+                    <input type="password" id="login-password" name="password" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 pr-12 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors" placeholder="••••••••">
+                    <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300 transition-colors">
+                        <iconify-icon id="login-eye-icon" icon="solar:eye-closed-linear" class="text-xl"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Captcha -->
+            <div>
+                <label class="block text-xs font-medium text-neutral-400 mb-1.5">
+                    Verificación de seguridad *
+                </label>
+                <div class="flex items-center gap-3">
+                    <div class="flex-1 bg-white/5 border border-white/10 px-4 py-2.5 rounded-lg">
+                        <span class="text-emerald-400 font-mono text-base" id="login-captcha-question">4 + 7 = ?</span>
+                    </div>
+                    <input type="number" id="login-captcha" name="captcha" required class="w-20 bg-white/5 border border-white/10 text-white text-center px-3 py-2.5 rounded-lg text-sm focus:outline-none focus:border-emerald-500/50 transition-colors" placeholder="?">
+                    <button type="button" id="refresh-login-captcha" class="text-neutral-500 hover:text-neutral-300 transition-colors" title="Generar nueva verificación">
+                        <iconify-icon icon="solar:refresh-linear" class="text-2xl"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" id="login-submit-btn" class="w-full px-8 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 bg-emerald-500 text-[#030303] hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center justify-center gap-2 mt-6">
+                <iconify-icon icon="solar:login-2-linear" class="text-xl"></iconify-icon>
+                <span>Iniciar sesión</span>
+            </button>
+
+            <!-- Link a Registro -->
+            <div class="text-center mt-4">
+                <p class="text-xs text-neutral-500">
+                    ¿No tienes cuenta? 
+                    <button type="button" onclick="closeLoginModal(); openRegisterModal();" class="text-emerald-400 hover:text-emerald-300 font-medium underline">
+                        Regístrate aquí
+                    </button>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal de Registro -->
+<div id="register-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="bg-[#0a0a0a] border border-white/10 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+        <!-- Header -->
+        <div class="sticky top-0 bg-[#0a0a0a] border-b border-white/10 px-6 py-4 flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-white">Crear Cuenta</h3>
+            <button onclick="closeRegisterModal()" class="text-neutral-500 hover:text-white transition-colors">
+                <iconify-icon icon="solar:close-circle-linear" class="text-2xl"></iconify-icon>
+            </button>
+        </div>
+
+        <!-- Form -->
+        <form id="register-form" class="p-6">
+            <!-- Grid de 2 columnas -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Columna Izquierda -->
+                <div class="space-y-4">
+                    <!-- Nombre -->
+                    <div>
+                        <label class="block text-xs font-medium text-neutral-400 mb-1.5">Nombre completo *</label>
+                        <input type="text" name="name" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors">
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label class="block text-xs font-medium text-neutral-400 mb-1.5">Email *</label>
+                        <input type="email" name="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors">
+                    </div>
+
+                    <!-- Telegram -->
+                    <div>
+                        <label class="block text-xs font-medium text-neutral-400 mb-1.5">Telegram (opcional)</label>
+                        <input type="text" name="telegram" placeholder="@usuario" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors">
+                        <p class="text-xs text-neutral-500 mt-1"><iconify-icon icon="solar:gift-linear" class="text-sm"></iconify-icon> Lo pedimos para sorteos y promociones exclusivas</p>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha -->
+                <div class="space-y-4">
+                    <!-- País -->
+                    <div>
+                        <label class="block text-xs font-medium text-neutral-400 mb-1.5">País *</label>
+                        <select name="country" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500/50 transition-colors">
+                            <option value="" class="bg-[#0a0a0a]">Selecciona tu país...</option>
+                            <option value="Argentina" class="bg-[#0a0a0a]">🇦🇷 Argentina</option>
+                            <option value="Chile" class="bg-[#0a0a0a]">🇨🇱 Chile</option>
+                            <option value="Colombia" class="bg-[#0a0a0a]">🇨🇴 Colombia</option>
+                            <option value="México" class="bg-[#0a0a0a]">🇲🇽 México</option>
+                            <option value="Perú" class="bg-[#0a0a0a]">🇵🇪 Perú</option>
+                            <option value="Uruguay" class="bg-[#0a0a0a]">🇺🇾 Uruguay</option>
+                            <option value="Venezuela" class="bg-[#0a0a0a]">🇻🇪 Venezuela</option>
+                            <option value="España" class="bg-[#0a0a0a]">🇪🇸 España</option>
+                            <option value="Otro" class="bg-[#0a0a0a]">🌎 Otro</option>
+                        </select>
+                    </div>
+
+                    <!-- ¿Dónde nos conociste? -->
+                    <div>
+                        <label class="block text-xs font-medium text-neutral-400 mb-1.5">¿Dónde nos conociste? *</label>
+                        <select name="referral_source" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500/50 transition-colors">
+                            <option value="" class="bg-[#0a0a0a]">Selecciona una opción...</option>
+                            <option value="Instagram" class="bg-[#0a0a0a]">Instagram</option>
+                            <option value="YouTube" class="bg-[#0a0a0a]">YouTube</option>
+                            <option value="Facebook" class="bg-[#0a0a0a]">Facebook</option>
+                            <option value="Google" class="bg-[#0a0a0a]">Google</option>
+                            <option value="Recomendación" class="bg-[#0a0a0a]">Recomendación de amigo</option>
+                            <option value="Otro" class="bg-[#0a0a0a]">Otro</option>
+                        </select>
+                    </div>
+
+                    <!-- Términos -->
+                    <div>
+                        <label class="flex items-start gap-2 cursor-pointer group">
+                            <input type="checkbox" name="terms" required class="mt-0.5 w-4 h-4 rounded bg-white/5 border-white/10 text-emerald-500 focus:ring-emerald-500/50">
+                            <span class="text-xs text-neutral-400 group-hover:text-neutral-300 transition-colors">
+                                Acepto los <a href="terminos.html" target="_blank" class="text-emerald-400 hover:text-emerald-300 underline">Términos de servicio</a> de TardoAR
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mensaje de error -->
+            <div id="register-error" class="hidden bg-red-500/10 border border-red-500/20 rounded-lg p-3 text-xs text-red-400 mt-4"></div>
+
+            <!-- Mensaje de éxito -->
+            <div id="register-success" class="hidden bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-3 text-xs text-emerald-400 mt-4"></div>
+
+            <!-- Botones -->
+            <div class="flex gap-3 pt-2">
+                <button type="button" onclick="closeRegisterModal()" class="flex-1 px-4 py-2.5 text-sm font-medium text-neutral-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-all">
+                    Cancelar
+                </button>
+                <button type="submit" id="register-submit-btn" class="flex-1 px-8 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 bg-emerald-500 text-[#030303] hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center justify-center gap-2">
+                    <span>Crear cuenta</span>
+                </button>
+            </div>
+            
+            <!-- Link a Login -->
+            <div class="text-center mt-4">
+                <p class="text-xs text-neutral-500">
+                    ¿Ya tienes cuenta? 
+                    <button type="button" onclick="closeRegisterModal(); openLoginModal();" class="text-emerald-400 hover:text-emerald-300 font-medium underline">
+                        Inicia sesión
+                    </button>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
