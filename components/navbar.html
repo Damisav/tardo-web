@@ -11,7 +11,7 @@
             <a href="/#faq" class="hover:text-white transition-colors">¿Qué es TARDO?</a>
         </div>
         <!-- Desktop: Botones sin autenticar -->
-        <div id="nav-guest" class="hidden md:flex items-center gap-2">
+        <div id="nav-guest" class="hidden items-center gap-2">
             <button onclick="openLoginModal()" class="flex items-center gap-2 text-xs font-medium text-white hover:text-emerald-400 px-3 py-2 rounded-lg transition-all">
                 <iconify-icon icon="solar:login-3-linear" class="text-base"></iconify-icon>
                 <span>Acceso</span>
@@ -26,7 +26,7 @@
             </a>
         </div>
         <!-- Desktop: Usuario autenticado -->
-        <div id="nav-user" class="hidden md:flex items-center gap-2">
+        <div id="nav-user" class="hidden items-center gap-2">
             <a href="/descargas.html" class="flex items-center gap-2 text-xs font-medium bg-emerald-500/5 hover:bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/30 text-white px-4 py-2 rounded-lg transition-all">
                 <iconify-icon icon="solar:download-linear" class="text-base"></iconify-icon>
                 <span>Descargar</span>
@@ -148,16 +148,19 @@
                 const user = JSON.parse(userStr);
                 const userName = user.name || user.email || 'Usuario';
                 
-                // Desktop
-                if (navGuest) navGuest.classList.add('hidden');
+                // Desktop: Ocultar guest, mostrar user
+                if (navGuest) {
+                    navGuest.classList.add('hidden');
+                    navGuest.classList.remove('md:flex');
+                }
                 if (navUser) {
                     navUser.classList.remove('hidden');
-                    navUser.classList.add('flex');
+                    navUser.classList.add('md:flex');
                 }
                 const navUserNameText = document.getElementById('nav-user-name-text');
                 if (navUserNameText) navUserNameText.textContent = userName;
                 
-                // Mobile
+                // Mobile: Ocultar guest, mostrar user
                 if (mobileNavGuest) mobileNavGuest.classList.add('hidden');
                 if (mobileNavUser) {
                     mobileNavUser.classList.remove('hidden');
@@ -171,12 +174,15 @@
                 logout();
             }
         } else {
-            // Guest state (default)
+            // Guest state: Mostrar guest, ocultar user
             if (navGuest) {
                 navGuest.classList.remove('hidden');
-                navGuest.classList.add('flex');
+                navGuest.classList.add('md:flex');
             }
-            if (navUser) navUser.classList.add('hidden');
+            if (navUser) {
+                navUser.classList.add('hidden');
+                navUser.classList.remove('md:flex');
+            }
             if (mobileNavGuest) mobileNavGuest.classList.remove('hidden');
             if (mobileNavUser) mobileNavUser.classList.add('hidden');
         }
