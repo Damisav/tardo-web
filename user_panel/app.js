@@ -102,7 +102,7 @@ async function updateUserProfile(updates) {
         const data = await response.json();
 
         if (response.ok) {
-            // Actualizar datos locales
+            // Backend devuelve el usuario directamente
             saveAuth(getToken(), data);
             return { success: true, user: data };
         } else {

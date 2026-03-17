@@ -10,7 +10,8 @@
             <a href="/#pricing" class="hover:text-white transition-colors">Planes y licencias</a>
             <a href="/#faq" class="hover:text-white transition-colors">¿Qué es TARDO?</a>
         </div>
-        <div class="hidden md:flex items-center gap-2">
+        <!-- Desktop: Botones sin autenticar -->
+        <div id="nav-guest" class="hidden md:flex items-center gap-2">
             <button onclick="openLoginModal()" class="flex items-center gap-2 text-xs font-medium text-white hover:text-emerald-400 px-3 py-2 rounded-lg transition-all">
                 <iconify-icon icon="solar:login-3-linear" class="text-base"></iconify-icon>
                 <span>Acceso</span>
@@ -23,6 +24,21 @@
                 <iconify-icon icon="solar:download-linear" class="text-base"></iconify-icon>
                 <span>Descargar TARDO</span>
             </a>
+        </div>
+        <!-- Desktop: Usuario autenticado -->
+        <div id="nav-user" class="hidden md:flex items-center gap-2">
+            <a href="/descargas.html" class="flex items-center gap-2 text-xs font-medium bg-emerald-500/5 hover:bg-emerald-500/10 border border-emerald-500/20 hover:border-emerald-500/30 text-white px-4 py-2 rounded-lg transition-all">
+                <iconify-icon icon="solar:download-linear" class="text-base"></iconify-icon>
+                <span>Descargar</span>
+            </a>
+            <a href="/user_panel/dashboard.html" id="nav-user-name" class="flex items-center gap-2 text-xs font-medium text-white hover:text-emerald-400 px-3 py-2 rounded-lg transition-all">
+                <iconify-icon icon="solar:user-circle-bold" class="text-base"></iconify-icon>
+                <span id="nav-user-name-text">Usuario</span>
+            </a>
+            <button onclick="logout()" class="flex items-center gap-2 text-xs font-medium text-neutral-400 hover:text-white px-3 py-2 rounded-lg transition-all">
+                <iconify-icon icon="solar:logout-2-linear" class="text-base"></iconify-icon>
+                <span>Salir</span>
+            </button>
         </div>
         <button id="mobile-menu-btn" class="md:hidden text-white p-2">
             <iconify-icon icon="solar:hamburger-menu-linear" class="text-2xl"></iconify-icon>
@@ -51,14 +67,29 @@
             
             <hr class="border-white/10 my-2">
             
-            <button onclick="openLoginModal()" class="flex items-center gap-3 text-sm text-neutral-400 hover:text-white transition-colors w-full text-left">
-                <iconify-icon icon="solar:login-3-linear" class="text-xl"></iconify-icon>
-                <span>Acceso</span>
-            </button>
-            <button onclick="openRegisterModal()" class="flex items-center gap-3 text-sm text-neutral-400 hover:text-white transition-colors w-full text-left">
-                <iconify-icon icon="solar:user-plus-linear" class="text-xl"></iconify-icon>
-                <span>Inscribirse</span>
-            </button>
+            <!-- Mobile: Usuario NO autenticado -->
+            <div id="mobile-nav-guest">
+                <button onclick="openLoginModal()" class="flex items-center gap-3 text-sm text-neutral-400 hover:text-white transition-colors w-full text-left">
+                    <iconify-icon icon="solar:login-3-linear" class="text-xl"></iconify-icon>
+                    <span>Acceso</span>
+                </button>
+                <button onclick="openRegisterModal()" class="flex items-center gap-3 text-sm text-neutral-400 hover:text-white transition-colors w-full text-left mt-5">
+                    <iconify-icon icon="solar:user-plus-linear" class="text-xl"></iconify-icon>
+                    <span>Inscribirse</span>
+                </button>
+            </div>
+            
+            <!-- Mobile: Usuario autenticado -->
+            <div id="mobile-nav-user" class="hidden flex-col gap-5">
+                <a href="/user_panel/dashboard.html" class="flex items-center gap-3 text-sm text-neutral-400 hover:text-white transition-colors">
+                    <iconify-icon icon="solar:user-circle-bold" class="text-xl"></iconify-icon>
+                    <span id="mobile-user-name">Mi Perfil</span>
+                </a>
+                <button onclick="logout()" class="flex items-center gap-3 text-sm text-neutral-400 hover:text-white transition-colors w-full text-left">
+                    <iconify-icon icon="solar:logout-2-linear" class="text-xl"></iconify-icon>
+                    <span>Salir</span>
+                </button>
+            </div>
             
             <!-- Download Button (moved here, always visible) -->
             <a href="/descargas.html" class="flex items-center gap-3 p-4 mt-2 rounded-lg bg-emerald-500/5 border border-emerald-500/20 hover:bg-emerald-500/10 hover:border-emerald-500/30 transition-all">
@@ -101,4 +132,62 @@
     document.querySelectorAll('#mobile-menu a').forEach(link => {
         link.addEventListener('click', closeMenu);
     });
+    
+    // Authentication state management
+    function checkAuthState() {
+        const token = localStorage.getItem('tardo_token');
+        const userStr = localStorage.getItem('tardo_user');
+        
+        const navGuest = document.getElementById('nav-guest');
+        const navUser = document.getElementById('nav-user');
+        const mobileNavGuest = document.getElementById('mobile-nav-guest');
+        const mobileNavUser = document.getElementById('mobile-nav-user');
+        
+        if (token && userStr) {
+            try {
+                const user = JSON.parse(userStr);
+                const userName = user.name || user.email || 'Usuario';
+                
+                // Desktop
+                if (navGuest) navGuest.classList.add('hidden');
+                if (navUser) {
+                    navUser.classList.remove('hidden');
+                    navUser.classList.add('flex');
+                }
+                const navUserNameText = document.getElementById('nav-user-name-text');
+                if (navUserNameText) navUserNameText.textContent = userName;
+                
+                // Mobile
+                if (mobileNavGuest) mobileNavGuest.classList.add('hidden');
+                if (mobileNavUser) {
+                    mobileNavUser.classList.remove('hidden');
+                    mobileNavUser.classList.add('flex');
+                }
+                const mobileUserName = document.getElementById('mobile-user-name');
+                if (mobileUserName) mobileUserName.textContent = userName;
+                
+            } catch (e) {
+                console.error('Error parsing user data:', e);
+                logout();
+            }
+        } else {
+            // Guest state (default)
+            if (navGuest) {
+                navGuest.classList.remove('hidden');
+                navGuest.classList.add('flex');
+            }
+            if (navUser) navUser.classList.add('hidden');
+            if (mobileNavGuest) mobileNavGuest.classList.remove('hidden');
+            if (mobileNavUser) mobileNavUser.classList.add('hidden');
+        }
+    }
+    
+    function logout() {
+        localStorage.removeItem('tardo_token');
+        localStorage.removeItem('tardo_user');
+        window.location.href = '/';
+    }
+    
+    // Check auth state on load
+    checkAuthState();
 </script>

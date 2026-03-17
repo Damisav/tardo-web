@@ -11,6 +11,9 @@
     <!-- Iconify -->
     <script src="https://code.iconify.design/iconify-icon/2.2.0/iconify-icon.min.js"></script>
     
+    <!-- Components.js (para cargar navbar) -->
+    <script src="../js/components.js"></script>
+    
     <!-- Auth App -->
     <script src="app.js"></script>
 </head>
@@ -20,12 +23,18 @@
     <div id="navbar-placeholder"></div>
 
     <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-24">
         
         <!-- Page Title -->
-        <div class="mb-8">
-            <h2 class="text-3xl font-semibold text-white mb-2">Mi Perfil</h2>
-            <p class="text-neutral-500">Administra tu información personal y preferencias</p>
+        <div class="mb-8 flex items-center justify-between">
+            <div>
+                <h2 class="text-3xl font-semibold text-white mb-2">Mi Perfil</h2>
+                <p class="text-neutral-500">Administra tu información personal y preferencias</p>
+            </div>
+            <a href="dashboard.html" class="flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-400 hover:text-white border border-white/10 hover:border-white/20 rounded-lg transition-all">
+                <iconify-icon icon="solar:arrow-left-linear" class="text-lg"></iconify-icon>
+                <span>Volver al Dashboard</span>
+            </a>
         </div>
 
         <!-- Profile Card -->
@@ -116,18 +125,29 @@
                     <p class="text-xs text-neutral-600 mt-1">Para recibir notificaciones y soporte</p>
                 </div>
 
-                <!-- País (Read Only) -->
+                <!-- País -->
                 <div>
                     <label for="country" class="block text-sm font-medium text-neutral-400 mb-2">
-                        País
+                        País *
                     </label>
-                    <input 
-                        type="text" 
+                    <select 
                         id="country" 
                         name="country" 
-                        disabled
-                        class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-neutral-500 cursor-not-allowed opacity-60"
+                        required
+                        class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors appearance-none cursor-pointer"
                     >
+                        <option value="">Selecciona tu país</option>
+                        <option value="Argentina">🇦🇷 Argentina</option>
+                        <option value="Chile">🇨🇱 Chile</option>
+                        <option value="Colombia">🇨🇴 Colombia</option>
+                        <option value="México">🇲🇽 México</option>
+                        <option value="Perú">🇵🇪 Perú</option>
+                        <option value="Uruguay">🇺🇾 Uruguay</option>
+                        <option value="Venezuela">🇻🇪 Venezuela</option>
+                        <option value="España">🇪🇸 España</option>
+                        <option value="Estados Unidos">🇺🇸 Estados Unidos</option>
+                        <option value="Otro">🌍 Otro</option>
+                    </select>
                 </div>
 
                 <!-- Botones -->
@@ -229,7 +249,8 @@
             try {
                 const formData = {
                     name: document.getElementById('name').value.trim(),
-                    telegram: document.getElementById('telegram').value.trim() || null
+                    telegram: document.getElementById('telegram').value.trim() || null,
+                    country: document.getElementById('country').value || null
                 };
 
                 const result = await TardoAuth.updateUserProfile(formData);
