@@ -82,7 +82,8 @@
                         id="name" 
                         name="name" 
                         required
-                        class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors"
+                        disabled
+                        class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                         placeholder="Tu nombre"
                     >
                 </div>
@@ -118,7 +119,8 @@
                             type="text" 
                             id="telegram" 
                             name="telegram"
-                            class="w-full bg-white/5 border border-white/10 rounded-lg pl-8 pr-4 py-3 text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors"
+                            disabled
+                            class="w-full bg-white/5 border border-white/10 rounded-lg pl-8 pr-4 py-3 text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                             placeholder="usuario"
                         >
                     </div>
@@ -128,13 +130,13 @@
                 <!-- País -->
                 <div>
                     <label for="country" class="block text-sm font-medium text-neutral-400 mb-2">
-                        País *
+                        País
                     </label>
                     <select 
                         id="country" 
                         name="country" 
-                        required
-                        class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors appearance-none cursor-pointer"
+                        disabled
+                        class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors appearance-none cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                         <option value="">Selecciona tu país</option>
                         <option value="Argentina">🇦🇷 Argentina</option>
@@ -152,10 +154,22 @@
 
                 <!-- Botones -->
                 <div class="flex gap-4 pt-4">
+                    <!-- Botón Editar (visible por defecto) -->
+                    <button 
+                        type="button" 
+                        id="edit-btn"
+                        onclick="enableEdit()"
+                        class="py-2.5 px-5 bg-white/5 border border-white/10 text-white rounded-lg hover:bg-white/10 transition-colors flex items-center justify-center gap-2 text-sm"
+                    >
+                        <iconify-icon icon="solar:pen-linear" class="text-lg"></iconify-icon>
+                        Editar perfil
+                    </button>
+                    
+                    <!-- Botones Guardar y Cancelar (ocultos por defecto) -->
                     <button 
                         type="submit" 
                         id="save-btn"
-                        class="flex-1 py-3 px-6 bg-emerald-500 text-[#030303] rounded-lg font-semibold hover:bg-emerald-400 transition-colors flex items-center justify-center gap-2"
+                        class="hidden flex-1 py-3 px-6 bg-emerald-500 text-[#030303] rounded-lg font-semibold hover:bg-emerald-400 transition-colors items-center justify-center gap-2"
                     >
                         <iconify-icon icon="solar:diskette-linear" class="text-xl"></iconify-icon>
                         Guardar cambios
@@ -163,8 +177,9 @@
                     
                     <button 
                         type="button" 
-                        onclick="loadProfileData()"
-                        class="px-6 py-3 bg-white/5 border border-white/10 text-white rounded-lg hover:bg-white/10 transition-colors"
+                        id="cancel-btn"
+                        onclick="cancelEdit()"
+                        class="hidden px-6 py-3 bg-white/5 border border-white/10 text-white rounded-lg hover:bg-white/10 transition-colors"
                     >
                         Cancelar
                     </button>
@@ -196,6 +211,50 @@
     <!-- Scripts -->
     <script>
         let currentUserData = null;
+        let originalData = null; // Para restaurar al cancelar
+
+        // Habilitar modo edición
+        function enableEdit() {
+            // Guardar datos originales
+            originalData = {
+                name: document.getElementById('name').value,
+                telegram: document.getElementById('telegram').value,
+                country: document.getElementById('country').value
+            };
+            
+            // Habilitar campos
+            document.getElementById('name').disabled = false;
+            document.getElementById('telegram').disabled = false;
+            document.getElementById('country').disabled = false;
+            
+            // Cambiar botones
+            document.getElementById('edit-btn').style.display = 'none';
+            document.getElementById('save-btn').style.display = 'flex';
+            document.getElementById('cancel-btn').style.display = 'block';
+        }
+
+        // Cancelar edición
+        function cancelEdit() {
+            // Restaurar valores originales
+            if (originalData) {
+                document.getElementById('name').value = originalData.name;
+                document.getElementById('telegram').value = originalData.telegram;
+                document.getElementById('country').value = originalData.country;
+            }
+            
+            // Deshabilitar campos
+            document.getElementById('name').disabled = true;
+            document.getElementById('telegram').disabled = true;
+            document.getElementById('country').disabled = true;
+            
+            // Cambiar botones
+            document.getElementById('edit-btn').style.display = 'flex';
+            document.getElementById('save-btn').style.display = 'none';
+            document.getElementById('cancel-btn').style.display = 'none';
+            
+            // Limpiar mensajes
+            hideMessages();
+        }
 
         // Cargar datos del usuario al iniciar
         document.addEventListener('DOMContentLoaded', async () => {
@@ -247,10 +306,15 @@
             hideMessages();
 
             try {
+                const nameValue = document.getElementById('name').value.trim();
+                const telegramValue = document.getElementById('telegram').value.trim();
+                const countryValue = document.getElementById('country').value;
+                
+                // Construir formData solo con valores válidos
                 const formData = {
-                    name: document.getElementById('name').value.trim(),
-                    telegram: document.getElementById('telegram').value.trim() || null,
-                    country: document.getElementById('country').value || null
+                    name: nameValue || null,
+                    telegram: telegramValue || null,
+                    country: (countryValue && countryValue !== '') ? countryValue : null
                 };
 
                 const result = await TardoAuth.updateUserProfile(formData);
@@ -260,6 +324,16 @@
                     
                     // Actualizar display
                     document.getElementById('display-name').textContent = result.user.name || result.user.email;
+                    
+                    // Deshabilitar modo edición
+                    document.getElementById('name').disabled = true;
+                    document.getElementById('telegram').disabled = true;
+                    document.getElementById('country').disabled = true;
+                    
+                    // Cambiar botones
+                    document.getElementById('edit-btn').style.display = 'flex';
+                    document.getElementById('save-btn').style.display = 'none';
+                    document.getElementById('cancel-btn').style.display = 'none';
                     
                     // Mostrar éxito
                     showSuccess();
