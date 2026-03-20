@@ -253,7 +253,7 @@
             containerEl.classList.remove('hidden');
 
             // Generar filas
-            tbody.innerHTML = activeLicenses.map(order => {
+            tbody.innerHTML = activeLicenses.map((order, index) => {
                 const planName = order.plan?.name || order.plan_name || 'N/A';
                 const maxBots = order.plan?.max_bots || 0;
                 const expiryDate = order.expiry_date ? new Date(order.expiry_date).toLocaleDateString('es-AR') : 'N/A';
@@ -265,7 +265,14 @@
                         <td class="px-6 py-4 text-neutral-300">${maxBots}</td>
                         <td class="px-6 py-4 text-neutral-300">${expiryDate}</td>
                         <td class="px-6 py-4">
-                            <code class="text-xs bg-white/5 px-2 py-1 rounded text-emerald-400">${licenseKey}</code>
+                            <div class="flex items-center gap-2 max-w-md">
+                                <code class="text-xs bg-white/5 px-2 py-1 rounded text-emerald-400 flex-1 overflow-hidden text-ellipsis whitespace-nowrap" title="${licenseKey}">${licenseKey}</code>
+                                <button onclick="copyLicenseKey('${licenseKey}', ${index})" 
+                                        class="text-neutral-500 hover:text-emerald-400 transition-colors flex-shrink-0"
+                                        id="copy-btn-${index}">
+                                    <iconify-icon icon="solar:copy-linear" class="text-sm"></iconify-icon>
+                                </button>
+                            </div>
                         </td>
                         <td class="px-6 py-4">
                             <span class="inline-flex items-center gap-1 px-2 py-1 rounded text-xs bg-emerald-500/10 text-emerald-400">
@@ -330,6 +337,28 @@
 
             // Actualizar total
             document.getElementById('total-orders').textContent = allOrders.length;
+        }
+
+        // Copiar licencia al clipboard
+        function copyLicenseKey(licenseKey, index) {
+            navigator.clipboard.writeText(licenseKey).then(() => {
+                const btn = document.getElementById(`copy-btn-${index}`);
+                const originalIcon = btn.innerHTML;
+                
+                // Cambiar icono temporalmente a check
+                btn.innerHTML = '<iconify-icon icon="solar:check-circle-bold" class="text-sm"></iconify-icon>';
+                btn.classList.remove('text-neutral-500');
+                btn.classList.add('text-emerald-400');
+                
+                // Restaurar después de 2 segundos
+                setTimeout(() => {
+                    btn.innerHTML = originalIcon;
+                    btn.classList.remove('text-emerald-400');
+                    btn.classList.add('text-neutral-500');
+                }, 2000);
+            }).catch(err => {
+                console.error('Error copiando licencia:', err);
+            });
         }
     </script>
 
