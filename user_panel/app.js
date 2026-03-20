@@ -120,6 +120,13 @@ async function getUserOrders() {
         if (!response) return [];
 
         const data = await response.json();
+        
+        // Backend devuelve {status, orders, total}
+        if (data.status === 'success' && Array.isArray(data.orders)) {
+            return data.orders;
+        }
+        
+        // Fallback por si cambia la estructura
         return Array.isArray(data) ? data : [];
     } catch (error) {
         console.error('Error fetching orders:', error);
