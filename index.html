@@ -595,7 +595,7 @@
                         <span class="text-[11px] text-gray-500 leading-relaxed">Ideal para comenzar con TARDO y entender sus características.</span>
                     </li>
                 </ul>
-                <button class="w-full py-2.5 px-4 rounded-xl bg-white/5 text-white text-sm font-medium hover:bg-white/10 transition-colors border border-white/5">
+                <button onclick="openCheckoutModal('Basic', 'monthly', 15.99, false)" class="w-full py-2.5 px-4 rounded-xl bg-white/5 text-white text-sm font-medium hover:bg-white/10 transition-colors border border-white/5">
                     Comenzar
                 </button>
             </div>
@@ -638,7 +638,7 @@
                         <span class="text-[11px] text-gray-500 leading-relaxed">Cada bot requiere una API key de Binance distinta</span>
                     </li>
                 </ul>
-                <button class="w-full py-2.5 px-4 rounded-xl bg-emerald-500 text-[#030303] text-sm font-semibold hover:bg-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-300">
+                <button onclick="openCheckoutModal('Premium', 'monthly', 39.99, false)" class="w-full py-2.5 px-4 rounded-xl bg-emerald-500 text-[#030303] text-sm font-semibold hover:bg-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-300">
                     Comenzar
                 </button>
             </div>
@@ -682,7 +682,7 @@
                         <span class="text-[11px] text-gray-500 leading-relaxed">Cada bot requiere una API key de Binance distinta</span>
                     </li>
                 </ul>
-                <button class="w-full py-2.5 px-4 rounded-xl bg-white/5 text-white text-sm font-medium hover:bg-white/10 transition-colors border border-white/5">
+                <button onclick="openCheckoutModal('Enterprise', 'monthly', 99.99, false)" class="w-full py-2.5 px-4 rounded-xl bg-white/5 text-white text-sm font-medium hover:bg-white/10 transition-colors border border-white/5">
                     Comenzar
                 </button>
             </div>
@@ -721,7 +721,7 @@
                         <span class="text-[11px] text-gray-500 leading-relaxed">Ideal para comenzar con TARDO y entender sus características.</span>
                     </li>
                 </ul>
-                <button class="w-full py-2.5 px-4 rounded-xl bg-white/5 text-white text-sm font-medium hover:bg-white/10 transition-colors border border-white/5">
+                <button onclick="openCheckoutModal('Basic', 'yearly', 159, false)" class="w-full py-2.5 px-4 rounded-xl bg-white/5 text-white text-sm font-medium hover:bg-white/10 transition-colors border border-white/5">
                     Comenzar
                 </button>
             </div>
@@ -764,7 +764,7 @@
                         <span class="text-[11px] text-gray-500 leading-relaxed">Cada bot requiere una API key de Binance distinta</span>
                     </li>
                 </ul>
-                <button class="w-full py-2.5 px-4 rounded-xl bg-white/5 text-white text-sm font-medium hover:bg-white/10 transition-colors border border-white/5">
+                <button onclick="openCheckoutModal('Premium', 'yearly', 399, false)" class="w-full py-2.5 px-4 rounded-xl bg-white/5 text-white text-sm font-medium hover:bg-white/10 transition-colors border border-white/5">
                     Comenzar
                 </button>
             </div>
@@ -811,7 +811,7 @@
                         <span class="text-[11px] text-gray-500 leading-relaxed">Cada bot requiere una API key de Binance distinta</span>
                     </li>
                 </ul>
-                <button class="w-full py-2.5 px-4 rounded-xl bg-emerald-500 text-[#030303] text-sm font-semibold hover:bg-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-300">
+                <button onclick="openCheckoutModal('Enterprise', 'yearly', 999, false)" class="w-full py-2.5 px-4 rounded-xl bg-emerald-500 text-[#030303] text-sm font-semibold hover:bg-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-300">
                     Comenzar
                 </button>
             </div>
@@ -1126,11 +1126,9 @@
         });
     </script>
 
-    <!-- Authentication -->
-    <script src="/js/auth.js"></script>
-    
-    <!-- Component Loader -->
-    <script src="/js/components.js"></script>
+    <!-- Authentication & Components -->
+    <script src="js/auth.js"></script>
+    <script src="js/components.js"></script>
 
     <!-- Build: 20260226-1 -->
 </body>

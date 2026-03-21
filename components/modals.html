@@ -181,3 +181,270 @@
         </form>
     </div>
 </div>
+
+<!-- Modal de Checkout -->
+<div id="checkout-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="bg-[#0a0a0a] border border-white/10 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+        <!-- Header -->
+        <div class="sticky top-0 bg-[#0a0a0a] border-b border-white/10 px-6 py-4 flex items-center justify-between z-10">
+            <h3 class="text-lg font-semibold text-white">Confirmar Compra</h3>
+            <button onclick="closeCheckoutModal()" class="text-neutral-500 hover:text-white transition-colors">
+                <iconify-icon icon="solar:close-circle-linear" class="text-2xl"></iconify-icon>
+            </button>
+        </div>
+
+        <!-- Plan Selected (Summary) -->
+        <div class="px-6 py-4 bg-emerald-500/5 border-b border-emerald-500/20">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h4 id="checkout-plan-name" class="text-base font-semibold text-white">Plan Premium Mensual</h4>
+                    <p id="checkout-plan-description" class="text-xs text-neutral-400 mt-1">3 bots activos • Soporte Premium incluido</p>
+                </div>
+                <div class="text-right">
+                    <div id="checkout-price" class="text-2xl font-bold text-emerald-400">$44.99</div>
+                    <div class="text-xs text-neutral-500">USD</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form -->
+        <form id="checkout-form" class="p-6">
+            <!-- Error Message -->
+            <div id="checkout-error" class="hidden bg-red-500/10 border border-red-500/20 rounded-lg p-3 text-xs text-red-400 mb-4">
+                <div class="flex items-center gap-2">
+                    <iconify-icon icon="solar:danger-circle-linear" class="text-lg"></iconify-icon>
+                    <span id="checkout-error-text">Error al procesar la compra</span>
+                </div>
+            </div>
+
+            <!-- Grid de 2 columnas -->
+            <div class="grid md:grid-cols-2 gap-4">
+                <!-- Email -->
+                <div>
+                    <label class="block text-xs font-medium text-neutral-400 mb-1.5">Email *</label>
+                    <input type="email" id="checkout-email" name="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors" placeholder="tu@email.com">
+                </div>
+
+                <!-- Nombre -->
+                <div>
+                    <label class="block text-xs font-medium text-neutral-400 mb-1.5">Nombre completo *</label>
+                    <input type="text" id="checkout-name" name="name" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors" placeholder="Tu nombre">
+                </div>
+
+                <!-- Telegram -->
+                <div>
+                    <label class="block text-xs font-medium text-neutral-400 mb-1.5">Telegram (opcional)</label>
+                    <input type="text" id="checkout-telegram" name="telegram" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors" placeholder="@usuario">
+                    <p class="text-xs text-neutral-500 mt-1"><iconify-icon icon="solar:gift-linear" class="text-sm"></iconify-icon> Para sorteos y promociones</p>
+                </div>
+
+                <!-- País (solo si es nuevo usuario) -->
+                <div id="checkout-country-wrapper" class="hidden">
+                    <label class="block text-xs font-medium text-neutral-400 mb-1.5">País *</label>
+                    <select id="checkout-country" name="country" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500/50 transition-colors">
+                        <option value="" class="bg-[#0a0a0a]">Selecciona tu país...</option>
+                        <option value="Argentina" class="bg-[#0a0a0a]">🇦🇷 Argentina</option>
+                        <option value="Chile" class="bg-[#0a0a0a]">🇨🇱 Chile</option>
+                        <option value="Colombia" class="bg-[#0a0a0a]">🇨🇴 Colombia</option>
+                        <option value="México" class="bg-[#0a0a0a]">🇲🇽 México</option>
+                        <option value="Perú" class="bg-[#0a0a0a]">🇵🇪 Perú</option>
+                        <option value="Uruguay" class="bg-[#0a0a0a]">🇺🇾 Uruguay</option>
+                        <option value="Venezuela" class="bg-[#0a0a0a]">🇻🇪 Venezuela</option>
+                        <option value="España" class="bg-[#0a0a0a]">🇪🇸 España</option>
+                        <option value="Otro" class="bg-[#0a0a0a]">🌎 Otro</option>
+                    </select>
+                </div>
+
+                <!-- Referral Source (solo si es nuevo usuario) -->
+                <div id="checkout-referral-wrapper" class="hidden">
+                    <label class="block text-xs font-medium text-neutral-400 mb-1.5">¿Dónde nos conociste? *</label>
+                    <select id="checkout-referral" name="referral_source" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500/50 transition-colors">
+                        <option value="" class="bg-[#0a0a0a]">Selecciona una opción...</option>
+                        <option value="Instagram" class="bg-[#0a0a0a]">Instagram</option>
+                        <option value="YouTube" class="bg-[#0a0a0a]">YouTube</option>
+                        <option value="Facebook" class="bg-[#0a0a0a]">Facebook</option>
+                        <option value="Google" class="bg-[#0a0a0a]">Google</option>
+                        <option value="Recomendación" class="bg-[#0a0a0a]">Recomendación de amigo</option>
+                        <option value="Otro" class="bg-[#0a0a0a]">Otro</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Términos (solo si es nuevo usuario) -->
+            <div id="checkout-terms-wrapper" class="hidden mt-4">
+                <label class="flex items-start gap-2 cursor-pointer group">
+                    <input type="checkbox" id="checkout-terms" name="terms" class="mt-0.5 w-4 h-4 rounded bg-white/5 border-white/10 text-emerald-500 focus:ring-emerald-500/50">
+                    <span class="text-xs text-neutral-400 group-hover:text-neutral-300 transition-colors">
+                        Acepto los <a href="terminos.html" target="_blank" class="text-emerald-400 hover:text-emerald-300 underline">Términos de servicio</a> de TardoAR
+                    </span>
+                </label>
+            </div>
+
+            <!-- Nota informativa -->
+            <div class="mt-6 bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+                <div class="flex items-start gap-3">
+                    <iconify-icon icon="solar:info-circle-linear" class="text-blue-400 text-xl shrink-0 mt-0.5"></iconify-icon>
+                    <div class="text-xs text-blue-300 leading-relaxed">
+                        <p class="font-medium mb-1">Proceso de activación:</p>
+                        <ol class="list-decimal list-inside space-y-1 text-blue-300/80">
+                            <li>Confirma tu compra</li>
+                            <li>Realiza el pago mediante el método que elijas.</li>
+                            <li>Nuestro equipo verificará tu pago (usualmente en minutos)</li>
+                            <li>Recibirás tu licencia por email automáticamente</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones -->
+            <div class="flex gap-3 mt-6">
+                <button type="button" onclick="closeCheckoutModal()" class="flex-1 px-4 py-2.5 text-sm font-medium text-neutral-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-all">
+                    Cancelar
+                </button>
+                <button type="submit" id="checkout-submit-btn" class="flex-1 px-8 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 bg-emerald-500 text-[#030303] hover:bg-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center justify-center gap-2">
+                    <iconify-icon icon="solar:shield-check-linear" class="text-xl"></iconify-icon>
+                    <span>Confirmar compra</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal de Pago -->
+<div id="payment-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="bg-[#0a0a0a] border border-white/10 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+        <!-- Header -->
+        <div class="sticky top-0 bg-[#0a0a0a] border-b border-white/10 px-6 py-4 flex items-center justify-between z-10">
+            <div>
+                <h3 class="text-lg font-semibold text-white">Completar Pago</h3>
+                <p class="text-xs text-neutral-500 mt-1">Orden #<span id="payment-order-id">LOADING...</span></p>
+            </div>
+            <button onclick="closePaymentModal()" class="text-neutral-500 hover:text-white transition-colors">
+                <iconify-icon icon="solar:close-circle-linear" class="text-2xl"></iconify-icon>
+            </button>
+        </div>
+
+        <!-- Precio a pagar -->
+        <div class="px-6 py-5 border-b border-white/10">
+            <div class="text-center">
+                <p class="text-xs text-neutral-400 mb-2">CANTIDAD A PAGAR</p>
+                <div class="text-4xl font-bold text-white">$<span id="payment-amount">0.00</span></div>
+                <p class="text-xs text-neutral-500 mt-1">USD (USDT)</p>
+                <p id="payment-plan-info" class="text-xs text-neutral-400 mt-2">Plan Basic Mensual</p>
+            </div>
+        </div>
+
+        <!-- Métodos de pago -->
+        <div class="p-6">
+            <h4 class="text-sm font-medium text-white mb-3">Selecciona método de pago:</h4>
+
+            <div class="grid md:grid-cols-3 gap-4">
+                <!-- Selector de métodos (izquierda) -->
+                <div class="space-y-2">
+                    <button onclick="selectPaymentMethod('binance')" id="method-binance" class="w-full px-4 py-3 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition-all text-left">
+                        <div class="flex items-center gap-2">
+                            <iconify-icon icon="simple-icons:binance" class="text-yellow-400 text-xl"></iconify-icon>
+                            <span class="text-sm text-white font-medium">Binance Pay</span>
+                        </div>
+                    </button>
+                    <button onclick="selectPaymentMethod('usdt')" id="method-usdt" class="w-full px-4 py-3 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition-all text-left">
+                        <div class="flex items-center gap-2">
+                            <iconify-icon icon="cryptocurrency:usdt" class="text-green-400 text-xl"></iconify-icon>
+                            <span class="text-sm text-white font-medium">USDT (BEP20)</span>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Detalles del método (derecha) -->
+                <div class="md:col-span-2">
+                    <!-- Binance Pay Details -->
+                    <div id="binance-details" class="hidden bg-white/5 border border-white/10 rounded-lg p-4">
+                        <div class="bg-white rounded-lg p-3 mb-3">
+                            <img id="payment-qr" src="" alt="QR Binance Pay" class="w-full h-auto max-w-[180px] mx-auto">
+                        </div>
+                        <div class="text-xs text-neutral-300 space-y-2">
+                            <p class="flex items-start gap-2">
+                                <iconify-icon icon="solar:check-circle-linear" class="text-emerald-400 text-base shrink-0 mt-0.5"></iconify-icon>
+                                <span>Escanea el código QR con Binance Pay</span>
+                            </p>
+                            <p class="flex items-start gap-2">
+                                <iconify-icon icon="solar:check-circle-linear" class="text-emerald-400 text-base shrink-0 mt-0.5"></iconify-icon>
+                                <span>Envía exactamente <strong id="payment-amount-qr" class="text-emerald-400">$0.00 USDT</strong></span>
+                            </p>
+                            <p class="flex items-start gap-2">
+                                <iconify-icon icon="solar:check-circle-linear" class="text-emerald-400 text-base shrink-0 mt-0.5"></iconify-icon>
+                                <span>Confirmación automática en minutos</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- USDT Details -->
+                    <div id="usdt-details" class="hidden bg-white/5 border border-white/10 rounded-lg p-4">
+                        <div class="mb-3">
+                            <label class="block text-xs font-medium text-neutral-400 mb-1.5">Dirección de Wallet:</label>
+                            <div class="flex items-center gap-2">
+                                <input type="text" id="payment-wallet" readonly class="flex-1 bg-white/10 border border-white/10 rounded-lg px-3 py-2 text-xs text-white font-mono select-all focus:outline-none" value="LOADING...">
+                                <button onclick="copyWallet(event)" class="px-3 py-2 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 rounded-lg transition-colors">
+                                    <iconify-icon icon="solar:copy-linear" class="text-lg"></iconify-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="block text-xs font-medium text-neutral-400 mb-1.5">Cantidad exacta a enviar:</label>
+                            <div class="flex items-center gap-2">
+                                <input type="text" id="payment-amount-usdt" readonly class="flex-1 bg-emerald-500/10 border border-emerald-500/20 rounded-lg px-3 py-2 text-sm text-emerald-300 font-bold select-all focus:outline-none" value="$0.00 USDT">
+                                <button onclick="copyAmount(event)" class="px-3 py-2 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 rounded-lg transition-colors">
+                                    <iconify-icon icon="solar:copy-linear" class="text-lg"></iconify-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="text-xs text-neutral-300 space-y-2">
+                            <p class="flex items-start gap-2">
+                                <iconify-icon icon="solar:danger-triangle-linear" class="text-yellow-400 text-base shrink-0 mt-0.5"></iconify-icon>
+                                <span><strong>Red:</strong> BEP20 / BSC (Binance Smart Chain)</span>
+                            </p>
+                            <p class="flex items-start gap-2">
+                                <iconify-icon icon="solar:check-circle-linear" class="text-emerald-400 text-base shrink-0 mt-0.5"></iconify-icon>
+                                <span>Envía exactamente el monto indicado</span>
+                            </p>
+                            <p class="flex items-start gap-2">
+                                <iconify-icon icon="solar:check-circle-linear" class="text-emerald-400 text-base shrink-0 mt-0.5"></iconify-icon>
+                                <span>Confirmación automática en minutos</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campo para TX Hash / Payment ID -->
+            <div class="mt-5 bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+                <label class="block text-sm font-medium text-white mb-2">
+                    <iconify-icon icon="solar:hashtag-linear" class="text-yellow-400 text-lg align-middle"></iconify-icon>
+                    ID de Transacción / Payment ID *<span class="text-yellow-400 text-xs ml-1">(OBLIGATORIO)</span>
+                </label>
+                <input 
+                    type="text" 
+                    id="payment-tx-id" 
+                    required
+                    placeholder="Ej: 0x1234abc... (TX hash de USDT) o ID de Binance Pay"
+                    class="w-full bg-white/5 border border-yellow-500/30 rounded-lg px-4 py-2.5 text-sm text-white placeholder-neutral-400 focus:outline-none focus:border-yellow-500 transition-colors font-mono"
+                >
+                <p class="text-xs text-yellow-300 mt-2 flex items-start gap-2">
+                    <iconify-icon icon="solar:danger-triangle-bold" class="text-base shrink-0 mt-0.5"></iconify-icon>
+                    <span><strong>Importante:</strong> Debes proporcionar el hash de transacción de la red BEP20 o el ID de pago (Binance Pay) para que podamos verificar tu pago más rápido.</span>
+                </p>
+            </div>
+
+            <!-- Botones -->
+            <div class="flex gap-3 mt-5">
+                <button onclick="closePaymentModal()" class="flex-1 px-4 py-2.5 text-sm font-medium text-neutral-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-all">
+                    Cerrar
+                </button>
+                <button onclick="confirmPaymentDone()" class="flex-1 px-8 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 bg-emerald-500 text-[#030303] hover:bg-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center justify-center gap-2">
+                    <iconify-icon icon="solar:check-circle-linear" class="text-xl"></iconify-icon>
+                    <span>Ya realicé el pago</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
