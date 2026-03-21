@@ -676,23 +676,79 @@ async function submitOrder(e) {
         // Guardar datos temporalmente
         window.pendingOrderData = requestBody;
 
-        // Calcular precio para mostrar en modal de pago
-        const planName = planData.planName.toLowerCase();
-        const period = planData.period; // 'monthly' o 'yearly'
-        const basePrice = basePrices[period][planName];
-        const supportCost = premiumSupport ? 5 : 0;
+        // ==================================================
+        // CALCULAR TODOS LOS DATOS DEL PLAN PARA EL MODAL
+        // ==================================================
+        const planInfo = window.checkoutPlanData;
+        const planName = planInfo.planName; // "Basic", "Premium", "Enterprise"
+        const planNameLower = planName.toLowerCase();
+        const period = planInfo.period; // 'monthly' o 'yearly'
+        const isYearly = period === 'yearly';
+        
+        // Precio base SIN soporte
+        const basePrice = basePrices[period][planNameLower];
+        
+        // Costo del soporte
+        // Anuales: soporte incluido GRATIS (no se suma, ya está en basePrice)
+        // Mensuales: soporte opcional $5
+        const supportCost = (!isYearly && premiumSupport) ? 5 : 0;
+        
+        // Precio final
         const totalPrice = basePrice + supportCost;
+        
+        // Nombre del plan con formato
+        const periodText = isYearly ? 'Anual' : 'Mensual';
+        const basePlanName = `${planName} ${periodText}`;
+        
+        // Descripción completa del plan (con info de soporte)
+        let planDescription = basePlanName;
+        if (isYearly) {
+            planDescription += ' (Soporte Premium Incluido)';
+        } else if (premiumSupport) {
+            planDescription += ' + Soporte Premium';
+        }
+        
+        // support_included: true si es anual O si es mensual CON soporte activado
+        const supportIncluded = isYearly || premiumSupport;
 
-        // Crear objeto temporal para mostrar en el modal
+        // ==================================================
+        // CREAR OBJETO TEMPORAL QUE EMULA RESPUESTA DEL BACKEND
+        // Contiene TODOS los campos que el modal necesita
+        // ==================================================
         const tempOrderData = {
-            order_id: 'PENDING', // Se generará al crear la orden
+            status: 'pending',
+            order_id: 'PENDING', // Se generará al crear la orden real
             email: email,
-            price: totalPrice,
-            plan: plan,
-            payment_method: 'usdt_bep20' // Default
+            plan: basePlanName, // "Basic Mensual", "Premium Anual", etc
+            plan_description: planDescription, // Con texto de soporte incluido
+            price_base: basePrice, // Precio sin soporte
+            support_cost: supportCost, // 0 o 5
+            price_final: totalPrice, // Precio total
+            price_unique: totalPrice, // Sin variación (payment_id identifica la orden)
+            amount: totalPrice, // Fallback
+            support_included: supportIncluded,
+            payment_methods: {
+                binance_pay: {
+                    qr_url: 'https://damisav.github.io/tardo-web/images/payments/Qr_Binance.jpeg',
+                    instructions: 'Escanea el código QR con Binance Pay y envía exactamente el monto total indicado.'
+                },
+                usdt_bep20: {
+                    wallet: '0xE3A30BB978C43Ba0ec01D3DaB10f4F6e63dE0c32', // Wallet BEP20
+                    amount: totalPrice,
+                    instructions: `Envía exactamente $${totalPrice.toFixed(2)} USDT (red BEP20/BSC) a la wallet indicada.`
+                }
+            },
+            created_at: new Date().toISOString(),
+            new_user: false // No sabemos aún (se determinará al crear la orden)
         };
 
-        console.log('💰 Precio calculado:', totalPrice);
+        console.log('✅ Datos completos para modal:', {
+            basePrice,
+            supportCost,
+            totalPrice,
+            planDescription,
+            supportIncluded
+        });
 
         // Store temporary order data
         currentOrderData = tempOrderData;
