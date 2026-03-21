@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cargar navbar
     const navbarPlaceholder = document.getElementById('navbar-placeholder');
     if (navbarPlaceholder) {
-        fetch('components/navbar.html')
+        fetch('/components/navbar.html')
             .then(response => {
                 if (!response.ok) throw new Error('Error al cargar navbar');
                 return response.text();
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cargar footer
     const footerPlaceholder = document.getElementById('footer-placeholder');
     if (footerPlaceholder) {
-        fetch('components/footer.html')
+        fetch('/components/footer.html')
             .then(response => {
                 if (!response.ok) throw new Error('Error al cargar footer');
                 return response.text();
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cargar modales (login y registro)
     const body = document.body;
-    fetch('components/modals.html')
+    fetch('/components/modals.html')
         .then(response => {
             if (!response.ok) throw new Error('Error al cargar modales');
             return response.text();
