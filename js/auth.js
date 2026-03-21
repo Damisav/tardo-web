@@ -225,9 +225,14 @@ function initAuth() {
                 });
 
                 const result = await response.json();
+                console.log('Response status:', response.status);
+                console.log('Response data:', result);
 
                 if (!response.ok) {
-                    throw new Error(result.detail || result.message || 'Error al crear cuenta');
+                    // Intentar obtener el mensaje de error de múltiples fuentes
+                    const errorMessage = result.detail || result.message || result.error || 'Error al crear cuenta';
+                    console.error('Error del servidor:', errorMessage);
+                    throw new Error(errorMessage);
                 }
 
                 // Éxito
@@ -247,8 +252,9 @@ function initAuth() {
                 }, 5000);
 
             } catch (error) {
-                console.error('Error:', error);
-                errorDiv.textContent = error.message;
+                console.error('Error completo:', error);
+                console.error('Error message:', error.message);
+                errorDiv.textContent = error.message || 'Error al crear cuenta';
                 errorDiv.classList.remove('hidden');
             } finally {
                 // Rehabilitar botón
