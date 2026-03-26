@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Soporte - TARDO</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Components.js (para navbar) -->
+    <script src="../js/components.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Auto-resize textarea */
+        .auto-resize {
+            resize: none;
+            overflow-y: hidden;
+        }
+
+        /* Scroll suave en el chat */
+        .chat-messages {
+            scroll-behavior: smooth;
+        }
+
+        /* Animación de typing indicator */
+        @keyframes bounce {
+            0%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+        }
+        
+        .animate-bounce-dot {
+            animation: bounce 1.4s infinite;
+        }
+    </style>
+</head>
+<body class="bg-[#030303] text-neutral-300 font-sans antialiased min-h-screen">
+
+    <!-- Background Gradients -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-[-10%] left-[20%] w-[800px] h-[600px] bg-neutral-800/20 rounded-full blur-[120px] mix-blend-screen opacity-20"></div>
+        <div class="absolute bottom-[-10%] right-[-5%] w-[600px] h-[600px] bg-emerald-900/10 rounded-full blur-[100px] mix-blend-screen opacity-20"></div>
+    </div>
+
+    <!-- Navbar Component -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-28 pb-20">
+        
+        <!-- Header Section -->
+        <header class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div>
+                <div class="flex items-center gap-3 mb-2">
+                    <h1 class="text-3xl font-semibold tracking-tight text-white">Centro de Soporte</h1>
+                    <span class="px-2 py-0.5 rounded-md bg-white/5 text-xs font-medium text-neutral-400 border border-white/10">Beta</span>
+                </div>
+                <p class="text-sm text-neutral-400">¿Necesitás ayuda? Creá un ticket y te respondemos lo antes posible.</p>
+            </div>
+            <button onclick="openCreateTicketModal()" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium py-2.5 px-5 rounded-lg transition-all shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40">
+                <iconify-icon icon="solar:add-circle-linear" width="18"></iconify-icon>
+                Crear Ticket
+            </button>
+        </header>
+
+        <!-- Main Workspace: List & Detail -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-[650px]">
+            
+            <!-- Left Column: Ticket List -->
+            <div class="lg:col-span-4 bg-white/5 border border-white/10 rounded-xl flex flex-col overflow-hidden backdrop-blur-sm">
+                <div class="p-4 border-b border-white/10 bg-white/5 flex items-center justify-between">
+                    <h2 class="text-sm font-medium text-white">Tus Tickets</h2>
+                    <div class="flex items-center gap-2">
+                        <button onclick="loadTickets()" class="text-neutral-400 hover:text-white transition-colors" title="Refrescar">
+                            <iconify-icon icon="solar:refresh-circle-linear" width="18"></iconify-icon>
+                        </button>
+                        <button onclick="toggleFilters()" class="text-neutral-400 hover:text-white transition-colors" title="Filtros">
+                            <iconify-icon icon="solar:filter-linear" width="18"></iconify-icon>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Filters (Hidden by default) -->
+                <div id="filters-section" class="hidden p-4 border-b border-white/10 bg-white/5 space-y-2">
+                    <select id="filter-status" onchange="applyFilters()" class="w-full bg-[#030303] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50">
+                        <option value="">Todos los estados</option>
+                        <option value="abierto">Abierto</option>
+                        <option value="en_progreso">En Progreso</option>
+                        <option value="resuelto">Resuelto</option>
+                    </select>
+                </div>
+
+                <!-- Loading State -->
+                <div id="tickets-loading" class="flex-1 flex items-center justify-center">
+                    <div class="text-center">
+                        <iconify-icon icon="solar:refresh-circle-linear" class="text-3xl text-neutral-500 animate-spin mb-2"></iconify-icon>
+                        <p class="text-sm text-neutral-500">Cargando tickets...</p>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div id="tickets-empty" class="hidden flex-1 flex items-center justify-center p-8">
+                    <div class="text-center">
+                        <div class="h-16 w-16 mx-auto rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 text-neutral-500">
+                            <iconify-icon icon="solar:inbox-line-linear" width="32"></iconify-icon>
+                        </div>
+                        <h4 class="text-base font-medium text-white mb-2">No tenés tickets todavía</h4>
+                        <p class="text-sm text-neutral-500 mb-4">Si tenés alguna duda, creá tu primer ticket.</p>
+                        <button onclick="openCreateTicketModal()" class="bg-white/10 hover:bg-white/20 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors border border-white/10">
+                            Crear ticket
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tickets List -->
+                <div id="tickets-list" class="hidden flex-1 overflow-y-auto">
+                    <!-- Tickets rendered by JS -->
+                </div>
+            </div>
+
+            <!-- Right Column: Detail / Chat View -->
+            <div id="ticket-detail-container" class="lg:col-span-8 bg-white/5 border border-white/10 rounded-xl flex flex-col overflow-hidden backdrop-blur-sm">
+                
+                <!-- Empty State: No ticket selected -->
+                <div id="no-ticket-selected" class="flex-1 flex items-center justify-center p-8">
+                    <div class="text-center">
+                        <div class="h-20 w-20 mx-auto rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-4 text-neutral-500">
+                            <iconify-icon icon="solar:chat-line-linear" width="40"></iconify-icon>
+                        </div>
+                        <h4 class="text-lg font-medium text-white mb-2">Seleccioná un ticket</h4>
+                        <p class="text-sm text-neutral-500">Elegí un ticket de la lista para ver los detalles y mensajes.</p>
+                    </div>
+                </div>
+
+                <!-- Ticket Detail View (Hidden initially) -->
+                <div id="ticket-detail-view" class="hidden flex flex-col h-full">
+                    <!-- Chat Header -->
+                    <div class="p-5 border-b border-white/10 bg-white/5 flex items-center justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 mb-1">
+                                <h2 id="ticket-subject" class="text-base font-semibold text-white tracking-tight">---</h2>
+                                <span id="ticket-category" class="px-2 py-0.5 bg-white/10 border border-white/10 rounded text-xs text-neutral-300 font-medium">---</span>
+                            </div>
+                            <p id="ticket-meta" class="text-xs text-neutral-500">Ticket #--- • Creado ---</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span id="ticket-status-badge" class=""><!-- Status badge --></span>
+                            <button onclick="closeTicket()" class="hidden items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 hover:bg-white/10 text-xs font-medium text-neutral-300 transition-colors">
+                                <iconify-icon icon="solar:check-circle-linear" width="16"></iconify-icon>
+                                Cerrar ticket
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Chat Messages Area -->
+                    <div id="chat-messages" class="flex-1 overflow-y-auto p-6 space-y-6 bg-[#030303]/50 chat-messages">
+                        <!-- Messages rendered by JS -->
+                    </div>
+
+                    <!-- Input Area -->
+                    <div class="p-4 bg-white/5 border-t border-white/10">
+                        <div class="relative flex items-end bg-[#030303] border border-white/10 rounded-xl focus-within:border-emerald-500/50 focus-within:ring-1 focus-within:ring-emerald-500/50 transition-all p-1">
+                            <button onclick="attachFile()" class="p-2.5 text-neutral-500 hover:text-neutral-300 transition-colors flex-shrink-0" title="Adjuntar archivo">
+                                <iconify-icon icon="solar:paperclip-linear" width="20"></iconify-icon>
+                            </button>
+                            <textarea 
+                                id="message-input" 
+                                rows="1" 
+                                placeholder="Escribe tu respuesta..." 
+                                class="auto-resize flex-1 bg-transparent border-none focus:outline-none text-sm p-2.5 text-white placeholder-neutral-500 resize-none max-h-32 overflow-y-auto block w-full"
+                                onkeydown="handleMessageKeydown(event)"
+                            ></textarea>
+                            <button onclick="sendMessage()" class="bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg p-2.5 m-0.5 flex items-center justify-center transition-colors flex-shrink-0">
+                                <iconify-icon icon="solar:plain-2-linear" width="18"></iconify-icon>
+                            </button>
+                        </div>
+                        <p class="text-xs text-neutral-500 mt-2">Presioná Enter para enviar, Shift+Enter para nueva línea</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal: Crear Ticket -->
+    <div id="create-ticket-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="bg-[#121214] border border-white/10 rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex items-start justify-between mb-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-white mb-1">Nuevo Ticket de Soporte</h3>
+                        <p class="text-sm text-neutral-400">Describe tu problema para que podamos asistirte.</p>
+                    </div>
+                    <button onclick="closeCreateTicketModal()" class="text-neutral-400 hover:text-white transition-colors">
+                        <iconify-icon icon="solar:close-circle-linear" width="24"></iconify-icon>
+                    </button>
+                </div>
+
+                <form id="create-ticket-form" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-medium text-neutral-400 mb-1.5">Asunto *</label>
+                        <input 
+                            type="text" 
+                            id="ticket-subject-input"
+                            placeholder="Ej: Problema con retiro de USDT" 
+                            class="w-full bg-[#030303] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all placeholder-neutral-500"
+                            required
+                        >
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-neutral-400 mb-1.5">Categoría *</label>
+                            <div class="relative">
+                                <select 
+                                    id="ticket-category-input"
+                                    class="w-full appearance-none bg-[#030303] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all cursor-pointer"
+                                    required
+                                >
+                                    <option value="tecnico">Problema técnico</option>
+                                    <option value="pagos">Pagos y Retiros</option>
+                                    <option value="cuenta">Cuenta y Verificación</option>
+                                    <option value="trading">Estrategia / Trading</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                                <iconify-icon icon="solar:alt-arrow-down-linear" class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 pointer-events-none" width="16"></iconify-icon>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-neutral-400 mb-1.5">Prioridad</label>
+                            <div class="relative">
+                                <select 
+                                    id="ticket-priority-input"
+                                    class="w-full appearance-none bg-[#030303] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all cursor-pointer"
+                                >
+                                    <option value="baja">Baja</option>
+                                    <option value="normal" selected>Normal</option>
+                                </select>
+                                <iconify-icon icon="solar:alt-arrow-down-linear" class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 pointer-events-none" width="16"></iconify-icon>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-neutral-400 mb-1.5">Descripción *</label>
+                        <textarea 
+                            id="ticket-description-input"
+                            rows="4" 
+                            placeholder="Explica tu situación en detalle..." 
+                            class="w-full bg-[#030303] border border-white/10 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all placeholder-neutral-500 resize-none"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="border border-dashed border-white/20 rounded-lg p-5 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-white/5 hover:border-white/30 transition-all bg-[#030303]/50 group">
+                        <div class="h-10 w-10 rounded-full bg-white/5 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                            <iconify-icon icon="solar:upload-linear" class="text-neutral-400" width="20"></iconify-icon>
+                        </div>
+                        <span class="text-sm font-medium text-neutral-300">Adjuntar archivos</span>
+                        <span class="text-xs text-neutral-500 mt-1">PNG, JPG, PDF (Max. 5MB) - Próximamente</span>
+                    </div>
+
+                    <div class="pt-2 flex justify-end gap-3">
+                        <button type="button" onclick="closeCreateTicketModal()" class="px-4 py-2 text-sm font-medium text-neutral-400 hover:text-white transition-colors">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium py-2 px-6 rounded-lg transition-all shadow-lg shadow-emerald-500/20">
+                            <span id="create-ticket-btn-text">Crear Ticket</span>
+                            <iconify-icon id="create-ticket-btn-loading" icon="solar:refresh-circle-linear" class="hidden animate-spin" width="16"></iconify-icon>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="hidden fixed bottom-8 right-8 z-50 bg-white/10 border border-white/20 backdrop-blur-md text-white px-4 py-3 rounded-lg shadow-2xl max-w-sm">
+        <div class="flex items-center gap-3">
+            <iconify-icon id="toast-icon" icon="solar:check-circle-linear" width="20"></iconify-icon>
+            <span id="toast-message" class="text-sm font-medium">Operación exitosa</span>
+        </div>
+    </div>
+
+    <!-- Soporte.js -->
+    <script src="soporte.js"></script>
+
+    <script>
+        // Cargar navbar y tickets al iniciar
+        window.addEventListener('DOMContentLoaded', () => {
+            loadComponents();
+            checkAuth();
+            loadTickets();
+        });
+    </script>
+</body>
+</html>
