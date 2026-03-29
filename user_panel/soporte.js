@@ -316,13 +316,13 @@ document.getElementById('create-ticket-form').addEventListener('submit', async (
                 subject,
                 category,
                 priority,
-                first_message: description
+                message: description
             })
         });
 
         if (!response.ok) {
             const data = await response.json();
-            throw new Error(data.detail || 'Error creando ticket');
+            throw new Error(data.detail || data.message || 'Error creando ticket');
         }
 
         const data = await response.json();
