@@ -11,9 +11,9 @@ let userToken = null;
 // ========================================
 
 function checkAuth() {
-    const token = localStorage.getItem('userToken');
+    const token = localStorage.getItem('tardo_token');
     if (!token) {
-        window.location.href = '../user_panel/dashboard.html';
+        window.location.href = '/user_panel/dashboard.html';
         return;
     }
     userToken = token;

@@ -295,9 +295,8 @@
     <script src="soporte.js"></script>
 
     <script>
-        // Cargar navbar y tickets al iniciar
+        // Cargar tickets al iniciar (navbar se carga automáticamente con components.js)
         window.addEventListener('DOMContentLoaded', () => {
-            loadComponents();
             checkAuth();
             loadTickets();
         });
