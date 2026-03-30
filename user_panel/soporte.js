@@ -201,7 +201,7 @@ function renderMessage(message) {
                         <span class="text-xs text-neutral-600">${time}</span>
                     </div>
                     <div class="bg-white/10 border border-white/10 text-neutral-200 rounded-2xl rounded-tl-sm p-4 text-sm leading-relaxed">
-                        ${escapeHtml(message.content).replace(/\n/g, '<br>')}
+                        ${escapeHtml(message.message).replace(/\n/g, '<br>')}
                     </div>
                 </div>
             </div>
@@ -219,7 +219,7 @@ function renderMessage(message) {
                         <span class="text-xs text-neutral-600">${time}</span>
                     </div>
                     <div class="bg-emerald-600/20 border border-emerald-500/30 text-emerald-50 rounded-2xl rounded-tr-sm p-4 text-sm">
-                        ${escapeHtml(message.content).replace(/\n/g, '<br>')}
+                        ${escapeHtml(message.message).replace(/\n/g, '<br>')}
                     </div>
                 </div>
             </div>
@@ -246,7 +246,7 @@ async function sendMessage() {
                 'Authorization': `Bearer ${userToken}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ content })
+            body: JSON.stringify({ message: content })
         });
 
         if (!response.ok) {
