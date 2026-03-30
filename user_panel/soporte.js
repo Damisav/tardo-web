@@ -80,7 +80,7 @@ function renderTicketsList(tickets) {
                 <div class="flex justify-between items-start mb-2">
                     <div class="flex items-center gap-2">
                         <span class="text-xs font-medium text-neutral-500 group-hover:text-neutral-400 transition-colors">#TRD-${ticket.id}</span>
-                        ${hasAdminReply ? '<span class="px-1.5 py-0.5 rounded bg-emerald-600/30 text-emerald-400 text-xs font-bold animate-pulse">NUEVO</span>' : ''}
+                        ${hasAdminReply ? '<span class="px-1.5 py-0.5 rounded bg-emerald-600/30 text-emerald-400 text-xs font-bold animate-pulse">Nueva respuesta</span>' : ''}
                     </div>
                     <span class="text-xs text-neutral-500">${timeAgo}</span>
                 </div>
