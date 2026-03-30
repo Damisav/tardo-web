@@ -154,32 +154,19 @@ function renderTicketDetail(ticket) {
     `;
 
     // Renderizar mensajes
-    renderMessages(ticket.messages || []);
+    renderMessages(ticket.messages || [], ticket.status);
 
-    // Deshabilitar chat si el ticket está resuelto
-    const messageInput = document.getElementById('message-input');
-    const sendButton = document.querySelector('#ticket-detail-view button[onclick="sendMessage()"]');
+    // Mostrar/ocultar área de input según estado del ticket
+    const messageInputArea = document.getElementById('message-input-area');
     
     if (ticket.status === 'resuelto') {
-        messageInput.disabled = true;
-        messageInput.placeholder = 'Este ticket está resuelto y no puede recibir más mensajes';
-        messageInput.classList.add('opacity-50', 'cursor-not-allowed');
-        if (sendButton) {
-            sendButton.disabled = true;
-            sendButton.classList.add('opacity-50', 'cursor-not-allowed');
-        }
+        messageInputArea.classList.add('hidden');
     } else {
-        messageInput.disabled = false;
-        messageInput.placeholder = 'Escribe tu mensaje...';
-        messageInput.classList.remove('opacity-50', 'cursor-not-allowed');
-        if (sendButton) {
-            sendButton.disabled = false;
-            sendButton.classList.remove('opacity-50', 'cursor-not-allowed');
-        }
+        messageInputArea.classList.remove('hidden');
     }
 }
 
-function renderMessages(messages) {
+function renderMessages(messages, status) {
     const chatEl = document.getElementById('chat-messages');
     
     if (messages.length === 0) {
@@ -203,7 +190,7 @@ function renderMessages(messages) {
         messagesByDate[date].push(msg);
     });
 
-    chatEl.innerHTML = Object.entries(messagesByDate).map(([date, msgs]) => {
+    let messagesHTML = Object.entries(messagesByDate).map(([date, msgs]) => {
         return `
             <div class="flex justify-center">
                 <span class="text-xs font-medium text-neutral-600 bg-white/5 border border-white/10 px-3 py-1 rounded-full">${date}</span>
@@ -211,6 +198,19 @@ function renderMessages(messages) {
             ${msgs.map(msg => renderMessage(msg)).join('')}
         `;
     }).join('');
+
+    // Agregar mensaje de ticket resuelto al final
+    if (status === 'resuelto') {
+        messagesHTML += `
+            <div class="flex justify-center mt-6">
+                <span class="text-xs font-medium text-neutral-500 bg-white/5 border border-white/10 px-4 py-2 rounded-full">
+                    Este ticket está resuelto y no puede recibir más mensajes
+                </span>
+            </div>
+        `;
+    }
+
+    chatEl.innerHTML = messagesHTML;
 
     // Scroll al final
     chatEl.scrollTop = chatEl.scrollHeight;
