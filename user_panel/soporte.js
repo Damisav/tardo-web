@@ -8,21 +8,46 @@ let userToken = null;
 
 // ========================================
 // Sistema de tickets leídos (localStorage)
+// Guardamos el estado del último mensaje visto para detectar cambios
 // ========================================
 
-function getReadTickets() {
-    const read = localStorage.getItem('tardo_user_read_tickets');
-    return read ? new Set(JSON.parse(read)) : new Set();
+function getReadTicketsState() {
+    const state = localStorage.getItem('tardo_user_read_tickets');
+    return state ? JSON.parse(state) : {};
 }
 
-function markTicketAsRead(ticketId) {
-    const read = getReadTickets();
-    read.add(ticketId);
-    localStorage.setItem('tardo_user_read_tickets', JSON.stringify([...read]));
+function markTicketAsRead(ticketId, lastMessageIsAdmin) {
+    const state = getReadTicketsState();
+    state[ticketId] = lastMessageIsAdmin;
+    localStorage.setItem('tardo_user_read_tickets', JSON.stringify(state));
+    console.log(`[USUARIO] ✅ Ticket ${ticketId} marcado como leído con last_message_is_admin=${lastMessageIsAdmin}`);
 }
 
-function isTicketRead(ticketId) {
-    return getReadTickets().has(ticketId);
+function shouldShowBadge(ticketId, currentLastMessageIsAdmin) {
+    const state = getReadTicketsState();
+    const savedState = state[ticketId];
+    
+    // Si no hay respuesta del admin, nunca mostrar badge
+    if (currentLastMessageIsAdmin !== 1) {
+        console.log(`[USUARIO] Ticket ${ticketId}: last_message_is_admin=${currentLastMessageIsAdmin} → NO badge (no hay respuesta admin)`);
+        return false;
+    }
+    
+    // Si nunca fue leído, mostrar badge
+    if (savedState === undefined) {
+        console.log(`[USUARIO] Ticket ${ticketId}: Nunca leído → SÍ badge`);
+        return true;
+    }
+    
+    // Si el estado cambió desde la última lectura, mostrar badge
+    if (savedState !== currentLastMessageIsAdmin) {
+        console.log(`[USUARIO] Ticket ${ticketId}: Estado cambió ${savedState} → ${currentLastMessageIsAdmin} → SÍ badge`);
+        return true;
+    }
+    
+    // Ya fue leído en este estado
+    console.log(`[USUARIO] Ticket ${ticketId}: Ya leído con estado ${savedState} → NO badge`);
+    return false;
 }
 
 // ========================================
@@ -110,7 +135,7 @@ function renderTicketsList(tickets) {
         const statusInfo = getStatusInfo(ticket.status);
         const priorityInfo = getPriorityInfo(ticket.priority);
         const timeAgo = formatTimeAgo(ticket.created_at);
-        const hasAdminReply = ticket.last_message_is_admin === 1 && !isTicketRead(ticket.id);
+        const hasAdminReply = shouldShowBadge(ticket.id, ticket.last_message_is_admin);
 
         return `
             <div 
@@ -145,7 +170,6 @@ function renderTicketsList(tickets) {
 
 async function selectTicket(ticketId) {
     currentTicketId = ticketId;
-    markTicketAsRead(ticketId); // Marcar como visto (localStorage)
     
     try {
         const response = await fetch(`${API_BASE_URL}/api/user/tickets/${ticketId}`, {
@@ -159,6 +183,10 @@ async function selectTicket(ticketId) {
         }
 
         const data = await response.json();
+        
+        // Marcar como visto con el estado actual
+        markTicketAsRead(ticketId, data.ticket.last_message_is_admin);
+        
         renderTicketDetail(data.ticket);
         
         // Re-render lista para actualizar el activo
