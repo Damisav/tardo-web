@@ -5,6 +5,7 @@
 const API_BASE_URL = 'https://admin.tardoar.com';
 let currentTicketId = null;
 let userToken = null;
+const readTickets = new Set(); // Tickets que ya fueron vistos por el usuario
 
 // ========================================
 // Autenticación
@@ -91,7 +92,7 @@ function renderTicketsList(tickets) {
         const statusInfo = getStatusInfo(ticket.status);
         const priorityInfo = getPriorityInfo(ticket.priority);
         const timeAgo = formatTimeAgo(ticket.created_at);
-        const hasAdminReply = ticket.last_message_is_admin === 1;
+        const hasAdminReply = ticket.last_message_is_admin === 1 && !readTickets.has(ticket.id);
 
         return `
             <div 
@@ -126,6 +127,7 @@ function renderTicketsList(tickets) {
 
 async function selectTicket(ticketId) {
     currentTicketId = ticketId;
+    readTickets.add(ticketId); // Marcar como visto
     
     try {
         const response = await fetch(`${API_BASE_URL}/api/user/tickets/${ticketId}`, {
