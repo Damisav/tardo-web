@@ -237,8 +237,8 @@ function renderMessage(message) {
         // Mensaje de soporte
         return `
             <div class="flex gap-4">
-                <div class="h-8 w-8 rounded-full bg-emerald-600 border border-emerald-500 flex-shrink-0 flex items-center justify-center text-white shadow-lg shadow-emerald-500/30">
-                    <iconify-icon icon="solar:headset-linear" width="18"></iconify-icon>
+                <div class="h-8 w-8 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 border border-emerald-400/50 ring-1 ring-emerald-400/20 flex-shrink-0 flex items-center justify-center text-white font-bold text-sm shadow-md">
+                    T
                 </div>
                 <div class="flex flex-col items-start gap-1 max-w-[85%] sm:max-w-[75%]">
                     <div class="flex items-center gap-2 mb-0.5">
