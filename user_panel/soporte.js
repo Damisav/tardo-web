@@ -52,8 +52,22 @@ async function loadTickets() {
             return;
         }
 
+        // Aplicar filtro de estado
+        const filterStatus = document.getElementById('filter-status').value;
+        let filteredTickets = data.tickets;
+        
+        if (filterStatus) {
+            filteredTickets = filteredTickets.filter(ticket => ticket.status === filterStatus);
+        }
+
+        // Verificar si hay tickets después del filtro
+        if (filteredTickets.length === 0) {
+            emptyEl.classList.remove('hidden');
+            return;
+        }
+
         // Ordenar: tickets resueltos al final
-        const sortedTickets = data.tickets.sort((a, b) => {
+        const sortedTickets = filteredTickets.sort((a, b) => {
             if (a.status === 'resuelto' && b.status !== 'resuelto') return 1;
             if (a.status !== 'resuelto' && b.status === 'resuelto') return -1;
             return 0; // Mantener orden original (por updated_at) para el resto
