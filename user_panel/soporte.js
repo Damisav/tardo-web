@@ -413,8 +413,8 @@ function getPriorityInfo(priority) {
 function getCategoryLabel(category) {
     const categoryMap = {
         'tecnico': 'Problema técnico',
-        'pagos': 'Pagos y Retiros',
-        'cuenta': 'Cuenta y Verificación',
+        'pagos': 'Cargar y retirar de Binance',
+        'cuenta': 'Cuenta y verificacion Binance',
         'trading': 'Estrategia / Trading',
         'otro': 'Otro'
     };
