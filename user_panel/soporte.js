@@ -70,6 +70,7 @@ function renderTicketsList(tickets) {
         const statusInfo = getStatusInfo(ticket.status);
         const priorityInfo = getPriorityInfo(ticket.priority);
         const timeAgo = formatTimeAgo(ticket.created_at);
+        const hasAdminReply = ticket.last_message_is_admin === 1;
 
         return `
             <div 
@@ -77,7 +78,10 @@ function renderTicketsList(tickets) {
                 class="p-4 border-b border-white/10 ${isActive ? 'bg-white/10 border-l-2 border-l-emerald-500' : 'hover:bg-white/5 border-l-2 border-l-transparent'} cursor-pointer transition-colors group"
             >
                 <div class="flex justify-between items-start mb-2">
-                    <span class="text-xs font-medium text-neutral-500 group-hover:text-neutral-400 transition-colors">#TRD-${ticket.id}</span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-medium text-neutral-500 group-hover:text-neutral-400 transition-colors">#TRD-${ticket.id}</span>
+                        ${hasAdminReply ? '<span class="px-1.5 py-0.5 rounded bg-emerald-600/30 text-emerald-400 text-xs font-bold animate-pulse">NUEVO</span>' : ''}
+                    </div>
                     <span class="text-xs text-neutral-500">${timeAgo}</span>
                 </div>
                 <h3 class="text-sm font-medium ${isActive ? 'text-white' : 'text-neutral-300'} mb-3 line-clamp-1">${ticket.subject}</h3>
