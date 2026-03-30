@@ -66,8 +66,8 @@ async function loadTickets() {
             return;
         }
 
-        // Ordenar: tickets resueltos al final
-        const sortedTickets = filteredTickets.sort((a, b) => {
+        // Ordenar: tickets resueltos al final (crear copia para no mutar el original)
+        const sortedTickets = [...filteredTickets].sort((a, b) => {
             if (a.status === 'resuelto' && b.status !== 'resuelto') return 1;
             if (a.status !== 'resuelto' && b.status === 'resuelto') return -1;
             return 0; // Mantener orden original (por updated_at) para el resto
