@@ -5,7 +5,25 @@
 const API_BASE_URL = 'https://admin.tardoar.com';
 let currentTicketId = null;
 let userToken = null;
-const readTickets = new Set(); // Tickets que ya fueron vistos por el usuario
+
+// ========================================
+// Sistema de tickets leídos (localStorage)
+// ========================================
+
+function getReadTickets() {
+    const read = localStorage.getItem('tardo_user_read_tickets');
+    return read ? new Set(JSON.parse(read)) : new Set();
+}
+
+function markTicketAsRead(ticketId) {
+    const read = getReadTickets();
+    read.add(ticketId);
+    localStorage.setItem('tardo_user_read_tickets', JSON.stringify([...read]));
+}
+
+function isTicketRead(ticketId) {
+    return getReadTickets().has(ticketId);
+}
 
 // ========================================
 // Autenticación
@@ -92,7 +110,7 @@ function renderTicketsList(tickets) {
         const statusInfo = getStatusInfo(ticket.status);
         const priorityInfo = getPriorityInfo(ticket.priority);
         const timeAgo = formatTimeAgo(ticket.created_at);
-        const hasAdminReply = ticket.last_message_is_admin === 1 && !readTickets.has(ticket.id);
+        const hasAdminReply = ticket.last_message_is_admin === 1 && !isTicketRead(ticket.id);
 
         return `
             <div 
@@ -127,7 +145,7 @@ function renderTicketsList(tickets) {
 
 async function selectTicket(ticketId) {
     currentTicketId = ticketId;
-    readTickets.add(ticketId); // Marcar como visto
+    markTicketAsRead(ticketId); // Marcar como visto (localStorage)
     
     try {
         const response = await fetch(`${API_BASE_URL}/api/user/tickets/${ticketId}`, {
