@@ -52,7 +52,14 @@ async function loadTickets() {
             return;
         }
 
-        renderTicketsList(data.tickets);
+        // Ordenar: tickets resueltos al final
+        const sortedTickets = data.tickets.sort((a, b) => {
+            if (a.status === 'resuelto' && b.status !== 'resuelto') return 1;
+            if (a.status !== 'resuelto' && b.status === 'resuelto') return -1;
+            return 0; // Mantener orden original (por updated_at) para el resto
+        });
+
+        renderTicketsList(sortedTickets);
         listEl.classList.remove('hidden');
 
     } catch (error) {
@@ -86,8 +93,7 @@ function renderTicketsList(tickets) {
                 </div>
                 <h3 class="text-sm font-medium ${isActive ? 'text-white' : 'text-neutral-300'} mb-3 line-clamp-1">${ticket.subject}</h3>
                 <div class="flex items-center gap-2">
-                    <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-md ${statusInfo.bgClass} border ${statusInfo.borderClass} ${statusInfo.textClass} text-xs font-medium">
-                        <span class="h-1.5 w-1.5 rounded-full ${statusInfo.dotClass}"></span>
+                    <span class="text-xs font-medium ${statusInfo.textClass}">
                         ${statusInfo.label}
                     </span>
                     <span class="inline-flex items-center gap-1 ${priorityInfo.textClass} text-xs font-medium ml-auto">
@@ -142,14 +148,35 @@ function renderTicketDetail(ticket) {
     
     const statusInfo = getStatusInfo(ticket.status);
     document.getElementById('ticket-status-badge').innerHTML = `
-        <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-md ${statusInfo.bgClass} border ${statusInfo.borderClass} ${statusInfo.textClass} text-xs font-medium">
-            <span class="h-1.5 w-1.5 rounded-full ${statusInfo.dotClass}"></span>
+        <span class="text-xs font-medium ${statusInfo.textClass}">
             ${statusInfo.label}
         </span>
     `;
 
     // Renderizar mensajes
     renderMessages(ticket.messages || []);
+
+    // Deshabilitar chat si el ticket está resuelto
+    const messageInput = document.getElementById('message-input');
+    const sendButton = document.querySelector('#ticket-detail-view button[onclick="sendMessage()"]');
+    
+    if (ticket.status === 'resuelto') {
+        messageInput.disabled = true;
+        messageInput.placeholder = 'Este ticket está resuelto y no puede recibir más mensajes';
+        messageInput.classList.add('opacity-50', 'cursor-not-allowed');
+        if (sendButton) {
+            sendButton.disabled = true;
+            sendButton.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+    } else {
+        messageInput.disabled = false;
+        messageInput.placeholder = 'Escribe tu mensaje...';
+        messageInput.classList.remove('opacity-50', 'cursor-not-allowed');
+        if (sendButton) {
+            sendButton.disabled = false;
+            sendButton.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+    }
 }
 
 function renderMessages(messages) {
@@ -370,24 +397,15 @@ function getStatusInfo(status) {
     const statusMap = {
         'abierto': {
             label: 'Abierto',
-            bgClass: 'bg-blue-500/10',
-            borderClass: 'border-blue-500/20',
-            textClass: 'text-blue-400',
-            dotClass: 'bg-blue-500'
+            textClass: 'text-blue-400'
         },
         'en_progreso': {
             label: 'En Progreso',
-            bgClass: 'bg-emerald-500/10',
-            borderClass: 'border-emerald-500/20',
-            textClass: 'text-emerald-400',
-            dotClass: 'bg-emerald-500'
+            textClass: 'text-emerald-400'
         },
         'resuelto': {
             label: 'Resuelto',
-            bgClass: 'bg-white/5',
-            borderClass: 'border-white/10',
-            textClass: 'text-neutral-400',
-            dotClass: 'bg-neutral-500'
+            textClass: 'text-neutral-500'
         }
     };
     return statusMap[status] || statusMap['abierto'];
@@ -402,12 +420,12 @@ function getPriorityInfo(priority) {
         },
         'normal': {
             label: 'Normal',
-            textClass: 'text-blue-400',
+            textClass: 'text-neutral-500',
             icon: 'solar:minus-circle-linear'
         },
         'alta': {
             label: 'Alta',
-            textClass: 'text-red-400',
+            textClass: 'text-neutral-500',
             icon: 'solar:flame-linear'
         }
     };
