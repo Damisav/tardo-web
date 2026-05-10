@@ -733,7 +733,7 @@ async function submitOrder(e) {
                     instructions: 'Escanea el código QR con Binance Pay y envía exactamente el monto total indicado.'
                 },
                 usdt_bep20: {
-                    wallet: '0xE3A30BB978C43Ba0ec01D3DaB10f4F6e63dE0c32', // Wallet BEP20
+                    wallet: '0xe1F43c5C940f4573EAb98a4Da68003b137eDE0DD', // Wallet BEP20 (CORREGIDA - SEGURIDAD 10/05/2026)
                     amount: totalPrice,
                     instructions: `Envía exactamente $${totalPrice.toFixed(2)} USDT (red BEP20/BSC) a la wallet indicada.`
                 }
