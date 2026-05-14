@@ -25,18 +25,14 @@
     <section class="relative z-10 pt-32 pb-16">
         <div class="max-w-4xl mx-auto px-6 text-center">
             
-            <!-- Unified Download Button -->
-            <a href="https://drive.google.com/file/d/1cNJgnY5x0kDFLOKnlFZs-Is4oOeSU0Us/view?usp=sharing" target="_blank" class="inline-flex items-center gap-4 px-6 py-4 mb-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/15 hover:border-emerald-500/30 transition-all group">
-                <iconify-icon icon="solar:download-linear" class="text-emerald-500 text-2xl flex-shrink-0"></iconify-icon>
+            <!-- Download Not Available -->
+            <div class="inline-flex items-center gap-4 px-6 py-4 mb-8 rounded-2xl bg-neutral-900/50 border border-neutral-700/20">
+                <iconify-icon icon="solar:info-circle-linear" class="text-neutral-500 text-2xl flex-shrink-0"></iconify-icon>
                 <div class="flex flex-col items-start gap-1">
-                    <div class="flex items-center gap-2">
-                        <span class="text-xs font-mono text-emerald-400 font-semibold">Última versión: v3.0.1</span>
-                        <span class="text-[10px] text-neutral-500">24/02/2026</span>
-                    </div>
-                    <span class="text-sm text-white font-medium">Descargar Setup.exe</span>
+                    <span class="text-sm text-white font-medium">Descarga temporalmente no disponible</span>
+                    <span class="text-xs text-neutral-500">Contacta con soporte para más información</span>
                 </div>
-                <span class="text-xs text-neutral-500 ml-auto">~85 MB</span>
-            </a>
+            </div>
 
             <!-- Requisitos previos -->
             <p class="text-xs text-neutral-500 mt-4">
@@ -308,10 +304,10 @@
                 <h3 class="text-xl font-semibold text-white mb-2">¿Listo para empezar?</h3>
                 <p class="text-neutral-400 text-sm mb-6">Descarga el software y obtén tu licencia para comenzar a operar</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="https://drive.google.com/file/d/1cNJgnY5x0kDFLOKnlFZs-Is4oOeSU0Us/view?usp=sharing" target="_blank" class="inline-flex items-center gap-2 h-10 px-6 rounded bg-emerald-500 text-white font-medium text-sm hover:bg-emerald-600 transition-colors">
-                        <iconify-icon icon="solar:download-linear"></iconify-icon>
-                        Descargar Ahora
-                    </a>
+                    <div class="inline-flex items-center gap-2 h-10 px-6 rounded bg-neutral-700/30 border border-neutral-600/20 text-neutral-400 font-medium text-sm cursor-not-allowed">
+                        <iconify-icon icon="solar:info-circle-linear"></iconify-icon>
+                        Descarga No Disponible
+                    </div>
                     <a href="index.html#pricing" class="inline-flex items-center gap-2 h-10 px-6 rounded bg-white/5 border border-white/10 text-white font-medium text-sm hover:bg-white/10 transition-colors">
                         Ver Planes de Licencia
                     </a>
