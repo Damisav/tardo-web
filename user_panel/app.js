@@ -134,6 +134,48 @@ async function getUserOrders() {
     }
 }
 
+async function changePassword(currentPassword, newPassword, confirmPassword) {
+    try {
+        // Debug log si está activo
+        if (window.TardoDebug && window.TardoDebug.isActive()) {
+            window.TardoDebug.log('password', 'Enviando solicitud de cambio de contraseña');
+        }
+
+        const response = await fetchWithAuth(`${API_URL}/user/password`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                current_password: currentPassword,
+                new_password: newPassword,
+                confirm_password: confirmPassword
+            })
+        });
+
+        if (!response) return { success: false, error: 'No autorizado' };
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Debug log éxito
+            if (window.TardoDebug && window.TardoDebug.isActive()) {
+                window.TardoDebug.log('password', 'Contraseña cambiada exitosamente');
+            }
+            return { success: true, message: data.message || 'Contraseña actualizada correctamente' };
+        } else {
+            // Debug log error
+            if (window.TardoDebug && window.TardoDebug.isActive()) {
+                window.TardoDebug.log('password', `Error: ${data.detail || 'Error desconocido'}`);
+            }
+            return { success: false, error: data.detail || 'Error al cambiar contraseña' };
+        }
+    } catch (error) {
+        console.error('Error changing password:', error);
+        if (window.TardoDebug && window.TardoDebug.isActive()) {
+            window.TardoDebug.log('password', `Error de conexión: ${error.message}`);
+        }
+        return { success: false, error: 'Error de conexión' };
+    }
+}
+
 // ========================================
 // Logout
 // ========================================
@@ -204,6 +246,7 @@ window.TardoAuth = {
     logout,
     getCurrentUser,
     updateUserProfile,
+    changePassword,
     getUserOrders,
     formatDate,
     formatCurrency

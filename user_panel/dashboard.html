@@ -17,6 +17,9 @@
     <!-- Auth App -->
     <script src="app.js"></script>
     
+    <!-- Debug Module -->
+    <script src="debug.js"></script>
+    
     <style>
         .tab-button {
             position: relative;
@@ -287,6 +290,17 @@
                             Editar perfil
                         </button>
                         
+                        <!-- Botón Cambiar Contraseña -->
+                        <button 
+                            type="button" 
+                            id="change-password-btn"
+                            onclick="openChangePasswordModal()"
+                            class="py-2.5 px-5 bg-white/5 border border-white/10 text-white rounded-lg hover:bg-white/10 transition-colors flex items-center justify-center gap-2 text-sm"
+                        >
+                            <iconify-icon icon="solar:lock-password-linear" class="text-lg"></iconify-icon>
+                            Cambiar contraseña
+                        </button>
+                        
                         <!-- Botones Guardar y Cancelar (ocultos por defecto) -->
                         <button 
                             type="submit" 
@@ -330,6 +344,90 @@
         </div>
 
     </main>
+
+    <!-- Modal Cambiar Contraseña -->
+    <div id="change-password-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div class="bg-[#0a0a0a] border border-white/10 rounded-2xl max-w-md w-full shadow-2xl">
+            <!-- Header -->
+            <div class="sticky top-0 bg-[#0a0a0a] border-b border-white/10 px-6 py-4 flex items-center justify-between">
+                <h3 class="text-lg font-semibold text-white">Cambiar Contraseña</h3>
+                <button onclick="closeChangePasswordModal()" class="text-neutral-500 hover:text-white transition-colors">
+                    <iconify-icon icon="solar:close-circle-linear" class="text-2xl"></iconify-icon>
+                </button>
+            </div>
+
+            <!-- Form -->
+            <form id="change-password-form" class="p-6 space-y-4">
+                <!-- Success Message -->
+                <div id="change-password-success" class="hidden bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-3 text-xs text-emerald-400">
+                    <div class="flex items-center gap-2">
+                        <iconify-icon icon="solar:check-circle-bold" class="text-lg"></iconify-icon>
+                        <span id="change-password-success-text">Contraseña actualizada correctamente</span>
+                    </div>
+                </div>
+
+                <!-- Error Message -->
+                <div id="change-password-error" class="hidden bg-red-500/10 border border-red-500/20 rounded-lg p-3 text-xs text-red-400">
+                    <div class="flex items-center gap-2">
+                        <iconify-icon icon="solar:danger-circle-linear" class="text-lg"></iconify-icon>
+                        <span id="change-password-error-text">Error al cambiar contraseña</span>
+                    </div>
+                </div>
+
+                <!-- Contraseña Actual -->
+                <div>
+                    <label class="block text-xs font-medium text-neutral-400 mb-1.5">Contraseña Actual *</label>
+                    <div class="relative">
+                        <input type="password" id="current-password" required 
+                            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 pr-12 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors" 
+                            placeholder="Ingresa tu contraseña actual">
+                        <button type="button" id="toggle-current-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300 transition-colors">
+                            <iconify-icon icon="solar:eye-closed-linear" class="text-xl"></iconify-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Nueva Contraseña -->
+                <div>
+                    <label class="block text-xs font-medium text-neutral-400 mb-1.5">Nueva Contraseña *</label>
+                    <div class="relative">
+                        <input type="password" id="new-password" required 
+                            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 pr-12 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors" 
+                            placeholder="Mínimo 8 caracteres">
+                        <button type="button" id="toggle-new-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300 transition-colors">
+                            <iconify-icon icon="solar:eye-closed-linear" class="text-xl"></iconify-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Confirmar Nueva Contraseña -->
+                <div>
+                    <label class="block text-xs font-medium text-neutral-400 mb-1.5">Confirmar Nueva Contraseña *</label>
+                    <div class="relative">
+                        <input type="password" id="confirm-password" required 
+                            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 pr-12 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors" 
+                            placeholder="Repite la nueva contraseña">
+                        <button type="button" id="toggle-confirm-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300 transition-colors">
+                            <iconify-icon icon="solar:eye-closed-linear" class="text-xl"></iconify-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Botones -->
+                <div class="flex gap-3 pt-2">
+                    <button type="button" onclick="closeChangePasswordModal()" 
+                        class="flex-1 px-4 py-2.5 text-sm font-medium text-neutral-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-all">
+                        Cancelar
+                    </button>
+                    <button type="submit" id="change-password-submit-btn" 
+                        class="flex-1 px-8 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 bg-emerald-500 text-[#030303] hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center justify-center gap-2">
+                        <iconify-icon icon="solar:lock-password-linear" class="text-xl"></iconify-icon>
+                        <span>Cambiar contraseña</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script>
@@ -683,6 +781,154 @@
             document.getElementById('profile-success').classList.add('hidden');
             document.getElementById('profile-error').classList.add('hidden');
         }
+
+        // ============= FUNCIONES DE CAMBIO DE CONTRASEÑA =============
+        
+        // Abrir modal de cambio de contraseña
+        function openChangePasswordModal() {
+            document.getElementById('change-password-modal').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+            
+            // Reset form
+            document.getElementById('change-password-form').reset();
+            document.getElementById('change-password-error').classList.add('hidden');
+            document.getElementById('change-password-success').classList.add('hidden');
+        }
+
+        // Cerrar modal de cambio de contraseña
+        function closeChangePasswordModal() {
+            document.getElementById('change-password-modal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            
+            // Reset form
+            document.getElementById('change-password-form').reset();
+            document.getElementById('change-password-error').classList.add('hidden');
+            document.getElementById('change-password-success').classList.add('hidden');
+        }
+
+        // Toggle visibility para contraseña actual
+        document.getElementById('toggle-current-password').addEventListener('click', function() {
+            const input = document.getElementById('current-password');
+            const icon = this.querySelector('iconify-icon');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.setAttribute('icon', 'solar:eye-linear');
+            } else {
+                input.type = 'password';
+                icon.setAttribute('icon', 'solar:eye-closed-linear');
+            }
+        });
+
+        // Toggle visibility para nueva contraseña
+        document.getElementById('toggle-new-password').addEventListener('click', function() {
+            const input = document.getElementById('new-password');
+            const icon = this.querySelector('iconify-icon');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.setAttribute('icon', 'solar:eye-linear');
+            } else {
+                input.type = 'password';
+                icon.setAttribute('icon', 'solar:eye-closed-linear');
+            }
+        });
+
+        // Toggle visibility para confirmar contraseña
+        document.getElementById('toggle-confirm-password').addEventListener('click', function() {
+            const input = document.getElementById('confirm-password');
+            const icon = this.querySelector('iconify-icon');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.setAttribute('icon', 'solar:eye-linear');
+            } else {
+                input.type = 'password';
+                icon.setAttribute('icon', 'solar:eye-closed-linear');
+            }
+        });
+
+        // Manejar submit del formulario de cambio de contraseña
+        document.getElementById('change-password-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('change-password-submit-btn');
+            const errorDiv = document.getElementById('change-password-error');
+            const errorText = document.getElementById('change-password-error-text');
+            const successDiv = document.getElementById('change-password-success');
+            const successText = document.getElementById('change-password-success-text');
+
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            // Ocultar mensajes previos
+            errorDiv.classList.add('hidden');
+            successDiv.classList.add('hidden');
+
+            // Validaciones client-side
+            if (newPassword.length < 8) {
+                errorText.textContent = 'La nueva contraseña debe tener al menos 8 caracteres';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                errorText.textContent = 'Las contraseñas no coinciden';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            if (currentPassword === newPassword) {
+                errorText.textContent = 'La nueva contraseña debe ser diferente a la actual';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<iconify-icon icon="solar:refresh-linear" class="text-xl animate-spin"></iconify-icon><span>Cambiando...</span>';
+
+            try {
+                const result = await TardoAuth.changePassword(currentPassword, newPassword, confirmPassword);
+
+                if (result.success) {
+                    // Mostrar éxito
+                    successText.textContent = result.message || 'Contraseña actualizada correctamente';
+                    successDiv.classList.remove('hidden');
+                    
+                    // Limpiar form
+                    document.getElementById('change-password-form').reset();
+                    
+                    // Cerrar modal después de 2 segundos
+                    setTimeout(() => {
+                        closeChangePasswordModal();
+                    }, 2000);
+                } else {
+                    // Mostrar error
+                    errorText.textContent = result.error || 'Error al cambiar contraseña';
+                    errorDiv.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorText.textContent = 'Error de conexión. Intenta nuevamente.';
+                errorDiv.classList.remove('hidden');
+            } finally {
+                // Restore button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<iconify-icon icon="solar:lock-password-linear" class="text-xl"></iconify-icon><span>Cambiar contraseña</span>';
+            }
+        });
+
+        // Cerrar modal con Esc
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('change-password-modal');
+                if (modal && !modal.classList.contains('hidden')) {
+                    closeChangePasswordModal();
+                }
+            }
+        });
     </script>
 
     <!-- Footer Component -->
