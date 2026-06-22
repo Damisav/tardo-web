@@ -2,34 +2,6 @@
 const API_URL = 'https://admin.tardoar.com/api';
 
 // ==================== LOGIN MODAL ====================
-let loginCaptchaAnswer = 0;
-
-// Generate random captcha (simple math)
-function generateLoginCaptcha() {
-    const num1 = Math.floor(Math.random() * 10) + 1;
-    const num2 = Math.floor(Math.random() * 10) + 1;
-    const operations = ['+', '-', '×'];
-    const operation = operations[Math.floor(Math.random() * operations.length)];
-    
-    // Calculate answer
-    if (operation === '+') {
-        loginCaptchaAnswer = num1 + num2;
-    } else if (operation === '-') {
-        loginCaptchaAnswer = num1 - num2;
-    } else if (operation === '×') {
-        loginCaptchaAnswer = num1 * num2;
-    }
-    
-    // Display question
-    document.getElementById('login-captcha-question').textContent = `${num1} ${operation} ${num2} = ?`;
-    document.getElementById('login-captcha').value = '';
-}
-
-// Validate captcha
-function validateLoginCaptcha() {
-    const userAnswer = parseInt(document.getElementById('login-captcha').value);
-    return userAnswer === loginCaptchaAnswer;
-}
 
 window.openLoginModal = function() {
     // Cerrar menú móvil si está abierto
@@ -43,7 +15,11 @@ window.openLoginModal = function() {
     
     document.getElementById('login-modal').classList.remove('hidden');
     document.body.classList.add('overflow-hidden');
-    generateLoginCaptcha();
+    
+    // Renderizar Turnstile para login
+    if (window.TardoTurnstile) {
+        TardoTurnstile.render('login-turnstile');
+    }
 }
 
 window.closeLoginModal = function() {
@@ -51,6 +27,58 @@ window.closeLoginModal = function() {
     document.body.classList.remove('overflow-hidden');
     document.getElementById('login-form').reset();
     document.getElementById('login-error').classList.add('hidden');
+    
+    // Reset Turnstile widgets
+    if (window.TardoTurnstile) {
+        TardoTurnstile.reset('login-turnstile');
+        TardoTurnstile.reset('forgot-turnstile');
+    }
+    
+    // Reset forgot password view
+    showLoginView();
+    document.getElementById('forgot-password-form').reset();
+    document.getElementById('forgot-error').classList.add('hidden');
+    document.getElementById('forgot-success').classList.add('hidden');
+}
+
+// ==================== FORGOT PASSWORD VIEW ====================
+
+window.showForgotPasswordView = function() {
+    // Ocultar vista de login
+    document.getElementById('login-view').classList.add('hidden');
+    
+    // Mostrar vista de forgot password
+    document.getElementById('forgot-password-view').classList.remove('hidden');
+    
+    // Cambiar título del modal
+    document.getElementById('login-modal-title').textContent = 'Recuperar Contraseña';
+    
+    // Pre-llenar email si existe en el campo de login
+    const loginEmail = document.getElementById('login-email').value;
+    if (loginEmail) {
+        document.getElementById('forgot-email').value = loginEmail;
+    }
+    
+    // Renderizar Turnstile
+    if (window.TardoTurnstile) {
+        TardoTurnstile.render('forgot-turnstile');
+    }
+}
+
+window.showLoginView = function() {
+    // Mostrar vista de login
+    document.getElementById('login-view').classList.remove('hidden');
+    
+    // Ocultar vista de forgot password
+    document.getElementById('forgot-password-view').classList.add('hidden');
+    
+    // Restaurar título del modal
+    document.getElementById('login-modal-title').textContent = 'Iniciar Sesión';
+    
+    // Reset Turnstile
+    if (window.TardoTurnstile) {
+        TardoTurnstile.reset('forgot-turnstile');
+    }
 }
 
 // ==================== REGISTER MODAL ====================
@@ -111,14 +139,6 @@ function initAuth() {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Validate captcha first
-            if (!validateLoginCaptcha()) {
-                document.getElementById('login-error-text').textContent = 'Verificación incorrecta. Por favor, resuelve la operación matemática.';
-                document.getElementById('login-error').classList.remove('hidden');
-                generateLoginCaptcha();
-                return;
-            }
-
             const submitBtn = document.getElementById('login-submit-btn');
             const errorDiv = document.getElementById('login-error');
             const errorText = document.getElementById('login-error-text');
@@ -126,19 +146,32 @@ function initAuth() {
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
 
+            // Obtener token de Turnstile
+            const turnstileToken = window.TardoTurnstile ? TardoTurnstile.getToken('login-turnstile') : null;
+            
+            if (!turnstileToken) {
+                errorText.textContent = 'Por favor, completá la verificación de seguridad.';
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
             // Disable button
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<iconify-icon icon="solar:refresh-linear" class="text-xl animate-spin"></iconify-icon><span>Verificando...</span>';
             errorDiv.classList.add('hidden');
 
             try {
-                // Enviar como query params (FastAPI espera parámetros en URL)
-                const queryParams = new URLSearchParams();
-                queryParams.append('email', email);
-                queryParams.append('password', password);
-                
-                const response = await fetch(`${API_URL}/auth/login?${queryParams.toString()}`, {
-                    method: 'POST'
+                // Enviar como JSON body con Turnstile token
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password,
+                        turnstile_token: turnstileToken
+                    })
                 });
 
                 const result = await response.json();
@@ -166,10 +199,101 @@ function initAuth() {
                 console.error('Error:', error);
                 errorText.textContent = error.message;
                 errorDiv.classList.remove('hidden');
-                generateLoginCaptcha();
+                
+                // Reset Turnstile en caso de error
+                if (window.TardoTurnstile) {
+                    TardoTurnstile.reset('login-turnstile');
+                }
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<iconify-icon icon="solar:login-2-linear" class="text-xl"></iconify-icon><span>Iniciar sesión</span>';
+            }
+        });
+    }
+
+    // Forgot password form submit
+    const forgotForm = document.getElementById('forgot-password-form');
+    if (forgotForm) {
+        forgotForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('forgot-submit-btn');
+            const errorDiv = document.getElementById('forgot-error');
+            const errorText = document.getElementById('forgot-error-text');
+            const successDiv = document.getElementById('forgot-success');
+            const successText = document.getElementById('forgot-success-text');
+            const formFields = document.getElementById('forgot-form-fields');
+
+            const email = document.getElementById('forgot-email').value;
+            const confirmEmail = document.getElementById('forgot-confirm-email').value;
+
+            // Validar que emails coincidan (client-side)
+            if (email !== confirmEmail) {
+                errorText.textContent = 'Los emails no coinciden. Verificá que sean idénticos.';
+                errorDiv.classList.remove('hidden');
+                successDiv.classList.add('hidden');
+                return;
+            }
+
+            // Obtener token de Turnstile
+            const turnstileToken = window.TardoTurnstile ? TardoTurnstile.getToken('forgot-turnstile') : null;
+            
+            if (!turnstileToken) {
+                errorText.textContent = 'Por favor, completá la verificación de seguridad.';
+                errorDiv.classList.remove('hidden');
+                successDiv.classList.add('hidden');
+                return;
+            }
+
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<iconify-icon icon="solar:refresh-linear" class="text-xl animate-spin"></iconify-icon><span>Enviando...</span>';
+            errorDiv.classList.add('hidden');
+            successDiv.classList.add('hidden');
+
+            try {
+                const response = await fetch(`${API_URL}/auth/forgot-password`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        confirm_email: confirmEmail,
+                        turnstile_token: turnstileToken
+                    })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    // Manejar errores específicos
+                    if (response.status === 404) {
+                        throw new Error('El email no está registrado. Verificá que sea correcto o registrate.');
+                    } else if (response.status === 429) {
+                        throw new Error(result.detail || 'Demasiados intentos. Esperá unos minutos e intentá nuevamente.');
+                    } else {
+                        throw new Error(result.detail || 'Error al procesar tu solicitud');
+                    }
+                }
+
+                // Success
+                successText.textContent = result.message || `Email enviado a ${email}`;
+                successDiv.classList.remove('hidden');
+                formFields.classList.add('hidden'); // Ocultar formulario tras éxito
+
+            } catch (error) {
+                console.error('Error:', error);
+                errorText.textContent = error.message;
+                errorDiv.classList.remove('hidden');
+                
+                // Reset Turnstile en caso de error
+                if (window.TardoTurnstile) {
+                    TardoTurnstile.reset('forgot-turnstile');
+                }
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<iconify-icon icon="solar:letter-linear" class="text-xl"></iconify-icon><span>Enviar link de recuperación</span>';
             }
         });
     }

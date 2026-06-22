@@ -3,71 +3,134 @@
     <div class="bg-[#0a0a0a] border border-white/10 rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl">
         <!-- Header -->
         <div class="sticky top-0 bg-[#0a0a0a] border-b border-white/10 px-6 py-4 flex items-center justify-between">
-            <h3 class="text-lg font-semibold text-white">Iniciar Sesión</h3>
+            <h3 id="login-modal-title" class="text-lg font-semibold text-white">Iniciar Sesión</h3>
             <button onclick="closeLoginModal()" class="text-neutral-500 hover:text-white transition-colors">
                 <iconify-icon icon="solar:close-circle-linear" class="text-2xl"></iconify-icon>
             </button>
         </div>
 
-        <!-- Form -->
-        <form id="login-form" class="p-6 space-y-4">
-            <!-- Error Message -->
-            <div id="login-error" class="hidden bg-red-500/10 border border-red-500/20 rounded-lg p-3 text-xs text-red-400">
-                <div class="flex items-center gap-2">
-                    <iconify-icon icon="solar:danger-circle-linear" class="text-lg"></iconify-icon>
-                    <span id="login-error-text">Error al iniciar sesión</span>
-                </div>
-            </div>
-
-            <!-- Email -->
-            <div>
-                <label class="block text-xs font-medium text-neutral-400 mb-1.5">Email *</label>
-                <input type="email" id="login-email" name="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors" placeholder="tu@email.com">
-            </div>
-
-            <!-- Password -->
-            <div>
-                <label class="block text-xs font-medium text-neutral-400 mb-1.5">Contraseña *</label>
-                <div class="relative">
-                    <input type="password" id="login-password" name="password" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 pr-12 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors" placeholder="••••••••">
-                    <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300 transition-colors">
-                        <iconify-icon id="login-eye-icon" icon="solar:eye-closed-linear" class="text-xl"></iconify-icon>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Captcha -->
-            <div>
-                <label class="block text-xs font-medium text-neutral-400 mb-1.5">
-                    Verificación de seguridad *
-                </label>
-                <div class="flex items-center gap-3">
-                    <div class="flex-1 bg-white/5 border border-white/10 px-4 py-2.5 rounded-lg">
-                        <span class="text-emerald-400 font-mono text-base" id="login-captcha-question">4 + 7 = ?</span>
+        <!-- Vista de Login -->
+        <div id="login-view">
+            <form id="login-form" class="p-6 space-y-4">
+                <!-- Error Message -->
+                <div id="login-error" class="hidden bg-red-500/10 border border-red-500/20 rounded-lg p-3 text-xs text-red-400">
+                    <div class="flex items-center gap-2">
+                        <iconify-icon icon="solar:danger-circle-linear" class="text-lg"></iconify-icon>
+                        <span id="login-error-text">Error al iniciar sesión</span>
                     </div>
-                    <input type="number" id="login-captcha" name="captcha" required class="w-20 bg-white/5 border border-white/10 text-white text-center px-3 py-2.5 rounded-lg text-sm focus:outline-none focus:border-emerald-500/50 transition-colors" placeholder="?">
-                    <button type="button" id="refresh-login-captcha" class="text-neutral-500 hover:text-neutral-300 transition-colors" title="Generar nueva verificación">
-                        <iconify-icon icon="solar:refresh-linear" class="text-2xl"></iconify-icon>
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="block text-xs font-medium text-neutral-400 mb-1.5">Email *</label>
+                    <input type="email" id="login-email" name="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors" placeholder="tu@email.com">
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label class="block text-xs font-medium text-neutral-400 mb-1.5">Contraseña *</label>
+                    <div class="relative">
+                        <input type="password" id="login-password" name="password" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 pr-12 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors" placeholder="••••••••">
+                        <button type="button" id="toggle-login-password" class="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300 transition-colors">
+                            <iconify-icon id="login-eye-icon" icon="solar:eye-closed-linear" class="text-xl"></iconify-icon>
+                        </button>
+                    </div>
+                    <!-- Link "Olvidé mi contraseña" -->
+                    <div class="text-right mt-2">
+                        <button type="button" onclick="showForgotPasswordView()" class="text-xs text-emerald-400 hover:text-emerald-300 font-medium">
+                            ¿Olvidaste tu contraseña?
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Turnstile Security -->
+                <div>
+                    <label class="block text-xs font-medium text-neutral-400 mb-1.5">
+                        Verificación de seguridad *
+                    </label>
+                    <div id="login-turnstile" class="flex justify-center"></div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="login-submit-btn" class="w-full px-8 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 bg-emerald-500 text-[#030303] hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center justify-center gap-2 mt-6">
+                    <iconify-icon icon="solar:login-2-linear" class="text-xl"></iconify-icon>
+                    <span>Iniciar sesión</span>
+                </button>
+
+                <!-- Link a Registro -->
+                <div class="text-center mt-4">
+                    <p class="text-xs text-neutral-500">
+                        ¿No tienes cuenta? 
+                        <button type="button" onclick="closeLoginModal(); openRegisterModal();" class="text-emerald-400 hover:text-emerald-300 font-medium underline">
+                            Regístrate aquí
+                        </button>
+                    </p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Vista de Recuperar Contraseña -->
+        <div id="forgot-password-view" class="hidden">
+            <form id="forgot-password-form" class="p-6 space-y-4">
+                <!-- Success Message -->
+                <div id="forgot-success" class="hidden bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-4 text-sm text-emerald-400">
+                    <div class="flex items-start gap-3">
+                        <iconify-icon icon="solar:check-circle-linear" class="text-xl flex-shrink-0 mt-0.5"></iconify-icon>
+                        <div>
+                            <p id="forgot-success-text" class="font-medium mb-1">Email enviado correctamente</p>
+                            <p class="text-xs text-emerald-400/80">Revisá tu bandeja de entrada</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Error Message -->
+                <div id="forgot-error" class="hidden bg-red-500/10 border border-red-500/20 rounded-lg p-3 text-xs text-red-400">
+                    <div class="flex items-center gap-2">
+                        <iconify-icon icon="solar:danger-circle-linear" class="text-lg"></iconify-icon>
+                        <span id="forgot-error-text">Error al procesar solicitud</span>
+                    </div>
+                </div>
+
+                <div id="forgot-form-fields">
+                    <p class="text-sm text-neutral-400 mb-4">
+                        Te enviaremos un email con instrucciones para restablecer tu contraseña.
+                    </p>
+
+                    <!-- Email -->
+                    <div>
+                        <label class="block text-xs font-medium text-neutral-400 mb-1.5">Email *</label>
+                        <input type="email" id="forgot-email" name="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors" placeholder="tu@email.com">
+                    </div>
+
+                    <!-- Confirmar Email -->
+                    <div>
+                        <label class="block text-xs font-medium text-neutral-400 mb-1.5">Confirmar Email *</label>
+                        <input type="email" id="forgot-confirm-email" name="confirm_email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors" placeholder="tu@email.com">
+                    </div>
+
+                    <!-- Turnstile Widget -->
+                    <div>
+                        <label class="block text-xs font-medium text-neutral-400 mb-1.5">
+                            Verificación de seguridad *
+                        </label>
+                        <div id="forgot-turnstile" class="flex justify-center"></div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="forgot-submit-btn" class="w-full px-8 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 bg-emerald-500 text-[#030303] hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center justify-center gap-2 mt-6">
+                        <iconify-icon icon="solar:letter-linear" class="text-xl"></iconify-icon>
+                        <span>Enviar link de recuperación</span>
                     </button>
                 </div>
-            </div>
 
-            <!-- Submit Button -->
-            <button type="submit" id="login-submit-btn" class="w-full px-8 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 bg-emerald-500 text-[#030303] hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center justify-center gap-2 mt-6">
-                <iconify-icon icon="solar:login-2-linear" class="text-xl"></iconify-icon>
-                <span>Iniciar sesión</span>
-            </button>
-
-            <!-- Link a Registro -->
-            <div class="text-center mt-4">
-                <p class="text-xs text-neutral-500">
-                    ¿No tienes cuenta? 
-                    <button type="button" onclick="closeLoginModal(); openRegisterModal();" class="text-emerald-400 hover:text-emerald-300 font-medium underline">
-                        Regístrate aquí
+                <!-- Link Volver al Login -->
+                <div class="text-center mt-4">
+                    <button type="button" onclick="showLoginView()" class="text-xs text-emerald-400 hover:text-emerald-300 font-medium">
+                        ← Volver al inicio de sesión
                     </button>
-                </p>
-            </div>
-        </form>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
