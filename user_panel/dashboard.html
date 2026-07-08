@@ -11,6 +11,9 @@
     <!-- Iconify -->
     <script src="https://code.iconify.design/iconify-icon/2.2.0/iconify-icon.min.js"></script>
     
+    <!-- Modal History Manager (must load before other scripts) -->
+    <script src="../js/modal-history.js"></script>
+    
     <!-- Components.js (para cargar navbar) -->
     <script src="../js/components.js"></script>
     
@@ -780,6 +783,17 @@
 
         // ============= FUNCIONES DE CAMBIO DE CONTRASEÑA =============
         
+        // Función interna que solo maneja el DOM (sin history)
+        function _closeChangePasswordModalDOM() {
+            document.getElementById('change-password-modal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            
+            // Reset form
+            document.getElementById('change-password-form').reset();
+            document.getElementById('change-password-error').classList.add('hidden');
+            document.getElementById('change-password-success').classList.add('hidden');
+        }
+        
         // Abrir modal de cambio de contraseña
         function openChangePasswordModal() {
             document.getElementById('change-password-modal').classList.remove('hidden');
@@ -789,17 +803,20 @@
             document.getElementById('change-password-form').reset();
             document.getElementById('change-password-error').classList.add('hidden');
             document.getElementById('change-password-success').classList.add('hidden');
+            
+            // Registrar en el historial
+            if (window.ModalHistory) {
+                ModalHistory.push('change-password-modal', _closeChangePasswordModalDOM);
+            }
         }
 
         // Cerrar modal de cambio de contraseña
         function closeChangePasswordModal() {
-            document.getElementById('change-password-modal').classList.add('hidden');
-            document.body.classList.remove('overflow-hidden');
-            
-            // Reset form
-            document.getElementById('change-password-form').reset();
-            document.getElementById('change-password-error').classList.add('hidden');
-            document.getElementById('change-password-success').classList.add('hidden');
+            if (window.ModalHistory) {
+                ModalHistory.close(_closeChangePasswordModalDOM);
+            } else {
+                _closeChangePasswordModalDOM();
+            }
         }
 
         // Toggle visibility para contraseña actual

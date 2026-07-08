@@ -1120,6 +1120,7 @@
         </div>
     </div>
 
+    <script src="js/modal-history.js"></script>
     <script src="js/main.js"></script>
 
     <!-- Gallery Lightbox Script -->
@@ -1148,6 +1149,21 @@
             const loader = document.getElementById('lightbox-loader');
             const body = document.body;
 
+            // Función interna que solo maneja el DOM (sin history)
+            function closeLightboxDOM() {
+                // Fade out
+                lightbox.classList.add('opacity-0');
+                lightboxImg.classList.remove('opacity-100', 'scale-100');
+                lightboxImg.classList.add('opacity-0', 'scale-95');
+                
+                // Wait for transition
+                setTimeout(() => {
+                    lightbox.classList.add('hidden');
+                    lightboxImg.src = '';
+                    body.classList.remove('overflow-hidden');
+                }, 300);
+            }
+
             function openLightbox(src) {
                 // Use original src (already high quality WebP)
                 const highResSrc = src;
@@ -1174,20 +1190,19 @@
                 };
                 
                 lightboxImg.src = highResSrc;
+                
+                // Registrar en el historial
+                if (window.ModalHistory) {
+                    ModalHistory.push('lightbox', closeLightboxDOM);
+                }
             }
 
             function closeLightbox() {
-                // Fade out
-                lightbox.classList.add('opacity-0');
-                lightboxImg.classList.remove('opacity-100', 'scale-100');
-                lightboxImg.classList.add('opacity-0', 'scale-95');
-                
-                // Wait for transition
-                setTimeout(() => {
-                    lightbox.classList.add('hidden');
-                    lightboxImg.src = '';
-                    body.classList.remove('overflow-hidden');
-                }, 300);
+                if (window.ModalHistory) {
+                    ModalHistory.close(closeLightboxDOM);
+                } else {
+                    closeLightboxDOM();
+                }
             }
 
             // Attach click listeners to grid items

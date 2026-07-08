@@ -455,6 +455,17 @@ const API_BASE_URL = 'https://admin.tardoar.com';
 let currentOrderData = null;
 
 /**
+ * Closes the checkout modal (internal DOM-only function)
+ */
+function _closeCheckoutModalDOM() {
+    const modal = document.getElementById('checkout-modal');
+    if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = ''; // Restore scroll
+    }
+}
+
+/**
  * Opens the checkout modal with plan details
  * @param {string} planName - Name of the plan (e.g., "Premium")
  * @param {string} period - Billing period ("monthly" or "yearly")
@@ -571,16 +582,21 @@ function openCheckoutModal(planName, period, basePrice, ignored) {
     // Show modal
     modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden'; // Prevent background scroll
+    
+    // Register in history
+    if (window.ModalHistory) {
+        ModalHistory.push('checkout-modal', _closeCheckoutModalDOM);
+    }
 }
 
 /**
  * Closes the checkout modal
  */
 function closeCheckoutModal() {
-    const modal = document.getElementById('checkout-modal');
-    if (modal) {
-        modal.classList.add('hidden');
-        document.body.style.overflow = ''; // Restore scroll
+    if (window.ModalHistory) {
+        ModalHistory.close(_closeCheckoutModalDOM);
+    } else {
+        _closeCheckoutModalDOM();
     }
 }
 
@@ -753,11 +769,12 @@ async function submitOrder(e) {
         // Store temporary order data
         currentOrderData = tempOrderData;
 
-        // Close checkout modal
-        closeCheckoutModal();
-
-        // Show payment modal
-        showPaymentModal(tempOrderData);
+        // Transition from checkout to payment modal (replace in history)
+        _closeCheckoutModalDOM();
+        if (window.ModalHistory) {
+            ModalHistory.replace('payment-modal', _closePaymentModalDOM);
+        }
+        _openPaymentModalDOM(tempOrderData);
 
     } catch (error) {
         console.error('Error creating order:', error);
@@ -776,10 +793,21 @@ async function submitOrder(e) {
 }
 
 /**
- * Shows the payment modal with order details
+ * Closes the payment modal (internal DOM-only function)
+ */
+function _closePaymentModalDOM() {
+    const modal = document.getElementById('payment-modal');
+    if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+}
+
+/**
+ * Opens the payment modal with order details (internal DOM-only function)
  * @param {Object} orderData - Order data from backend
  */
-function showPaymentModal(orderData) {
+function _openPaymentModalDOM(orderData) {
     const modal = document.getElementById('payment-modal');
     if (!modal) {
         console.error('Payment modal not found');
@@ -835,6 +863,19 @@ function showPaymentModal(orderData) {
     selectPaymentMethod('binance');
 }
 
+/**
+ * Shows the payment modal with order details
+ * @param {Object} orderData - Order data from backend
+ */
+function showPaymentModal(orderData) {
+    _openPaymentModalDOM(orderData);
+    
+    // Register in history
+    if (window.ModalHistory) {
+        ModalHistory.push('payment-modal', _closePaymentModalDOM);
+    }
+}
+
 // Variable global para guardar el método de pago seleccionado
 let selectedPaymentMethod = 'binance_pay'; // Default: Binance Pay
 
@@ -884,10 +925,20 @@ function selectPaymentMethod(method) {
  * Closes the payment modal
  */
 function closePaymentModal() {
-    const modal = document.getElementById('payment-modal');
+    if (window.ModalHistory) {
+        ModalHistory.close(_closePaymentModalDOM);
+    } else {
+        _closePaymentModalDOM();
+    }
+}
+
+/**
+ * Closes payment success modal (internal DOM-only function)
+ */
+function _closePaymentSuccessModalDOM() {
+    const modal = document.getElementById('payment-success-modal');
     if (modal) {
-        modal.classList.add('hidden');
-        document.body.style.overflow = '';
+        modal.remove();
     }
 }
 
@@ -932,15 +983,21 @@ function showPaymentSuccessModal() {
     
     // Append to body
     document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // Register in history
+    if (window.ModalHistory) {
+        ModalHistory.push('payment-success-modal', _closePaymentSuccessModalDOM);
+    }
 }
 
 /**
  * Closes payment success modal
  */
 function closePaymentSuccessModal() {
-    const modal = document.getElementById('payment-success-modal');
-    if (modal) {
-        modal.remove();
+    if (window.ModalHistory) {
+        ModalHistory.close(_closePaymentSuccessModalDOM);
+    } else {
+        _closePaymentSuccessModalDOM();
     }
 }
 
@@ -1132,11 +1189,41 @@ async function confirmPaymentDone() {
         return; // No cerrar modal si hay error
     }
     
-    // Close payment modal
-    closePaymentModal();
+    // Transition from payment to success modal (replace in history)
+    _closePaymentModalDOM();
+    if (window.ModalHistory) {
+        ModalHistory.replace('payment-success-modal', _closePaymentSuccessModalDOM);
+    }
 
     // Show success modal with payment confirmation
-    showPaymentSuccessModal();
+    const modalHTML = `
+        <div id="payment-success-modal" class="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+            <div class="bg-[#0a0a0a] border border-emerald-500/30 rounded-2xl max-w-md w-full shadow-2xl animate-fadeIn">
+                <!-- Icon -->
+                <div class="flex justify-center pt-8 pb-4">
+                    <div class="bg-emerald-500/20 rounded-full p-4">
+                        <iconify-icon icon="solar:check-circle-bold" class="text-emerald-400 text-6xl"></iconify-icon>
+                    </div>
+                </div>
+                
+                <!-- Content -->
+                <div class="px-8 pb-8 text-center">
+                    <h3 class="text-2xl font-bold text-white mb-3">¡Pago Registrado!</h3>
+                    <p class="text-neutral-300 text-sm leading-relaxed mb-6">
+                        Tu pago será verificado y recibirás tu licencia por email en breve.
+                    </p>
+                    
+                    <!-- Actions -->
+                    <div>
+                        <button onclick="closePaymentSuccessModal()" class="w-full px-6 py-3 rounded-xl text-sm font-medium text-neutral-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-all">
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
 }
 
 // ==============================

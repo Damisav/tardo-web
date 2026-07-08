@@ -64,6 +64,26 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Funcionalidad del menú móvil
+
+// Función interna que solo maneja el DOM (sin history)
+function _closeMobileMenuDOM() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    
+    if (mobileMenu) mobileMenu.classList.add('translate-x-full');
+    if (mobileMenuOverlay) mobileMenuOverlay.classList.add('hidden');
+    document.body.style.overflow = ''; // Restaurar scroll
+}
+
+// Función pública para cerrar el menú (con history)
+window.closeMobileMenu = function() {
+    if (window.ModalHistory) {
+        ModalHistory.close(_closeMobileMenuDOM);
+    } else {
+        _closeMobileMenuDOM();
+    }
+}
+
 function initMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -80,27 +100,26 @@ function initMobileMenu() {
         mobileMenu.classList.remove('translate-x-full');
         mobileMenuOverlay.classList.remove('hidden');
         document.body.style.overflow = 'hidden'; // Prevenir scroll
+        
+        // Registrar en el historial
+        if (window.ModalHistory) {
+            ModalHistory.push('mobile-menu', _closeMobileMenuDOM);
+        }
     });
     
     // Cerrar menú con botón X
     if (mobileMenuClose) {
-        mobileMenuClose.addEventListener('click', closeMobileMenu);
+        mobileMenuClose.addEventListener('click', window.closeMobileMenu);
     }
     
     // Cerrar menú con click en overlay
-    mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+    mobileMenuOverlay.addEventListener('click', window.closeMobileMenu);
     
     // Cerrar menú al hacer click en cualquier link del menú
     const mobileMenuLinks = mobileMenu.querySelectorAll('a');
     mobileMenuLinks.forEach(link => {
-        link.addEventListener('click', closeMobileMenu);
+        link.addEventListener('click', window.closeMobileMenu);
     });
-    
-    function closeMobileMenu() {
-        mobileMenu.classList.add('translate-x-full');
-        mobileMenuOverlay.classList.add('hidden');
-        document.body.style.overflow = ''; // Restaurar scroll
-    }
 }
 
 // Authentication state management

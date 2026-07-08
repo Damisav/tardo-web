@@ -3,26 +3,8 @@ const API_URL = 'https://admin.tardoar.com/api';
 
 // ==================== LOGIN MODAL ====================
 
-window.openLoginModal = function() {
-    // Cerrar menú móvil si está abierto
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-    if (mobileMenu && !mobileMenu.classList.contains('translate-x-full')) {
-        mobileMenu.classList.add('translate-x-full');
-        mobileMenuOverlay.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
-    }
-    
-    document.getElementById('login-modal').classList.remove('hidden');
-    document.body.classList.add('overflow-hidden');
-    
-    // Renderizar Turnstile para login
-    if (window.TardoTurnstile) {
-        TardoTurnstile.render('login-turnstile');
-    }
-}
-
-window.closeLoginModal = function() {
+// Función interna que solo maneja el DOM (sin history)
+function _closeLoginModalDOM() {
     document.getElementById('login-modal').classList.add('hidden');
     document.body.classList.remove('overflow-hidden');
     document.getElementById('login-form').reset();
@@ -39,6 +21,42 @@ window.closeLoginModal = function() {
     document.getElementById('forgot-password-form').reset();
     document.getElementById('forgot-error').classList.add('hidden');
     document.getElementById('forgot-success').classList.add('hidden');
+}
+
+window.openLoginModal = function() {
+    // Cerrar menú móvil si está abierto
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+    if (mobileMenu && !mobileMenu.classList.contains('translate-x-full')) {
+        mobileMenu.classList.add('translate-x-full');
+        mobileMenuOverlay.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+        // Remover silenciosamente del stack si estaba ahí
+        if (window.ModalHistory) {
+            ModalHistory.removeSilent('mobile-menu');
+        }
+    }
+    
+    document.getElementById('login-modal').classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+    
+    // Renderizar Turnstile para login
+    if (window.TardoTurnstile) {
+        TardoTurnstile.render('login-turnstile');
+    }
+    
+    // Registrar en el historial
+    if (window.ModalHistory) {
+        ModalHistory.push('login-modal', _closeLoginModalDOM);
+    }
+}
+
+window.closeLoginModal = function() {
+    if (window.ModalHistory) {
+        ModalHistory.close(_closeLoginModalDOM);
+    } else {
+        _closeLoginModalDOM();
+    }
 }
 
 // ==================== FORGOT PASSWORD VIEW ====================
@@ -83,6 +101,15 @@ window.showLoginView = function() {
 
 // ==================== REGISTER MODAL ====================
 
+// Función interna que solo maneja el DOM (sin history)
+function _closeRegisterModalDOM() {
+    document.getElementById('register-modal').classList.add('hidden');
+    document.body.classList.remove('overflow-hidden');
+    document.getElementById('register-form').reset();
+    document.getElementById('register-error').classList.add('hidden');
+    document.getElementById('register-success').classList.add('hidden');
+}
+
 window.openRegisterModal = function() {
     // Cerrar menú móvil si está abierto
     const mobileMenu = document.getElementById('mobile-menu');
@@ -91,18 +118,62 @@ window.openRegisterModal = function() {
         mobileMenu.classList.add('translate-x-full');
         mobileMenuOverlay.classList.add('hidden');
         document.body.classList.remove('overflow-hidden');
+        // Remover silenciosamente del stack si estaba ahí
+        if (window.ModalHistory) {
+            ModalHistory.removeSilent('mobile-menu');
+        }
     }
     
     document.getElementById('register-modal').classList.remove('hidden');
     document.body.classList.add('overflow-hidden');
+    
+    // Registrar en el historial
+    if (window.ModalHistory) {
+        ModalHistory.push('register-modal', _closeRegisterModalDOM);
+    }
 }
 
 window.closeRegisterModal = function() {
-    document.getElementById('register-modal').classList.add('hidden');
-    document.body.classList.remove('overflow-hidden');
-    document.getElementById('register-form').reset();
-    document.getElementById('register-error').classList.add('hidden');
-    document.getElementById('register-success').classList.add('hidden');
+    if (window.ModalHistory) {
+        ModalHistory.close(_closeRegisterModalDOM);
+    } else {
+        _closeRegisterModalDOM();
+    }
+}
+
+// ==================== SWITCH BETWEEN MODALS ====================
+
+window.switchToRegisterModal = function() {
+    // Cerrar DOM del login sin afectar history
+    _closeLoginModalDOM();
+    
+    // Reemplazar entrada en history (login → registro, misma profundidad)
+    if (window.ModalHistory) {
+        ModalHistory.replace('register-modal', _closeRegisterModalDOM);
+    }
+    
+    // Abrir DOM del registro
+    document.getElementById('register-modal').classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+}
+
+window.switchToLoginModal = function() {
+    // Cerrar DOM del registro sin afectar history
+    _closeRegisterModalDOM();
+    
+    // Reemplazar entrada en history (registro → login, misma profundidad)
+    if (window.ModalHistory) {
+        ModalHistory.replace('login-modal', _closeLoginModalDOM);
+    }
+    
+    // Abrir DOM del login
+    document.getElementById('login-modal').classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
+    
+    // Renderizar Turnstile para login
+    if (window.TardoTurnstile) {
+        TardoTurnstile.render('login-turnstile');
+    }
 }
 
 // ==================== INITIALIZATION ====================
