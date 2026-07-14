@@ -41,28 +41,11 @@
                 Recordá que para usar TARDO necesitás tener una cuenta en Binance (<a href="index.html#guia-1" class="text-emerald-500/80 hover:text-emerald-400 transition-colors">Guía 1</a>) y configurar tus API Keys (<a href="index.html#guia-2" class="text-emerald-500/80 hover:text-emerald-400 transition-colors">Guía 2</a>)
             </p>
 
-            <!-- Instrucciones SmartScreen -->
-            <div class="mt-6 p-4 rounded-lg bg-amber-500/5 border border-amber-500/20">
-                <p class="text-xs text-neutral-400 mb-2">
-                    <iconify-icon icon="solar:shield-warning-linear" class="text-amber-400 text-sm align-middle inline-block mr-1"></iconify-icon>
-                    <span class="text-white font-medium">Si Windows muestra advertencia de seguridad:</span>
-                </p>
-                <ol class="text-xs text-neutral-500 ml-5 space-y-1 list-decimal">
-                    <li>Hacer clic en <span class="text-white font-medium">"Más información"</span></li>
-                    <li>Hacer clic en <span class="text-white font-medium">"Ejecutar de todas formas"</span></li>
-                </ol>
-                <p class="text-xs text-neutral-600 mt-2 italic">
-                    Es normal en software nuevo sin certificado comercial. El archivo se descarga solo desde tardoar.com
-                </p>
-            </div>
-
-            <!-- VirusTotal Link -->
-            <div id="virustotal-container" class="mt-4 text-center" style="display: none;">
-                <p class="text-xs text-neutral-500">
-                    <iconify-icon icon="solar:verified-check-linear" class="text-emerald-500 text-sm align-middle inline-block mr-1"></iconify-icon>
-                    Verificado en VirusTotal — <a id="virustotal-link" href="#" target="_blank" class="text-emerald-500/80 hover:text-emerald-400 transition-colors">ver reporte</a>
-                </p>
-            </div>
+            <!-- Aviso SmartScreen y VirusTotal -->
+            <p class="text-xs text-neutral-500 mt-4 text-center">
+                <iconify-icon icon="solar:shield-warning-linear" class="text-amber-400 text-sm align-middle inline-block mr-1"></iconify-icon>
+                Si Windows muestra advertencia: clic en "Más información" → "Ejecutar de todas formas". El instalador no contiene virus, <a id="virustotal-link" href="#" target="_blank" class="text-emerald-500/80 hover:text-emerald-400 transition-colors underline">ver certificado acá</a>.
+            </p>
 
         </div>
     </section>
@@ -449,12 +432,10 @@
                     versionText.textContent = `Descargar TardoAR v${data.latest_version}`;
                 }
 
-                // Show VirusTotal link if URL exists
-                const vtContainer = document.getElementById('virustotal-container');
+                // Update VirusTotal link if URL exists
                 const vtLink = document.getElementById('virustotal-link');
-                if (vtContainer && vtLink && data.virustotal_url && data.virustotal_url.trim() !== '') {
+                if (vtLink && data.virustotal_url && data.virustotal_url.trim() !== '') {
                     vtLink.href = data.virustotal_url;
-                    vtContainer.style.display = 'block';
                 }
             })
             .catch(error => {
