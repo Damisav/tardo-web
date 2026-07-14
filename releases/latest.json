@@ -1,5 +1,8 @@
 {
-  "latest_version": "3.0.3",
+  "latest_version": "3.0.4",
   "download_url": "https://tardoar.com/descargas.html",
-  "release_date": "2026-07-08"
+  "direct_download_zip": "https://tardoar.com/releases/TardoAR_Setup.zip",
+  "direct_download_exe": "https://tardoar.com/releases/TardoAR_Setup.exe",
+  "virustotal_url": "",
+  "release_date": "2026-07-13"
 }

@@ -27,11 +27,11 @@
         <div class="max-w-4xl mx-auto px-6 text-center">
             
             <!-- Download Button -->
-            <a href="https://drive.google.com/file/d/1tVJst0opbl3vTycstsiEgSxSDFMr4LY9/view?usp=sharing" target="_blank" class="inline-flex items-center gap-4 px-6 py-4 mb-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/15 hover:border-emerald-500/30 transition-all group">
+            <a href="releases/TardoAR_Setup.zip" class="inline-flex items-center gap-4 px-6 py-4 mb-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/15 hover:border-emerald-500/30 transition-all group">
                 <iconify-icon icon="solar:download-linear" class="text-emerald-500 text-2xl flex-shrink-0"></iconify-icon>
                 <div class="flex flex-col items-start gap-1">
-                    <span class="text-sm text-white font-medium group-hover:text-emerald-300 transition-colors">Descargar TardoAR v3.0.3</span>
-                    <span class="text-xs text-neutral-500">Setup.exe - Instalador completo</span>
+                    <span id="download-version-text" class="text-sm text-white font-medium group-hover:text-emerald-300 transition-colors">Descargar TardoAR v3.0.3</span>
+                    <span class="text-xs text-neutral-500">TardoAR_Setup.zip - Instalador completo</span>
                 </div>
             </a>
 
@@ -40,6 +40,29 @@
                 <iconify-icon icon="solar:info-circle-linear" class="text-neutral-600 text-sm align-middle inline-block mr-1"></iconify-icon>
                 Recordá que para usar TARDO necesitás tener una cuenta en Binance (<a href="index.html#guia-1" class="text-emerald-500/80 hover:text-emerald-400 transition-colors">Guía 1</a>) y configurar tus API Keys (<a href="index.html#guia-2" class="text-emerald-500/80 hover:text-emerald-400 transition-colors">Guía 2</a>)
             </p>
+
+            <!-- Instrucciones SmartScreen -->
+            <div class="mt-6 p-4 rounded-lg bg-amber-500/5 border border-amber-500/20">
+                <p class="text-xs text-neutral-400 mb-2">
+                    <iconify-icon icon="solar:shield-warning-linear" class="text-amber-400 text-sm align-middle inline-block mr-1"></iconify-icon>
+                    <span class="text-white font-medium">Si Windows muestra advertencia de seguridad:</span>
+                </p>
+                <ol class="text-xs text-neutral-500 ml-5 space-y-1 list-decimal">
+                    <li>Hacer clic en <span class="text-white font-medium">"Más información"</span></li>
+                    <li>Hacer clic en <span class="text-white font-medium">"Ejecutar de todas formas"</span></li>
+                </ol>
+                <p class="text-xs text-neutral-600 mt-2 italic">
+                    Es normal en software nuevo sin certificado comercial. El archivo se descarga solo desde tardoar.com
+                </p>
+            </div>
+
+            <!-- VirusTotal Link -->
+            <div id="virustotal-container" class="mt-4 text-center" style="display: none;">
+                <p class="text-xs text-neutral-500">
+                    <iconify-icon icon="solar:verified-check-linear" class="text-emerald-500 text-sm align-middle inline-block mr-1"></iconify-icon>
+                    Verificado en VirusTotal — <a id="virustotal-link" href="#" target="_blank" class="text-emerald-500/80 hover:text-emerald-400 transition-colors">ver reporte</a>
+                </p>
+            </div>
 
         </div>
     </section>
@@ -393,7 +416,7 @@
                 <h3 class="text-xl font-semibold text-white mb-2">¿Listo para empezar?</h3>
                 <p class="text-neutral-400 text-sm mb-6">Descarga el software y obtén tu licencia para comenzar a operar</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="https://drive.google.com/file/d/1tVJst0opbl3vTycstsiEgSxSDFMr4LY9/view?usp=sharing" target="_blank" class="inline-flex items-center gap-2 h-10 px-6 rounded bg-emerald-500 text-white font-medium text-sm hover:bg-emerald-600 transition-colors">
+                    <a href="releases/TardoAR_Setup.zip" class="inline-flex items-center gap-2 h-10 px-6 rounded bg-emerald-500 text-white font-medium text-sm hover:bg-emerald-600 transition-colors">
                         <iconify-icon icon="solar:download-linear"></iconify-icon>
                         Descargar Ahora
                     </a>
@@ -413,6 +436,32 @@
     <script src="/js/modal-history.js"></script>
     <script src="/js/auth.js"></script>
     <script src="/js/components.js"></script>
+
+    <!-- Dynamic version and VirusTotal link loader -->
+    <script>
+        // Fetch latest.json and update version + virustotal link
+        fetch('releases/latest.json')
+            .then(response => response.json())
+            .then(data => {
+                // Update version in download button
+                const versionText = document.getElementById('download-version-text');
+                if (versionText && data.latest_version) {
+                    versionText.textContent = `Descargar TardoAR v${data.latest_version}`;
+                }
+
+                // Show VirusTotal link if URL exists
+                const vtContainer = document.getElementById('virustotal-container');
+                const vtLink = document.getElementById('virustotal-link');
+                if (vtContainer && vtLink && data.virustotal_url && data.virustotal_url.trim() !== '') {
+                    vtLink.href = data.virustotal_url;
+                    vtContainer.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.warn('No se pudo cargar latest.json:', error);
+                // Fallback: mantener version hardcodeada en HTML
+            });
+    </script>
 
 </body>
 </html>
