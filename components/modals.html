@@ -511,3 +511,96 @@
         </div>
     </div>
 </div>
+
+<!-- Modal de Demo -->
+<div id="demo-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="bg-[#0a0a0a] border border-white/10 rounded-2xl max-w-md w-full shadow-2xl">
+        <!-- Header -->
+        <div class="sticky top-0 bg-[#0a0a0a] border-b border-white/10 px-6 py-4 flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-white flex items-center gap-2">
+                <iconify-icon icon="solar:gift-linear" class="text-emerald-400"></iconify-icon>
+                Solicitar Demo Gratuita
+            </h3>
+            <button onclick="closeDemoModal()" class="text-neutral-500 hover:text-white transition-colors">
+                <iconify-icon icon="solar:close-circle-linear" class="text-2xl"></iconify-icon>
+            </button>
+        </div>
+
+        <form id="demo-form" class="p-6 space-y-4">
+            <!-- Success Message -->
+            <div id="demo-success" class="hidden bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-4 text-sm text-emerald-400">
+                <div class="flex items-start gap-3">
+                    <iconify-icon icon="solar:check-circle-linear" class="text-xl flex-shrink-0 mt-0.5"></iconify-icon>
+                    <div>
+                        <p id="demo-success-text" class="font-medium mb-1">¡Solicitud recibida!</p>
+                        <p class="text-xs text-emerald-400/80">Te enviaremos la licencia por email</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Message -->
+            <div id="demo-error" class="hidden bg-red-500/10 border border-red-500/20 rounded-lg p-3 text-xs text-red-400">
+                <div class="flex items-center gap-2">
+                    <iconify-icon icon="solar:danger-circle-linear" class="text-lg"></iconify-icon>
+                    <span id="demo-error-text">Error al procesar solicitud</span>
+                </div>
+            </div>
+
+            <div id="demo-form-fields">
+                <!-- Descripción -->
+                <div class="bg-emerald-500/5 border border-emerald-500/20 rounded-lg p-4 text-sm">
+                    <div class="flex items-start gap-3">
+                        <iconify-icon icon="solar:info-circle-linear" class="text-emerald-400 text-xl flex-shrink-0"></iconify-icon>
+                        <div class="space-y-2 text-neutral-300">
+                            <p class="font-medium text-white">Incluye:</p>
+                            <ul class="space-y-1 text-xs">
+                                <li class="flex items-center gap-2">
+                                    <iconify-icon icon="solar:check-circle-linear" class="text-emerald-400"></iconify-icon>
+                                    30 días de prueba
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <iconify-icon icon="solar:check-circle-linear" class="text-emerald-400"></iconify-icon>
+                                    Plan Basic - 1 bot
+                                </li>
+                                <li class="flex items-center gap-2">
+                                    <iconify-icon icon="solar:check-circle-linear" class="text-emerald-400"></iconify-icon>
+                                    Sin tarjeta ni compromiso
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="block text-xs font-medium text-neutral-400 mb-1.5">Email *</label>
+                    <input type="email" id="demo-email" name="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors" placeholder="tu@email.com">
+                </div>
+
+                <!-- Turnstile Security -->
+                <div>
+                    <label class="block text-xs font-medium text-neutral-400 mb-1.5">
+                        Verificación de seguridad *
+                    </label>
+                    <div id="demo-turnstile" class="flex justify-center"></div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" id="demo-submit-btn" class="w-full px-8 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 bg-emerald-500 text-[#030303] hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center justify-center gap-2 mt-6">
+                    <iconify-icon icon="solar:rocket-2-linear" class="text-xl"></iconify-icon>
+                    <span>Solicitar demo</span>
+                </button>
+
+                <!-- Link a Registro -->
+                <div class="text-center mt-4">
+                    <p class="text-xs text-neutral-500">
+                        ¿No tenés cuenta? 
+                        <button type="button" onclick="switchToRegisterModal()" class="text-emerald-400 hover:text-emerald-300 font-medium underline">
+                            Creá tu cuenta acá
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
