@@ -45,9 +45,21 @@ document.addEventListener('DOMContentLoaded', () => {
             modalsContainer.innerHTML = html;
             body.appendChild(modalsContainer);
             
+            console.log('[COMPONENTS] Modales insertados en DOM');
+
             // Inicializar autenticación después de cargar modales
             if (typeof initAuth === 'function') {
                 initAuth();
+                console.log('[COMPONENTS] initAuth() ejecutado');
+            } else {
+                console.warn('[COMPONENTS] initAuth no disponible');
+            }
+
+            // Inicializar demo modal DESPUÉS de que los modales están en DOM
+            if (typeof window.initDemo === 'function') {
+                window.initDemo();
+            } else {
+                console.warn('[COMPONENTS] initDemo no disponible (¿demo.js cargó?)');
             }
             
             // IMPORTANTE: Adjuntar event listener al formulario de checkout

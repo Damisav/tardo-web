@@ -573,8 +573,9 @@
 
                 <!-- Email -->
                 <div>
-                    <label class="block text-xs font-medium text-neutral-400 mb-1.5">Email *</label>
-                    <input type="email" id="demo-email" name="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors" placeholder="tu@email.com">
+                    <label class="block text-xs font-medium text-neutral-400 mb-1.5">Email de tu cuenta TardoAR *</label>
+                    <input type="email" id="demo-email" name="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-colors" placeholder="El mismo email con el que te registraste">
+                    <p class="text-xs text-neutral-500 mt-1.5">Usá el email con el que creaste tu cuenta. Si no tenés, registrate primero.</p>
                 </div>
 
                 <!-- Turnstile Security -->
@@ -595,7 +596,7 @@
                 <div class="text-center mt-4">
                     <p class="text-xs text-neutral-500">
                         ¿No tenés cuenta? 
-                        <button type="button" onclick="switchToRegisterModal()" class="text-emerald-400 hover:text-emerald-300 font-medium underline">
+                        <button type="button" onclick="openRegisterFromDemo()" class="text-emerald-400 hover:text-emerald-300 font-medium underline">
                             Creá tu cuenta acá
                         </button>
                     </p>
