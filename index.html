@@ -118,12 +118,18 @@
                 class="block w-[90%] md:w-full p-0 border-0 bg-transparent cursor-pointer rounded-xl overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60 transition-opacity hover:opacity-95"
                 aria-label="Solicitar demo gratis por 30 días"
             >
-                <img
-                    src="images/banners/banner_demo.png"
-                    alt="TardoAR - Prueba gratis por 30 días. 1 bot, sin tarjeta, sin compromiso"
-                    class="w-full h-auto object-contain rounded-xl"
-                    loading="lazy"
-                >
+                <picture>
+                    <source
+                        media="(max-width: 767px)"
+                        srcset="images/banners/banner_demo_movil.png"
+                    >
+                    <img
+                        src="images/banners/banner_demo.png"
+                        alt="TardoAR - Prueba gratis por 30 días. 1 bot, sin tarjeta, sin compromiso"
+                        class="w-full h-auto object-contain rounded-xl"
+                        loading="lazy"
+                    >
+                </picture>
             </button>
         </div>
     </section>
