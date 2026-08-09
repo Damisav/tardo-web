@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 initMobileMenu();
                 // Verificar estado de autenticación
                 checkAuthState();
+                // Inicializar video promo toast
+                initVideoPromo();
             })
             .catch(error => console.error('Error cargando navbar:', error));
     }
@@ -194,4 +196,27 @@ window.logout = function() {
     localStorage.removeItem('tardo_token');
     localStorage.removeItem('tardo_user');
     window.location.href = '/';
+}
+
+// Video Promo Toast
+function initVideoPromo() {
+    const STORAGE_KEY = 'tardo_video_promo_instalacion_v1';
+    const toast = document.getElementById('video-promo-toast');
+    const closeBtn = document.getElementById('video-promo-close');
+    
+    if (!toast || localStorage.getItem(STORAGE_KEY) === '1') return;
+
+    // Mostrar con delay (~1.2s) para no competir con carga inicial
+    setTimeout(() => {
+        toast.classList.remove('hidden');
+        toast.classList.remove('opacity-0', 'translate-y-4');
+    }, 1200);
+
+    closeBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toast.classList.add('opacity-0', 'translate-y-4');
+        setTimeout(() => toast.classList.add('hidden'), 300);
+        localStorage.setItem(STORAGE_KEY, '1');
+    });
 }
