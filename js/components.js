@@ -190,6 +190,59 @@ window.checkAuthState = function() {
         if (mobileNavGuest) mobileNavGuest.classList.remove('hidden');
         if (mobileNavUser) mobileNavUser.classList.add('hidden');
     }
+    
+    // Update download page state if on downloads page
+    updateDownloadPageState();
+}
+
+// Update download page state based on authentication
+window.updateDownloadPageState = function() {
+    const token = localStorage.getItem('tardo_token');
+    const userStr = localStorage.getItem('tardo_user');
+    const isLoggedIn = !!(token && userStr);
+    
+    // Download page hero elements
+    const downloadGuestHero = document.getElementById('download-guest-hero');
+    const downloadAuthHero = document.getElementById('download-auth-hero');
+    
+    // Download page CTA elements
+    const downloadAuthCta = document.getElementById('download-auth-cta');
+    
+    // Check if we're on the download page (elements exist)
+    if (!downloadGuestHero && !downloadAuthHero && !downloadAuthCta) {
+        // Not on download page, skip
+        return;
+    }
+    
+    if (isLoggedIn) {
+        // User is logged in: show auth blocks, hide guest blocks
+        if (downloadGuestHero) {
+            downloadGuestHero.classList.add('hidden');
+            downloadGuestHero.classList.remove('flex');
+        }
+        if (downloadAuthHero) {
+            downloadAuthHero.classList.remove('hidden');
+            downloadAuthHero.classList.add('inline-flex');
+        }
+        if (downloadAuthCta) {
+            downloadAuthCta.classList.remove('hidden');
+            downloadAuthCta.classList.add('inline-flex');
+        }
+    } else {
+        // User is NOT logged in: show guest blocks, hide auth blocks
+        if (downloadGuestHero) {
+            downloadGuestHero.classList.remove('hidden');
+            downloadGuestHero.classList.add('flex');
+        }
+        if (downloadAuthHero) {
+            downloadAuthHero.classList.add('hidden');
+            downloadAuthHero.classList.remove('inline-flex');
+        }
+        if (downloadAuthCta) {
+            downloadAuthCta.classList.add('hidden');
+            downloadAuthCta.classList.remove('inline-flex');
+        }
+    }
 }
 
 window.logout = function() {

@@ -26,8 +26,18 @@
     <section class="relative z-10 pt-32 pb-16">
         <div class="max-w-4xl mx-auto px-6 text-center">
             
-            <!-- Download Button -->
-            <a href="releases/TardoAR_Setup.zip" class="inline-flex items-center gap-4 px-6 py-4 mb-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/15 hover:border-emerald-500/30 transition-all group">
+            <!-- Download Button - Guest (Not Logged In) -->
+            <div id="download-guest-hero" class="hidden flex-col items-center gap-4 p-6 mb-8 rounded-2xl bg-neutral-900/30 border border-neutral-500/20">
+                <iconify-icon icon="solar:lock-keyhole-linear" class="text-neutral-400 text-3xl"></iconify-icon>
+                <p class="text-neutral-300 text-sm text-center max-w-md">Para descargar el instalador necesitás iniciar sesión o crear una cuenta</p>
+                <button onclick="openLoginModal()" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-emerald-500 text-white font-medium text-sm hover:bg-emerald-600 transition-colors">
+                    <iconify-icon icon="solar:login-2-linear" class="text-lg"></iconify-icon>
+                    <span>Iniciar sesión</span>
+                </button>
+            </div>
+
+            <!-- Download Button - Authenticated (Logged In) -->
+            <a id="download-auth-hero" href="releases/TardoAR_Setup.zip" class="inline-flex items-center gap-4 px-6 py-4 mb-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/15 hover:border-emerald-500/30 transition-all group">
                 <iconify-icon icon="solar:download-linear" class="text-emerald-500 text-2xl flex-shrink-0"></iconify-icon>
                 <div class="flex flex-col items-start gap-1">
                     <span id="download-version-text" class="text-sm text-white font-medium group-hover:text-emerald-300 transition-colors">Descargar TardoAR v3.0.4</span>
@@ -436,10 +446,12 @@
                 <h3 class="text-xl font-semibold text-white mb-2">¿Listo para empezar?</h3>
                 <p class="text-neutral-400 text-sm mb-6">Descarga el software y obtén tu licencia para comenzar a operar</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="releases/TardoAR_Setup.zip" class="inline-flex items-center gap-2 h-10 px-6 rounded bg-emerald-500 text-white font-medium text-sm hover:bg-emerald-600 transition-colors">
+                    <!-- Download button for authenticated users only -->
+                    <a id="download-auth-cta" href="releases/TardoAR_Setup.zip" class="inline-flex items-center gap-2 h-10 px-6 rounded bg-emerald-500 text-white font-medium text-sm hover:bg-emerald-600 transition-colors">
                         <iconify-icon icon="solar:download-linear"></iconify-icon>
                         Descargar Ahora
                     </a>
+                    <!-- Always visible - Ver Planes de Licencia -->
                     <a href="index.html#pricing" class="inline-flex items-center gap-2 h-10 px-6 rounded bg-white/5 border border-white/10 text-white font-medium text-sm hover:bg-white/10 transition-colors">
                         Ver Planes de Licencia
                     </a>
